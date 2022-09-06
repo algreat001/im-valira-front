@@ -1,0 +1,30 @@
+{
+  "title": "VALIRA-DECOR",
+  "appbar": {
+    "profile": {
+      "title": "User",
+      "profile": "My profile",
+      "signin": "Enter to online-store 'Valira-Decor'",
+      "login": "Login",
+      "signup": "Registration",
+      "register": "Registration in online-store 'Valira-Decor'",
+      "logout": "Logout",
+      "email": "Email address",
+      "password": "Password",
+      "save": "Save",
+      "firstname": "First name",
+      "lastname": "Surname",
+      "error": {
+        "signup": "There was a registration error, please try again later",
+        "signin": "There was a login error, please try again later",
+        "required": "Required",
+        "password": "Must be 4 characters or more",
+        "email": "Invalid email address"
+      }
+    },
+    "cancel": "Cancel",
+    "messages": "Messages",
+    "notifications": "Notifications",
+    "search": "Search..."
+  }
+}
