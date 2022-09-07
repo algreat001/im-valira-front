@@ -16,12 +16,13 @@ export interface MessagesBoxProps {
 }
 
 export const MessagesBox = observer(({ showTitle, onClick }: MessagesBoxProps) => {
-  const { profileStore } = useStores();
+  const { profileManagerStore } = useStores();
+  const { viewer } = profileManagerStore;
 
   return (
     <MenuItem onClick={onClick}>
       <IconButton size="large" color="inherit">
-        <Badge badgeContent={profileStore.messagesCount} color="error">
+        <Badge badgeContent={viewer.messagesCount} color="error">
           <MailIcon />
         </Badge>
       </IconButton>

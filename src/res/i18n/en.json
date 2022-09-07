@@ -26,5 +26,11 @@
     "messages": "Messages",
     "notifications": "Notifications",
     "search": "Search..."
+  },
+  "admin": {
+    "profiles": {
+      "label": "User profiles",
+      "load": "User profiles loading..."
+    }
   }
 }

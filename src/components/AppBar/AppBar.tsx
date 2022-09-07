@@ -25,7 +25,7 @@ interface MobileMenuProps {
 }
 
 const MobileMenu = ({ anchorEl, onClose }: MobileMenuProps) => {
-  const { loginStore, profileStore } = useStores();
+  const { loginStore } = useStores();
   const isMobileMenuOpen = Boolean(anchorEl);
 
   const handleMobileMenuClose = () => {
@@ -54,7 +54,7 @@ const MobileMenu = ({ anchorEl, onClose }: MobileMenuProps) => {
 };
 
 export const ApplicationBar = observer(() => {
-  const { loginStore, profileStore } = useStores();
+  const { loginStore, profileManagerStore } = useStores();
   const [ mobileMoreAnchorEl, setMobileMoreAnchorEl ] = React.useState<null | HTMLElement>(null);
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -102,7 +102,7 @@ export const ApplicationBar = observer(() => {
       </Box>
       <Signin />
       <Signup />
-      <Profile />
+      <Profile profile={profileManagerStore.currentProfile} />
     </>
   );
 });

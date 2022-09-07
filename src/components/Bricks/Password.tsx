@@ -10,9 +10,10 @@ interface PasswordProps {
   onChange: (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void;
   fullWidth?: boolean;
   error?: boolean;
+  disabled?: boolean;
 }
 
-export const Password = ({ id, label, value, onChange, fullWidth, error }: PasswordProps) => {
+export const Password = ({ id, label, value, onChange, fullWidth, error, disabled }: PasswordProps) => {
   const [ showPassword, setShowPassword ] = useState<boolean>();
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
@@ -27,7 +28,7 @@ export const Password = ({ id, label, value, onChange, fullWidth, error }: Passw
     setShowPassword(!showPassword);
   };
 
-  return <FormControl fullWidth={fullWidth} sx={{ marginTop: 1 }} variant="outlined">
+  return <FormControl fullWidth={fullWidth} sx={{ marginTop: 1 }} variant="outlined" disabled={disabled}>
     <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
     <OutlinedInput
       error={error}

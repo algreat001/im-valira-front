@@ -1,16 +1,16 @@
 import React from "react";
 import { LoginStore } from "./LoginStore";
-import { ProfileStore } from "./ProfileStore";
 import { RoleStore } from "./RoleStore";
 import { UIStore } from "./UIStore";
+import { ProfileManagerStore } from "./ProfileManagerStore";
 
 const uiStore = new UIStore();
-const profileStore = new ProfileStore();
+const profileManagerStore = new ProfileManagerStore();
 const roleStore = new RoleStore();
-const loginStore = new LoginStore(profileStore);
+const loginStore = new LoginStore(profileManagerStore.viewer);
 
 export const gap = {
-  profileStore,
+  profileManagerStore,
   roleStore,
   loginStore,
   uiStore

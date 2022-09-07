@@ -3,24 +3,30 @@ import { observer } from "mobx-react";
 
 import { Button, Dialog, DialogActions, DialogTitle, DialogContent, TextField } from "@mui/material";
 
-import { ProfileTextField } from "stores/ProfileStore";
+import { ProfileStore, ProfileTextField } from "stores/ProfileStore";
+
 import { useStores } from "stores/useStores";
 import { t } from "res/i18n/i18n";
+import { RoleDto } from "interfaces/ext";
 
 import { CloseButton } from "components/Bricks/CloseButton";
 import { Password } from "components/Bricks/Password";
 import { RolesList } from "components/RolesList/RolesList";
-import { RoleDto } from "interfaces/ext";
+import { AdminSelectUser } from "components/Admins/SelectUser/AdminSelectUser";
 
-export const Profile = observer(() => {
-  const { profileStore, uiStore } = useStores();
+export interface ProfileProps {
+  profile: ProfileStore;
+}
+
+export const Profile = observer(({ profile }: ProfileProps) => {
+  const { uiStore, profileManagerStore } = useStores();
   const [ password, setPassword ] = useState("");
-  const { isAdmin } = profileStore;
+  const { isAdmin } = profileManagerStore.viewer;
 
   useEffect(() => {
     if (uiStore.isShowProfileDlg) {
       setPassword("");
-      profileStore.saveToCache();
+      profile.saveToCache();
     }
   }, [ uiStore.isShowProfileDlg ]);
 
@@ -30,24 +36,24 @@ export const Profile = observer(() => {
       return;
     }
 
-    profileStore.changeTextField(e.target.id as ProfileTextField, e.target.value);
+    profile.changeTextField(e.target.id as ProfileTextField, e.target.value);
   };
 
   const handleSave = async () => {
-    await profileStore.saveProfile(password);
+    await profile.saveProfile(password);
     uiStore.hideProfileDlg();
   };
 
   const handleCancel = () => {
-    profileStore.restoreFromCache();
+    profile.restoreFromCache();
     uiStore.hideProfileDlg();
   };
 
   const handleAddRole = (role: RoleDto) => {
-    profileStore.addRole(role);
+    profile.addRole(role);
   };
   const handleDeleteRole = (role: string) => {
-    profileStore.deleteRole(role);
+    profile.deleteRole(role);
   };
 
 
@@ -57,15 +63,17 @@ export const Profile = observer(() => {
       <CloseButton onCLose={handleCancel} />
     </DialogTitle>
     <DialogContent>
-      <TextField
-        margin="dense"
-        id="email"
-        label={t("appbar.profile.email")}
-        type="email"
-        fullWidth
-        variant="outlined"
-        value={profileStore.email}
-      />
+      {isAdmin
+        ? <AdminSelectUser />
+        : <TextField
+          margin="dense"
+          id="email"
+          label={t("appbar.profile.email")}
+          type="email"
+          fullWidth
+          variant="outlined"
+          value={profile.email}
+        />}
       <TextField
         margin="dense"
         id="firstName"
@@ -74,7 +82,7 @@ export const Profile = observer(() => {
         fullWidth
         variant="outlined"
         onChange={handleTextChange}
-        value={profileStore.firstName}
+        value={profile.firstName}
       />
       <TextField
         margin="dense"
@@ -84,17 +92,18 @@ export const Profile = observer(() => {
         fullWidth
         variant="outlined"
         onChange={handleTextChange}
-        value={profileStore.lastName}
+        value={profile.lastName}
       />
       {isAdmin
-        ? <RolesList onAdd={handleAddRole} onDelete={handleDeleteRole} list={profileStore.roles} />
-        : <RolesList list={profileStore.roles} />}
+        ? <RolesList onAdd={handleAddRole} onDelete={handleDeleteRole} list={profile.roles} />
+        : <RolesList list={profile.roles} />}
       <form>
         <Password
           fullWidth
           id="password"
           label={t("appbar.profile.password")}
           value={password}
+          disabled={!profileManagerStore.isProfileEqualViewer(profile)}
           onChange={handleTextChange}
         />
       </form>

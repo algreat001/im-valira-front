@@ -16,12 +16,13 @@ export interface NotificationsBoxProps {
 }
 
 export const NotificationsBox = observer(({ showTitle, onClick }: NotificationsBoxProps) => {
-  const { profileStore } = useStores();
+  const { profileManagerStore } = useStores();
+  const { viewer } = profileManagerStore;
 
   return (
     <MenuItem onClick={onClick}>
       <IconButton size="large" color="inherit">
-        <Badge badgeContent={profileStore.notificationsCount} color="error">
+        <Badge badgeContent={viewer.notificationsCount} color="error">
           <NotificationsIcon />
         </Badge>
       </IconButton>

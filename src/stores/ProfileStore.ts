@@ -1,7 +1,7 @@
 import { UserDto, RoleDto } from "interfaces/ext";
 import { Messages, Notification } from "interfaces/profile";
 import { makeAutoObservable, runInAction } from "mobx";
-import { loadProfile, saveProfile } from "services/api";
+import { loadProfile, loadProfiles, saveProfile } from "services/api";
 
 export type ProfileTextField = "firstName" | "lastName" | "email";
 
@@ -22,8 +22,20 @@ export class ProfileStore {
 
   notifications: Notification[] = [];
 
+  profiles: ProfileStore[] = [];
+
+  currentProfileIndex: null | number;
+
   constructor() {
     makeAutoObservable(this);
+    this.currentProfileIndex = null;
+  }
+
+  get currentProfile(): ProfileStore {
+    if (this.currentProfileIndex === null || this.currentProfileIndex === -1) {
+      return this;
+    }
+    return this.profiles[this.currentProfileIndex];
   }
 
   logout() {
@@ -70,13 +82,18 @@ export class ProfileStore {
     if (!user) {
       throw new Error("Error upload user profile");
     }
+    this.initFromDto(user);
+  }
+
+  initFromDto(userDto: UserDto) {
     runInAction(() => {
-      this.email = user.email ?? "";
-      this.firstName = user.firstName ?? "";
-      this.lastName = user.lastName ?? "";
-      this.photo = user.photo ?? null;
-      this.roles = user.roles ?? [];
+      this.email = userDto.email ?? "";
+      this.firstName = userDto.firstName ?? "";
+      this.lastName = userDto.lastName ?? "";
+      this.photo = userDto.photo ?? null;
+      this.roles = userDto.roles ?? [];
     });
+
   }
 
   get dto(): UserDto {
@@ -108,6 +125,26 @@ export class ProfileStore {
       throw new Error("Error update user profile");
     }
   }
+
+  async loadProfiles() {
+    if (this.isAdmin) {
+      await runInAction(async () => {
+        this.profiles = [];
+      });
+      const newProfiles = (await loadProfiles()).map(userDto => {
+        const store = new ProfileStore();
+        store.initFromDto(userDto);
+        return store;
+      });
+      await runInAction(async () => {
+        this.profiles = newProfiles;
+      });
+    }
+  }
+
+  setCurrentProfile = (index: number) => {
+    this.currentProfileIndex = index;
+  };
 
   get isAdmin(): boolean {
     return this.isIncludeRole("Admin");

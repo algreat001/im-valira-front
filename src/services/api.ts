@@ -14,6 +14,9 @@ export const signin = async (user: UserDto): Promise<Token> =>
 export const loadProfile = async (): Promise<UserDto> =>
   (await request({ api: config.api.user, query: "profile" })) as UserDto;
 
+export const loadProfiles = async (): Promise<UserDto[]> =>
+  (await request({ api: config.api.user, query: "profiles" })) as UserDto[];
+
 export const loadRoles = async (): Promise<RoleDto[]> =>
   (await request({ api: config.api.role, query: "list" })) as RoleDto[];
 
