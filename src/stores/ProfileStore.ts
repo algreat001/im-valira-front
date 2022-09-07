@@ -2,7 +2,6 @@ import { UserDto, RoleDto } from "interfaces/ext";
 import { Messages, Notification } from "interfaces/profile";
 import { makeAutoObservable, runInAction } from "mobx";
 import { loadProfile, saveProfile } from "services/api";
-import { LoginStore } from "./LoginStore";
 
 export type ProfileTextField = "firstName" | "lastName" | "email";
 
@@ -23,11 +22,8 @@ export class ProfileStore {
 
   notifications: Notification[] = [];
 
-  isShowProfileDlg = false;
-
   constructor() {
     makeAutoObservable(this);
-    this.isShowProfileDlg = false;
   }
 
   logout() {
@@ -48,17 +44,11 @@ export class ProfileStore {
     return this.notifications.filter((nt) => !nt.isReadied).length;
   }
 
-  showProfileDlg = () => {
-    this.isShowProfileDlg = true;
-    this.saveToCache();
-  };
-
   saveToCache() {
     this.cache = JSON.stringify({ firstName: this.firstName, lastName: this.lastName, roles: this.roles });
   }
 
   restoreFromCache() {
-    this.hideProfileDlg();
     if (!this.cache) {
       return;
     }
@@ -70,10 +60,6 @@ export class ProfileStore {
     this.lastName = obj.lastName;
     this.roles = obj.roles;
   }
-
-  hideProfileDlg = () => {
-    this.isShowProfileDlg = false;
-  };
 
   changeTextField(field: ProfileTextField, value: string) {
     this[field] = value;
@@ -113,7 +99,6 @@ export class ProfileStore {
   }
 
   async saveProfile(password: string) {
-    this.hideProfileDlg();
     const user: any = this.dto;
     if (password) {
       user.password = password;

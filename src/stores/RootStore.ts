@@ -2,7 +2,9 @@ import React from "react";
 import { LoginStore } from "./LoginStore";
 import { ProfileStore } from "./ProfileStore";
 import { RoleStore } from "./RoleStore";
+import { UIStore } from "./UIStore";
 
+const uiStore = new UIStore();
 const profileStore = new ProfileStore();
 const roleStore = new RoleStore();
 const loginStore = new LoginStore(profileStore);
@@ -10,7 +12,8 @@ const loginStore = new LoginStore(profileStore);
 export const gap = {
   profileStore,
   roleStore,
-  loginStore
+  loginStore,
+  uiStore
 };
 
 export const storesContext = React.createContext(gap);

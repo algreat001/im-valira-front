@@ -14,7 +14,7 @@ export interface AcountBoxProps {
 }
 
 export const AccountBox = observer(({ showTitle, onClick }: AcountBoxProps) => {
-  const { loginStore, profileStore } = useStores();
+  const { loginStore, uiStore } = useStores();
   const [ anchorEl, setAnchorEl ] = useState<null | HTMLElement>(null);
   const isMenuOpen = Boolean(anchorEl);
 
@@ -25,12 +25,20 @@ export const AccountBox = observer(({ showTitle, onClick }: AcountBoxProps) => {
         onClick(event);
       }
     } else {
-      loginStore.showLoginDlg();
+      uiStore.showLoginDlg();
     }
   };
 
   const handleProfileCloseMenu = () => {
     setAnchorEl(null);
+  };
+
+  const handleShowProfile = () => {
+    uiStore.showProfileDlg();
+  };
+
+  const handleLogout = () => {
+    loginStore.logout();
   };
 
   const menuId = "primary-search-account-menu";
@@ -53,8 +61,8 @@ export const AccountBox = observer(({ showTitle, onClick }: AcountBoxProps) => {
       {
 
       }
-      <MenuItem onClick={() => profileStore.showProfileDlg()}>{t("appbar.profile.profile")}</MenuItem>
-      <MenuItem onClick={() => loginStore.logout()}>{t("appbar.profile.logout")}</MenuItem>
+      <MenuItem onClick={handleShowProfile}>{t("appbar.profile.profile")}</MenuItem>
+      <MenuItem onClick={handleLogout}>{t("appbar.profile.logout")}</MenuItem>
     </Menu>
   );
   return (

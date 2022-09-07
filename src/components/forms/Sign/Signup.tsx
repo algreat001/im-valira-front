@@ -20,12 +20,12 @@ import { validate } from "./Signin";
 
 
 export const Signup = observer(() => {
-  const { loginStore } = useStores();
+  const { loginStore, uiStore } = useStores();
   const [ error, setError ] = useState<null | string>(null);
 
   useEffect(() => {
     setError(null);
-  }, [ loginStore.isShowSignupDlg ]);
+  }, [ uiStore.isShowSignupDlg ]);
 
   const formik = useFormik({
     initialValues: {
@@ -37,16 +37,18 @@ export const Signup = observer(() => {
       if (!(await loginStore.signup(values.email, values.password))) {
         setError(t("appbar.profile.error.signup"));
         console.log(t("appbar.profile.error.signup"));
+      } else {
+        uiStore.hideSignupDlg();
       }
     }
 
   });
 
-  return <Dialog open={loginStore.isShowSignupDlg} onClose={loginStore.hideSignupDlg}>
+  return <Dialog open={uiStore.isShowSignupDlg} onClose={uiStore.hideSignupDlg}>
     <form onSubmit={formik.handleSubmit}>
       <DialogTitle>
         {t("appbar.profile.register")}
-        <CloseButton onCLose={loginStore.hideSignupDlg} />
+        <CloseButton onCLose={uiStore.hideSignupDlg} />
       </DialogTitle>
       <DialogContent>
         <TextField

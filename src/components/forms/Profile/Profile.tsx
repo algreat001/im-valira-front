@@ -13,15 +13,16 @@ import { RolesList } from "components/RolesList/RolesList";
 import { RoleDto } from "interfaces/ext";
 
 export const Profile = observer(() => {
-  const { profileStore } = useStores();
+  const { profileStore, uiStore } = useStores();
   const [ password, setPassword ] = useState("");
   const { isAdmin } = profileStore;
 
   useEffect(() => {
-    if (profileStore.isShowProfileDlg) {
+    if (uiStore.isShowProfileDlg) {
       setPassword("");
+      profileStore.saveToCache();
     }
-  }, [ profileStore.isShowProfileDlg ]);
+  }, [ uiStore.isShowProfileDlg ]);
 
   const handleTextChange = (e: any) => {
     if (e.target.id === "password") {
@@ -34,21 +35,23 @@ export const Profile = observer(() => {
 
   const handleSave = async () => {
     await profileStore.saveProfile(password);
+    uiStore.hideProfileDlg();
   };
 
   const handleCancel = () => {
     profileStore.restoreFromCache();
+    uiStore.hideProfileDlg();
   };
 
   const handleAddRole = (role: RoleDto) => {
     profileStore.addRole(role);
   };
-  const handleDeleteRole = (role: string, e: any) => {
+  const handleDeleteRole = (role: string) => {
     profileStore.deleteRole(role);
   };
 
 
-  return <Dialog open={profileStore.isShowProfileDlg} onClose={handleCancel}>
+  return <Dialog open={uiStore.isShowProfileDlg} onClose={handleCancel}>
     <DialogTitle>
       {t("appbar.profile.profile")}
       <CloseButton onCLose={handleCancel} />

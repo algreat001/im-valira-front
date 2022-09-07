@@ -11,18 +11,12 @@ export class LoginStore {
   password?: string;
 
   isLogined: boolean;
-
-  isShowLoginDlg: boolean;
-
-  isShowSignupDlg: boolean;
-
+  
   constructor(private profileStore: ProfileStore) {
     makeAutoObservable(this);
     this.token = "";
     this.email = "";
     this.password = "";
-    this.isShowLoginDlg = false;
-    this.isShowSignupDlg = false;
     this.isLogined = false;
     this.initFromStorage();
   }
@@ -31,25 +25,8 @@ export class LoginStore {
     this.email = email;
     this.password = password;
     await this.signin();
-    if (this.isLogined) {
-      this.hideLoginDlg();
-    }
     return this.isLogined;
   }
-
-  showLoginDlg = () => {
-    this.isShowLoginDlg = true;
-  };
-  hideLoginDlg = () => {
-    this.isShowLoginDlg = false;
-  };
-
-  showSignupDlg = () => {
-    this.isShowSignupDlg = true;
-  };
-  hideSignupDlg = () => {
-    this.isShowSignupDlg = false;
-  };
 
   async signin(): Promise<boolean> {
     const user = this.dto;
@@ -105,7 +82,6 @@ export class LoginStore {
     if (!result) {
       return false;
     }
-    this.hideSignupDlg();
     await this.login(email, password);
     return true;
   }
