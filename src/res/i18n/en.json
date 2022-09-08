@@ -29,6 +29,7 @@
   },
   "admin": {
     "profiles": {
+      "title": "Edit user profiles",
       "label": "User profiles",
       "load": "User profiles loading..."
     }

@@ -22,6 +22,7 @@ export const Profile = observer(({ profile }: ProfileProps) => {
   const { uiStore, profileManagerStore } = useStores();
   const [ password, setPassword ] = useState("");
   const { isAdmin } = profileManagerStore.viewer;
+  const isMyProfile = profileManagerStore.isProfileEqualViewer(profile);
 
   useEffect(() => {
     if (uiStore.isShowProfileDlg) {
@@ -59,7 +60,9 @@ export const Profile = observer(({ profile }: ProfileProps) => {
 
   return <Dialog open={uiStore.isShowProfileDlg} onClose={handleCancel}>
     <DialogTitle>
-      {t("appbar.profile.profile")}
+      {isMyProfile
+        ? t("appbar.profile.profile")
+        : t("admin.profiles.title")}
       <CloseButton onCLose={handleCancel} />
     </DialogTitle>
     <DialogContent>
