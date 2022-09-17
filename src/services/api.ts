@@ -1,5 +1,5 @@
 import { config } from "config";
-import { RoleDto, UserDto } from "interfaces/ext";
+import { ProductDto, RoleDto, UserDto } from "interfaces/ext";
 import { Token } from "interfaces/profile";
 import { request } from "services/request";
 
@@ -20,3 +20,6 @@ export const loadProfiles = async (): Promise<UserDto[]> =>
 export const loadRoles = async (): Promise<RoleDto[]> =>
   (await request({ api: config.api.role, query: "list" })) as RoleDto[];
 
+
+export const loadProduct = async (productId: string): Promise<ProductDto> =>
+  (await request({ api: config.api.product, query: "", data: productId })) as ProductDto;

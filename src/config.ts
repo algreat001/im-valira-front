@@ -9,6 +9,9 @@ export const config = {
     main: api,
     user: `${api}user/`,
     auth: `${api}auth/`,
-    role: `${api}role/`
+    role: `${api}role/`,
+
+    product: `${api}product/`,
+    catalog: `${api}catalog/`
   }
 };

@@ -1,13 +1,12 @@
 import React from "react";
+import { BrowserRouter } from "react-router-dom";
 
-import { ApplicationBar } from "components/AppBar/AppBar";
+import { PageRouter } from "components/PageRouter/PageRouter";
 
 function App() {
-  return (
-    <div className="App">
-      <ApplicationBar />
-    </div>
-  );
+  return <BrowserRouter>
+    <PageRouter />
+  </BrowserRouter>;
 }
 
 export default App;

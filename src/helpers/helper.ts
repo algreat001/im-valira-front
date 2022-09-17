@@ -20,3 +20,15 @@ export const memoize = <T = any>(fn: Func<T>) => {
   cached.cache = cache;
   return cached;
 };
+
+export function wait(time: number): Promise<undefined>;
+export function wait(time: number, cb: AnyFunction): number;
+
+export function wait(time: number, cb ?: AnyFunction) {
+  if (cb) {
+    return setTimeout(cb, time) as unknown as number;
+  }
+  return new Promise<undefined>((resolve) => {
+    setTimeout(resolve, time);
+  });
+}

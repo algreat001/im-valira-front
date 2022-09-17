@@ -53,9 +53,16 @@ const MobileMenu = ({ anchorEl, onClose }: MobileMenuProps) => {
   </Menu>;
 };
 
-export const ApplicationBar = observer(() => {
+export interface ApplicationBarProps {
+  name?: string;
+}
+
+export const ApplicationBar = observer(({ name }: ApplicationBarProps) => {
   const { loginStore, profileManagerStore } = useStores();
   const [ mobileMoreAnchorEl, setMobileMoreAnchorEl ] = React.useState<null | HTMLElement>(null);
+
+  console.log(name);
+
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
