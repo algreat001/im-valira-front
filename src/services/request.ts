@@ -3,7 +3,7 @@
 export interface Request {
   method?: string;
   api: string;
-  query: string;
+  query?: string;
   data?: unknown;
 }
 
@@ -13,8 +13,10 @@ const getToken = (): string => {
   return (token) ? "Bearer " + token : "";
 };
 
-export const request = async (req: Request): Promise<unknown> => {
-  const response = await fetch(req.api + req.query, {
+export const request = async <T>(req: Request): Promise<null | T> => {
+  const { api } = req;
+  const query = req.query ?? "";
+  const response = await fetch(api + query, {
     method: req.method || "POST",
     headers: {
       "Content-Type": "application/json;charset=utf-8",

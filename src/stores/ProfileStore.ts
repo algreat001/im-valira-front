@@ -1,7 +1,7 @@
 import { UserDto, RoleDto } from "interfaces/ext";
 import { Messages, Notification } from "interfaces/profile";
 import { makeAutoObservable, runInAction } from "mobx";
-import { loadProfile, loadProfiles, saveProfile } from "services/api";
+import { loadProfile, saveProfile } from "services/api";
 
 export type ProfileTextField = "firstName" | "lastName" | "email";
 
@@ -22,20 +22,8 @@ export class ProfileStore {
 
   notifications: Notification[] = [];
 
-  profiles: ProfileStore[] = [];
-
-  currentProfileIndex: null | number;
-
   constructor() {
     makeAutoObservable(this);
-    this.currentProfileIndex = null;
-  }
-
-  get currentProfile(): ProfileStore {
-    if (this.currentProfileIndex === null || this.currentProfileIndex === -1) {
-      return this;
-    }
-    return this.profiles[this.currentProfileIndex];
   }
 
   logout() {
@@ -43,8 +31,10 @@ export class ProfileStore {
     this.lastName = "";
     this.email = "";
     this.photo = "";
+    this.cache = "";
     this.messages = [];
     this.notifications = [];
+    this.roles = [];
   }
 
 
@@ -115,6 +105,10 @@ export class ProfileStore {
     }
   }
 
+  hasRole(role: string) {
+    return this.isAdmin || this.roles.some(r => r.role.toLowerCase() === role.toLowerCase());
+  }
+
   async saveProfile(password: string) {
     const user: any = this.dto;
     if (password) {
@@ -125,26 +119,6 @@ export class ProfileStore {
       throw new Error("Error update user profile");
     }
   }
-
-  async loadProfiles() {
-    if (this.isAdmin) {
-      await runInAction(async () => {
-        this.profiles = [];
-      });
-      const newProfiles = (await loadProfiles()).map(userDto => {
-        const store = new ProfileStore();
-        store.initFromDto(userDto);
-        return store;
-      });
-      await runInAction(async () => {
-        this.profiles = newProfiles;
-      });
-    }
-  }
-
-  setCurrentProfile = (index: number) => {
-    this.currentProfileIndex = index;
-  };
 
   get isAdmin(): boolean {
     return this.isIncludeRole("Admin");

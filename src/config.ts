@@ -12,6 +12,7 @@ export const config = {
     role: `${api}role/`,
 
     product: `${api}product/`,
+    products: `${api}product/list/`,
     catalog: `${api}catalog/`
   }
 };

@@ -33,5 +33,36 @@
       "label": "User profiles",
       "load": "User profiles loading..."
     }
-  }
+  },
+  "menu": {
+    "main": {
+      "title": "Catalog"
+    },
+    "editor": {
+      "catalog": {
+        "edit": "Edit",
+        "delete": "Delete",
+        "editProducts": "Edit Products",
+        "addChildCatalog": "Add Child Catalog"
+      }
+    }
+  },
+  "catalog": {
+    "edit": {
+      "title": {
+        "new": "New catalog",
+        "edit": "Edit catalog"
+      },
+      "name": "Name",
+      "description": "Description",
+      "meta": "Meta info",
+      "parent": "Parent",
+      "save": "Save"
+    },
+    "default": {
+      "name": "Name of the catalog",
+      "meta": "{}"
+    }
+  },
+  "loading": "Loading..."
 }

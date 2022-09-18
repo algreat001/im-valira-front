@@ -13,16 +13,14 @@ import { MessagesBox } from "components/MessagesBox/MessagesBox";
 import { Signin } from "components/forms/Sign/Signin";
 import { Signup } from "components/forms/Sign/Signup";
 import { Profile } from "components/forms/Profile/Profile";
+import { HideOnScroll } from "components/Bricks/HideOnScroll";
+
+import { MobileMenuProps } from "interfaces/menu";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import MoreIcon from "@mui/icons-material/MoreVert";
 
 const mobileMenuId = "primary-search-account-menu-mobile";
-
-interface MobileMenuProps {
-  anchorEl: null | HTMLElement;
-  onClose: () => void;
-}
 
 const MobileMenu = ({ anchorEl, onClose }: MobileMenuProps) => {
   const { loginStore } = useStores();
@@ -57,11 +55,9 @@ export interface ApplicationBarProps {
   name?: string;
 }
 
-export const ApplicationBar = observer(({ name }: ApplicationBarProps) => {
+export const ApplicationBar = observer(({}: ApplicationBarProps) => {
   const { loginStore, profileManagerStore } = useStores();
   const [ mobileMoreAnchorEl, setMobileMoreAnchorEl ] = React.useState<null | HTMLElement>(null);
-
-  console.log(name);
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -73,8 +69,8 @@ export const ApplicationBar = observer(({ name }: ApplicationBarProps) => {
 
   return (
     <>
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
+      <HideOnScroll>
+        <AppBar>
           <Toolbar>
             <IconButton size="large" edge="start" color="inherit" aria-label="open drawer" sx={{ mr: 2 }}>
               <MenuIcon />
@@ -105,8 +101,9 @@ export const ApplicationBar = observer(({ name }: ApplicationBarProps) => {
             </Box>
           </Toolbar>
         </AppBar>
-        <MobileMenu anchorEl={mobileMoreAnchorEl} onClose={handleMobileMenuClose} />
-      </Box>
+      </HideOnScroll>
+      <Toolbar />
+      <MobileMenu anchorEl={mobileMoreAnchorEl} onClose={handleMobileMenuClose} />
       <Signin />
       <Signup />
       <Profile profile={profileManagerStore.currentProfile} />

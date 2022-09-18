@@ -100,8 +100,8 @@ export const Signin = observer(() => {
             </div>}
         </DialogContent>
         <DialogActions>
-          <Button variant="text" onClick={handleSignup}>{t("appbar.profile.signup")}</Button>
-          <Button type="submit">{t("appbar.profile.login")}</Button>
+          <Button variant="outlined" onClick={handleSignup}>{t("appbar.profile.signup")}</Button>
+          <Button variant="outlined" type="submit">{t("appbar.profile.login")}</Button>
         </DialogActions>
       </form>
     </Dialog>

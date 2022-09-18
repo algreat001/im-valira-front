@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 
 import { ProductDto, ProductMeta } from "interfaces/ext";
 import { loadProduct } from "services/api";
@@ -25,12 +25,14 @@ export class ProductStore {
     this.id = id;
     this.isLoading = true;
     const dto = await loadProduct(id);
-    this.isLoading = false;
-    this.isError = !dto;
-    if (!dto) {
-      return;
-    }
-    this.fromDto(dto);
+    runInAction(() => {
+      this.isLoading = false;
+      this.isError = !dto;
+      if (!dto) {
+        return;
+      }
+      this.fromDto(dto);
+    });
     return;
   }
 

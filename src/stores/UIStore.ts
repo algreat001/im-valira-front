@@ -1,4 +1,6 @@
 import { makeAutoObservable } from "mobx";
+import { CatalogStore } from "./CatalogStore";
+import { CatalogEditorProps } from "components/forms/CatalogEditor/CatalogEditor";
 
 export class UIStore {
 
@@ -8,6 +10,10 @@ export class UIStore {
 
   isShowSignupDlg = false;
 
+  catalogEdit: null | CatalogEditorProps = null;
+
+  currentCatalogId: null | string = null;
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -16,6 +22,7 @@ export class UIStore {
     this.isShowProfileDlg = false;
     this.isShowLoginDlg = false;
     this.isShowSignupDlg = false;
+    this.catalogEdit = null;
   };
 
   showProfileDlg = () => {
@@ -43,5 +50,24 @@ export class UIStore {
     this.isShowSignupDlg = false;
   };
 
+  showCatalogEditDlg = (edit: CatalogEditorProps) => {
+    this.catalogEdit = edit;
+  };
+
+  hideCatalogEditDlg = () => {
+    this.catalogEdit = null;
+  };
+
+  get isShowCatalogEditDlg() {
+    return Boolean(this.catalogEdit);
+  }
+
+  setCurrentCatalogId(id: null | string) {
+    this.currentCatalogId = id;
+  }
+
+  isCurrentCatalog(catalog: CatalogStore): boolean {
+    return catalog.id === this.currentCatalogId;
+  }
 
 }

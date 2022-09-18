@@ -32,7 +32,11 @@ export class ProfileManagerStore {
         this.profiles = [];
         this.currentProfileIndex = null;
       });
-      const newProfiles = (await loadProfiles()).map(userDto => {
+      const profiles = await loadProfiles();
+      if (!profiles) {
+        return;
+      }
+      const newProfiles = profiles.map(userDto => {
         const store = new ProfileStore();
         store.initFromDto(userDto);
         return store;

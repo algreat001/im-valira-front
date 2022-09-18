@@ -13,6 +13,9 @@ export class RoleStore {
 
   async loadAllRoles() {
     const roles = await loadRoles();
+    if (!roles) {
+      return;
+    }
     runInAction(() => {
       this.roles = roles;
     });

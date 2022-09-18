@@ -14,6 +14,8 @@ import { Password } from "components/Bricks/Password";
 import { RolesList } from "components/RolesList/RolesList";
 import { AdminSelectUser } from "components/Admins/SelectUser/AdminSelectUser";
 
+import SaveIcon from "@mui/icons-material/Save";
+
 export interface ProfileProps {
   profile: ProfileStore;
 }
@@ -112,7 +114,7 @@ export const Profile = observer(({ profile }: ProfileProps) => {
       </form>
     </DialogContent>
     <DialogActions>
-      <Button onClick={handleSave}>{t("appbar.profile.save")}</Button>
+      <Button variant="outlined" startIcon={<SaveIcon />} onClick={handleSave}>{t("appbar.profile.save")}</Button>
     </DialogActions>
   </Dialog>;
 });
