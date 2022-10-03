@@ -5,7 +5,7 @@ import { Button, Dialog, DialogActions, DialogTitle, DialogContent, TextField } 
 
 import { ProfileStore, ProfileTextField } from "stores/ProfileStore";
 
-import { useStores } from "stores/useStores";
+import { useStores } from "../../../hooks/useStores";
 import { t } from "res/i18n/i18n";
 import { RoleDto } from "interfaces/ext";
 

@@ -11,7 +11,7 @@ import {
   TextField
 } from "@mui/material";
 
-import { useStores } from "stores/useStores";
+import { useStores } from "../../../hooks/useStores";
 import { t } from "res/i18n/i18n";
 
 import { CloseButton } from "components/Bricks/CloseButton";

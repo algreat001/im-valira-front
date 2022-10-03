@@ -5,7 +5,7 @@ import { Button, Dialog, DialogActions, DialogTitle, DialogContent, TextField } 
 
 import { CatalogStore, CatalogTextField } from "stores/CatalogStore";
 
-import { useStores } from "stores/useStores";
+import { useStores } from "../../../hooks/useStores";
 import { t } from "res/i18n/i18n";
 
 import { CloseButton } from "components/Bricks/CloseButton";

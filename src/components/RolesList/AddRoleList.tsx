@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { observer } from "mobx-react";
 import { RoleDto } from "interfaces/ext";
 
-import { useStores } from "stores/useStores";
+import { useStores } from "../../hooks/useStores";
 import { ListItemText, Menu, MenuItem } from "@mui/material";
 
 export interface AddRoleListProps {

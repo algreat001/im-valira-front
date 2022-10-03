@@ -57,12 +57,21 @@
       "description": "Description",
       "meta": "Meta info",
       "parent": "Parent",
-      "save": "Save"
+      "save": "Save",
+      "selectProduct": "Select product for catalog",
+      "saveChanges": "Save changes"
     },
     "default": {
       "name": "Name of the catalog",
       "meta": "{}"
     }
   },
-  "loading": "Loading..."
+  "cart": {
+    "add": "Add to cart"
+  },
+  "loading": "Loading...",
+  "landing": {
+    "recommended": "Recommended",
+    "favorites": "Favorites"
+  }
 }

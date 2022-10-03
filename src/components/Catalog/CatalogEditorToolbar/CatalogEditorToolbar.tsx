@@ -1,13 +1,17 @@
 import * as React from "react";
 
 import { observer } from "mobx-react";
+import { t } from "res/i18n/i18n";
+import { useStores } from "hooks/useStores";
+
+import { EditorMenuProps } from "interfaces/menu";
+
 import { CatalogStore } from "stores/CatalogStore";
+
 import { IconButton, Menu, MenuItem } from "@mui/material";
 import MoreIcon from "@mui/icons-material/MoreVert";
 
-import { EditorMenuProps } from "interfaces/menu";
-import { t } from "res/i18n/i18n";
-import { useStores } from "stores/useStores";
+import { SelectProducts } from "components/Admins/SelectProducts";
 
 const editorMenuId = "catalog-editor-menu";
 
@@ -46,6 +50,7 @@ const EditorMenu = ({ anchorEl, catalog, onClose }: EditorMenuProps) => {
     handleMobileMenuClose(event);
   };
   const handleAddProducts = (event: React.MouseEvent<HTMLElement>, data: CatalogStore) => {
+    uiStore.showSelectProductDlg();
     handleMobileMenuClose(event);
   };
   const handleDeleteCatalog = (event: React.MouseEvent<HTMLElement>, data: CatalogStore) => {
@@ -66,7 +71,7 @@ const EditorMenu = ({ anchorEl, catalog, onClose }: EditorMenuProps) => {
   }, {
     text: t("menu.editor.catalog.editProducts"),
     onClick: handleAddProducts,
-    condition: () => !!catalog.id,
+    condition: () => true,
     data: catalog
   }, {
     text: t("menu.editor.catalog.addChildCatalog"),
@@ -128,5 +133,6 @@ export const CatalogEditorToolbar = observer(({ catalog }: CatalogEditorToolbarP
       <MoreIcon />
     </IconButton>
     <EditorMenu catalog={catalog} anchorEl={editorMenuAnchorEl} onClose={handleEditorMenuClose} />
+    <SelectProducts />
   </>;
 });

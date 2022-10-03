@@ -1,3 +1,5 @@
+// в конце не забудь "/"
+
 const api =
   process.env.NODE_ENV === "production"
     ? "/api/v1/"
@@ -13,6 +15,12 @@ export const config = {
 
     product: `${api}product/`,
     products: `${api}product/list/`,
-    catalog: `${api}catalog/`
+    searchProducts: `${api}product/search/`,
+
+    catalog: `${api}catalog/`,
+    catalogList: `${api}catalog/list/`
+  },
+  limits: {
+    minSearchLength: 3
   }
 };

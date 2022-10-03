@@ -22,14 +22,27 @@ export const loadRoles = async (): Promise<null | RoleDto[]> =>
 
 
 export const loadProduct = async (productId: string): Promise<null | ProductDto> =>
-  (await request<ProductDto>({ api: config.api.product, data: productId }));
+  (await request<ProductDto>({ api: config.api.product, query: productId }));
 
-export const loadListProduct = async (catalogId: string): Promise<null | ProductDto[]> =>
-  (await request<ProductDto[]>({ api: config.api.products, query: catalogId }));
+export const loadListProduct = async (catalogId: string): Promise<null | string[]> =>
+  (await request<string[]>({ api: config.api.products, query: catalogId }));
+
+export const saveListProduct = async (catalogId: string, productIds: string[]): Promise<null | boolean> =>
+  (await request<boolean>({ api: config.api.products, method: "PUT", query: catalogId, data: productIds }));
 
 
-export const loadCatalogList = async (parentCatalogId: null | string): Promise<null | CatalogDto[]> =>
-  (await request<CatalogDto[]>({ api: config.api.catalog, query: parentCatalogId ? parentCatalogId.toString() : "" }));
+export const loadSearchProduct = async (search: string): Promise<null | string[]> =>
+  (await request<string[]>({ api: config.api.searchProducts, query: search }));
+
+
+export const loadCatalogList = async (parentCatalogId: null | string): Promise<null | string[]> =>
+  (await request<string[]>({
+    api: config.api.catalogList,
+    query: parentCatalogId ? parentCatalogId.toString() : ""
+  }));
+
+export const loadCatalog = async (catalogId: string): Promise<null | CatalogDto> =>
+  (await request<CatalogDto>({ api: config.api.catalog, query: catalogId }));
 
 export const saveCatalog = async (dto: CatalogDto): Promise<null | CatalogDto> =>
   (await request<CatalogDto>({ api: config.api.catalog, method: "PUT", data: dto }));

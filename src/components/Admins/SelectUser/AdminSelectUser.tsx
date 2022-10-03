@@ -13,7 +13,7 @@ import {
   ListItemIcon,
   ListItemText
 } from "@mui/material";
-import { useStores } from "stores/useStores";
+import { useStores } from "../../../hooks/useStores";
 
 
 export const AdminSelectUser = observer(() => {

@@ -1,6 +1,8 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 import { CatalogStore } from "./CatalogStore";
 import { CatalogEditorProps } from "components/forms/CatalogEditor/CatalogEditor";
+import { ProductRepositoryStore } from "./ProductRepositoryStore";
+import { CatalogRepositoryStore } from "./CatalogRepositoryStore";
 
 export class UIStore {
 
@@ -10,15 +12,20 @@ export class UIStore {
 
   isShowSignupDlg = false;
 
+  isShowSelectProductDlg = false;
+
+  cancelProductIds: string[] = [];
+
   catalogEdit: null | CatalogEditorProps = null;
 
   currentCatalogId: null | string = null;
 
-  constructor() {
+  constructor(private productRepository: ProductRepositoryStore, private catalogRepository: CatalogRepositoryStore) {
     makeAutoObservable(this);
   }
 
-  hideAllDialogs = () => {
+  private hideAllDialogs = () => {
+    this.isShowSelectProductDlg = false;
     this.isShowProfileDlg = false;
     this.isShowLoginDlg = false;
     this.isShowSignupDlg = false;
@@ -26,36 +33,66 @@ export class UIStore {
   };
 
   showProfileDlg = () => {
-    this.hideAllDialogs();
-    this.isShowProfileDlg = true;
+    runInAction(() => {
+      this.hideAllDialogs();
+      this.isShowProfileDlg = true;
+    });
   };
 
   hideProfileDlg = () => {
-    this.isShowProfileDlg = false;
+    runInAction(() => {
+      this.isShowProfileDlg = false;
+    });
   };
 
   showLoginDlg = () => {
-    this.hideAllDialogs();
-    this.isShowLoginDlg = true;
+    runInAction(() => {
+      this.hideAllDialogs();
+      this.isShowLoginDlg = true;
+    });
   };
   hideLoginDlg = () => {
-    this.isShowLoginDlg = false;
+    runInAction(() => {
+      this.isShowLoginDlg = false;
+    });
   };
 
   showSignupDlg = () => {
-    this.hideAllDialogs();
-    this.isShowSignupDlg = true;
+    runInAction(() => {
+      this.hideAllDialogs();
+      this.isShowSignupDlg = true;
+    });
   };
   hideSignupDlg = () => {
-    this.isShowSignupDlg = false;
+    runInAction(() => {
+      this.isShowSignupDlg = false;
+    });
+  };
+
+  showSelectProductDlg = () => {
+    runInAction(() => {
+      this.hideAllDialogs();
+      this.isShowSelectProductDlg = true;
+      this.cancelProductIds = this.productRepository.getProductIdsForCatalog(this.currentCatalogId);
+    });
+  };
+
+  hideSelectProductDlg = () => {
+    runInAction(() => {
+      this.isShowSelectProductDlg = false;
+    });
   };
 
   showCatalogEditDlg = (edit: CatalogEditorProps) => {
-    this.catalogEdit = edit;
+    runInAction(() => {
+      this.catalogEdit = edit;
+    });
   };
 
   hideCatalogEditDlg = () => {
-    this.catalogEdit = null;
+    runInAction(() => {
+      this.catalogEdit = null;
+    });
   };
 
   get isShowCatalogEditDlg() {
@@ -63,7 +100,9 @@ export class UIStore {
   }
 
   setCurrentCatalogId(id: null | string) {
-    this.currentCatalogId = id;
+    runInAction(() => {
+      this.currentCatalogId = id;
+    });
   }
 
   isCurrentCatalog(catalog: CatalogStore): boolean {

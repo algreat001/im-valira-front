@@ -5,7 +5,7 @@ import Menu from "@mui/material/Menu";
 
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { t } from "res/i18n/i18n";
-import { useStores } from "stores/useStores";
+import { useStores } from "../../hooks/useStores";
 import { observer } from "mobx-react";
 
 export interface AcountBoxProps {

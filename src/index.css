@@ -6,15 +6,20 @@
     --header-min-height: 64px;
     --footer-min-height: 300px;
     --gap: 12px;
+    --mini-gap: 8px;
     --radius: 5px;
     --catalog-width: 350px;
     --normal-speed-all: all 0.5s;
     --header-1-font: 14px;
+    --multiline: 5;
+
+    --product-card-height: 444px;
 }
 
 body {
     margin: 0;
     font-family: 'Overpass', sans-serif;
+    font-size: 14px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -24,6 +29,28 @@ code {
     monospace;
 }
 
+.ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.ellipsis-multiline {
+    display: -webkit-box;
+    width: 100%;
+    overflow: hidden;
+    white-space: pre-wrap;
+    word-break: break-word;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: var(--multiline);
+    -webkit-box-orient: vertical;
+}
+
+.hyphens {
+    white-space: pre-wrap;
+    word-break: break-word;
+    hyphens: auto;
+}
 
 .login__panel__social {
     width: 100%;
@@ -72,7 +99,6 @@ code {
 
 .landing {
     display: grid;
-    grid-template-columns: var(--catalog-width) auto;
     margin: var(--gap);
     gap: var(--gap);
     background-color: var(--white-bg-color);
@@ -80,8 +106,44 @@ code {
     min-height: calc(100vh - var(--header-min-height));
 }
 
+@media only screen and (max-width: 1000px) {
+    .landing {
+        grid-template-columns: auto;
+        grid-template-rows: auto auto;
+    }
+
+}
+
+@media only screen and (min-width: 1000px) {
+    .landing {
+        grid-template-columns: var(--catalog-width) auto;
+    }
+
+    .menu {
+        max-width: var(--catalog-width);
+    }
+}
+
+
+.landing__item {
+    overflow-x: hidden;
+}
+
+.landing__item__line {
+    margin: 0 0 8px 0 !important;
+    padding: 8px 4px;
+}
+
+.landing__item__wrap {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin: 8px 0 16px 0 !important;
+}
+
 .menu {
-    max-width: var(--catalog-width);
     width: 100%;
     background-color: var(--white-bg-color);
 }
@@ -129,4 +191,112 @@ code {
     align-items: center;
     padding: var(--gap);
     gap: var(--gap);
+}
+
+.product__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 280px;
+    width: 280px;
+    height: var(--product-card-height) !important;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: var(--normal-speed-all);
+}
+
+
+.product__card__image, .product__card__image > svg, .product__card__image > div > img {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 165px;
+    fill: var(--main-color) !important;
+    object-fit: cover;
+}
+
+.product__card__content {
+    position: absolute;
+    top: 160px;
+    gap: var(--mini-gap);
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 32px);
+}
+
+.product__card__header {
+    justify-content: flex-end !important;
+}
+
+.product__card__description {
+    justify-content: flex-start !important;
+}
+
+
+.product__card__action {
+    position: absolute;
+    bottom: 0;
+    justify-content: flex-end !important;
+    gap: var(--gap);
+    width: calc(100% - 32px);
+    height: 54px;
+}
+
+.product__card__price {
+    display: inline-flex;
+    justify-content: flex-end;
+}
+
+.product__card__rating {
+    justify-content: center;
+}
+
+.product__custom-list {
+    width: var(--catalog-width);
+    height: 230px;
+    overflow: auto;
+}
+
+.product__custom-list__item-name {
+
+}
+
+.picture-slider {
+    position: relative;
+}
+
+.picture-slider__progress {
+    position: absolute !important;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    height: 8px;
+    transition: var(--normal-speed-all);
+    color: var(--main-bg-color);
+    opacity: 1;
+}
+
+.picture-slider__progress > svg {
+    max-height: 8px;
+    height: 8px;
+}
+
+.picture-slider__progress--hide {
+    opacity: 0;
+}
+
+.picture-slider__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    transition: var(--normal-speed-all);
 }

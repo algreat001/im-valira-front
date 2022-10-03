@@ -1,7 +1,9 @@
 import * as React from "react";
 import { observer } from "mobx-react";
 
-import { useStores } from "stores/useStores";
+import { useStores } from "../../../hooks/useStores";
+import { useNavigate } from "react-router-dom";
+
 import { t } from "res/i18n/i18n";
 
 import { CatalogStore } from "stores/CatalogStore";
@@ -19,11 +21,13 @@ interface MenuItemProps {
 }
 
 const MenuItem = observer(({ catalog, level, isEditor }: MenuItemProps) => {
-  const { uiStore } = useStores();
+  const { catalogRepository, uiStore } = useStores();
+  const navigate = useNavigate();
 
   const handleClick = () => {
     catalog.select();
     uiStore.setCurrentCatalogId(catalog.id);
+    navigate("catalog/" + catalog.id);
   };
 
   return <>
@@ -39,9 +43,9 @@ const MenuItem = observer(({ catalog, level, isEditor }: MenuItemProps) => {
     </ListItemButton>
     {catalog.hasChildren && <Collapse in={catalog.isExpand} timeout="auto" unmountOnExit>
       <Loader show={!catalog.isChildrenLoaded} />
-      {catalog.children.map(child => <MenuItem
-        key={child.id}
-        catalog={child}
+      {catalog.children.map(childId => <MenuItem
+        key={childId}
+        catalog={catalogRepository.getCatalog(childId)}
         isEditor={isEditor}
         level={level + 1}
       />)}
@@ -50,22 +54,29 @@ const MenuItem = observer(({ catalog, level, isEditor }: MenuItemProps) => {
   </>;
 });
 
-export const CatalogMenu = observer(() => {
-  const { catalogStore, profileManagerStore } = useStores();
+export interface CatalogMenuProps {
+  nop?: null;
+}
+
+export const CatalogMenu = observer(({}: CatalogMenuProps) => {
+  const { catalogRepository, profileManagerStore } = useStores();
+
+  const rootCatalog = catalogRepository.getRoot();
+
   const isEditor = profileManagerStore.viewer.hasRole("editor");
   return <List
     className="menu"
     component="div"
     subheader={
       <ListSubheader component="div" className="menu__header">
-        {isEditor && <CatalogEditorToolbar catalog={catalogStore} />}
+        {isEditor && <CatalogEditorToolbar catalog={rootCatalog} />}
         <h2>{t("menu.main.title")}</h2>
       </ListSubheader>
     }
   >
-    {catalogStore.children.map(catalog => <MenuItem
-      catalog={catalog}
-      key={catalog.id}
+    {rootCatalog.children.map(catalogId => <MenuItem
+      catalog={catalogRepository.getCatalog(catalogId)}
+      key={catalogId}
       isEditor={isEditor}
       level={0}
     />)}

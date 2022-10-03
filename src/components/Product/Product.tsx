@@ -1,18 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { observer } from "mobx-react";
 
-import { useStores } from "stores/useStores";
+import { useStores } from "../../hooks/useStores";
 
 import { Alert, Skeleton } from "@mui/material";
+import { useNavigate, useParams } from "react-router-dom";
 
-export interface ProductProps {
-  id: string;
-}
+export const Product = observer(() => {
+  const { productRepository } = useStores();
+  const navigate = useNavigate();
 
-export const Product = observer(({ id }: ProductProps) => {
-  const { productManagerStore } = useStores();
+  const { productId } = useParams();
 
-  const product = productManagerStore.getProduct(id);
+  if (!productId) {
+    navigate("/");
+    return null;
+  }
+
+  const product = productRepository.getProduct(productId);
   if (!product) {
     return null;
   }

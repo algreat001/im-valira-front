@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react";
-import { useStores } from "stores/useStores";
+import { useStores } from "../../../hooks/useStores";
 import {
   Button,
   Dialog,

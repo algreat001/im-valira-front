@@ -32,7 +32,7 @@
     "start": "react-scripts start",
     "prebuild": "rm -R build",
     "build": "react-scripts build",
-    "postbuild": "cp -r build ../backend/public",
+    "postbuild": "cp -r ./build/ ../backend/public",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

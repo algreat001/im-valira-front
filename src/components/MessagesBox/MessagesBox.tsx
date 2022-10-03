@@ -6,7 +6,7 @@ import Badge from "@mui/material/Badge";
 import { MenuItem } from "@mui/material";
 
 import { t } from "res/i18n/i18n";
-import { useStores } from "stores/useStores";
+import { useStores } from "../../hooks/useStores";
 
 import MailIcon from "@mui/icons-material/Mail";
 

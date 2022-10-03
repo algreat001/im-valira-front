@@ -32,3 +32,8 @@ export function wait(time: number, cb ?: AnyFunction) {
     setTimeout(resolve, time);
   });
 }
+
+
+export function toRange(n: number, min: number, max: number): number {
+  return n < min ? min : n > max ? max : n;
+}

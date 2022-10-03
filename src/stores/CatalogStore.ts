@@ -1,8 +1,10 @@
 import { CatalogDto, CatalogMeta } from "interfaces/ext";
 import { makeAutoObservable, runInAction } from "mobx";
-import { deleteCatalog, loadCatalogList, saveCatalog } from "services/api";
-import { gap } from "./RootStore";
-import { t } from "../res/i18n/i18n";
+
+import { deleteCatalog, loadCatalog, loadCatalogList, saveCatalog } from "services/api";
+import { t } from "res/i18n/i18n";
+
+import { CatalogRepositoryStore } from "./CatalogRepositoryStore";
 
 export type CatalogTextField = "name" | "description" | "meta";
 
@@ -13,8 +15,8 @@ export class CatalogStore {
   description: null | string = null;
   meta: null | CatalogMeta = null;
 
-  children: CatalogStore[] = [];
-  parent: null | CatalogStore = null;
+  children: string[] = [];
+  parent: null | string = null;
 
   isChildrenLoaded = false;
   isExpand = false;
@@ -22,11 +24,8 @@ export class CatalogStore {
 
   private cache: null | string = null;
 
-  constructor(isMain = false) {
+  constructor(private catalogRepository: CatalogRepositoryStore) {
     makeAutoObservable(this);
-    if (isMain) {
-      this.loadChildren();
-    }
   }
 
   async loadChildren() {
@@ -34,34 +33,26 @@ export class CatalogStore {
     if (this.isChildrenLoaded) {
       return;
     }
-    const dtoList = await loadCatalogList(this.id);
-    if (!dtoList) {
+    const listIds = await loadCatalogList(this.id);
+    if (!listIds) {
       return;
     }
     runInAction(() => {
-      this.children = [];
-    });
-    for (const dtoCatalog of dtoList) {
-      const newChildren = new CatalogStore();
-      newChildren.fromDto(dtoCatalog, this);
-      runInAction(() => {
-        this.children.push(newChildren);
-      });
-    }
-    runInAction(() => {
+      this.children = listIds;
       this.isChildrenLoaded = true;
     });
+
   }
 
-  fromDto(dto: CatalogDto, parent: null | CatalogStore = null) {
+  fromDto(dto: CatalogDto, parentId: null | string = null) {
     this.id = dto.id;
     this.name = dto.name;
     this.description = dto.description;
     this.meta = dto.meta;
-    if (parent) {
-      this.parent = parent;
+    if (parentId) {
+      this.parent = parentId;
     } else if (dto.parent) {
-      this.parent = gap.catalogStore.findById(dto.parent);
+      this.parent = dto.parent;
     }
     this.hasChildren = dto.hasChildren;
   }
@@ -72,20 +63,32 @@ export class CatalogStore {
       name: this.name,
       description: this.description,
       meta: this.meta,
-      parent: this.parent?.id ?? null,
+      parent: this.parent,
       hasChildren: this.hasChildren
     } as CatalogDto;
   }
 
   toggleExpend() {
     this.isExpand = !this.isExpand;
+    if (this.isExpand) {
+      this.loadChildren();
+    }
   }
 
   select() {
     this.toggleExpend();
-    if (this.isExpand) {
-      this.loadChildren();
+    // if (this.isExpand) {
+    //   this.loadChildren();
+    // }
+  }
+
+  async load(id: string) {
+    const dto = await loadCatalog(id);
+    if (!dto) {
+      return;
     }
+    this.fromDto(dto);
+
   }
 
   async save() {
@@ -97,25 +100,25 @@ export class CatalogStore {
     if (!this.parent) {
       return;
     }
-
-    this.parent.pushChildren(this);
-    if (!this.parent.hasChildren) {
-      this.parent.hasChildren = true;
-      if (this.parent.id) {
-        this.parent.save();
-      }
+    const parentStore = this.catalogRepository.getCatalog(this.parent);
+    if (!parentStore || !this.id) {
+      return;
     }
-
-  }
-
-  pushChildren(child: CatalogStore) {
-    if (!this.children.some(ch => ch.id === child.id)) {
-      this.children.push(child);
+    parentStore.pushChildren(this.id);
+    if (!parentStore.hasChildren) {
+      parentStore.hasChildren = true;
+      parentStore.save();
     }
   }
 
-  deleteChildren(child: CatalogStore) {
-    this.children = this.children.filter(ch => ch.id !== child.id);
+  pushChildren(childId: string) {
+    if (!this.children.some(id => id === childId)) {
+      this.children.push(childId);
+    }
+  }
+
+  deleteChildren(childId: string) {
+    this.children = this.children.filter(id => id !== childId);
     if (this.children.length === 0) {
       this.hasChildren = false;
     }
@@ -128,7 +131,11 @@ export class CatalogStore {
     if (!await deleteCatalog(this.id)) {
       return;
     }
-    this.parent?.deleteChildren(this);
+    if (!this.parent) {
+      return;
+    }
+    const parentStore = this.catalogRepository.getCatalog(this.parent);
+    parentStore?.deleteChildren(this.id);
   }
 
   saveToCache() {
@@ -146,17 +153,11 @@ export class CatalogStore {
     this.fromDto(obj);
   }
 
-  findById(id: string): null | CatalogStore {
-    if (this.id === id) {
-      return this;
+  findById(id: null | string): null | CatalogStore {
+    if (!id) {
+      return null;
     }
-    for (const child of this.children) {
-      const res = child.findById(id);
-      if (res) {
-        return res;
-      }
-    }
-    return null;
+    return this.catalogRepository.getCatalog(id);
   }
 
   changeTextField(field: CatalogTextField, text: string) {
@@ -174,9 +175,9 @@ export class CatalogStore {
   }
 
   getNewChildCatalog(): CatalogStore {
-    const newCatalog = new CatalogStore();
+    const newCatalog = new CatalogStore(this.catalogRepository);
     newCatalog.setDefaultValue();
-    newCatalog.parent = this;
+    newCatalog.parent = this.id;
     return newCatalog;
   }
 
