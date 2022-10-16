@@ -1,13 +1,11 @@
+import React from "react";
 import { observer } from "mobx-react";
 
-import { useStores } from "../hooks/useStores";
+import { useStores } from "hooks/useStores";
 import { useParams } from "react-router-dom";
 import { t } from "res/i18n/i18n";
 
-import { Stack } from "@mui/material";
-
-import { CatalogMenu } from "components/Catalog/CatalogMenu/CatalogMenu";
-import { CatalogEditor } from "components/forms/CatalogEditor/CatalogEditor";
+import { CatalogPage } from "components/CatalogPage/CatalogPage";
 import { ProductCardHolder } from "components/Product/ProductCardHolder";
 
 export const LandingPage = observer(() => {
@@ -25,29 +23,23 @@ export const LandingPage = observer(() => {
 
   const isCatalogSelected = Boolean(uiStore.currentCatalogId);
 
-  return <div className="landing">
-    <CatalogMenu />
-    {!!uiStore.catalogEdit && <CatalogEditor {...uiStore.catalogEdit} />}
-    <Stack spacing={2} className="landing__item">
-      {isCatalogSelected && <ProductCardHolder
-        catalog={currentCatalog}
-        title={currentCatalog?.name ?? ""}
-        type="wrap"
-      />}
+  return <CatalogPage>
+    {isCatalogSelected && <ProductCardHolder
+      catalog={currentCatalog}
+      title={currentCatalog?.name ?? ""}
+      type="wrap"
+    />}
 
-      <ProductCardHolder
-        catalog={recommended}
-        title={t("landing.recommended")}
-        type="line"
-      />
+    <ProductCardHolder
+      catalog={recommended}
+      title={t("landing.recommended")}
+      type="line"
+    />
 
-      <ProductCardHolder
-        catalog={favorites}
-        title={t("landing.favorites")}
-        type="line"
-      />
-
-      {/*<Product id="0" />*/}
-    </Stack>
-  </div>;
+    <ProductCardHolder
+      catalog={favorites}
+      title={t("landing.favorites")}
+      type="line"
+    />
+  </CatalogPage>;
 });

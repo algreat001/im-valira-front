@@ -20,6 +20,10 @@ export const config = {
     catalog: `${api}catalog/`,
     catalogList: `${api}catalog/list/`
   },
+  route: {
+    catalog: { path: "catalog", param: ":catalogId" },
+    product: { path: "product", param: ":productId" }
+  },
   limits: {
     minSearchLength: 3
   }

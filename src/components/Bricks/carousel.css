@@ -1,0 +1,74 @@
+.carousel__container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel__line {
+    display: flex;
+    gap: var(--gap);
+    width: 100%;
+    height: 100%;
+}
+
+.carousel__dot__wrap {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%)
+}
+
+.carousel__dot__item {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    margin: 0 5px;
+    display: inline-block;
+    cursor: pointer;
+    background-color: var(--main-color);
+    transition: var(--normal-speed-all);
+    scale: 1;
+}
+
+.carousel__dot__item--active {
+    background-color: var(--main-bg-color);
+    scale: 1.3;
+}
+
+.carousel__slide {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    border-radius: var(--radius);
+    box-shadow: var(--bs-select);
+    transition: var(--normal-speed-all);
+}
+
+.carousel__slide > img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel__slide--active {
+    box-shadow: var(--bs-small);
+}
+
+.carousel__arrow {
+    position: absolute !important;
+    background-color: var(--bg-color-tranparent) !important;
+    width: 50px;
+    height: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #fff;
+    cursor: pointer;
+    left: initial;
+    right: 10px;
+}
+
+.carousel__arrow--left {
+    left: 20px;
+    right: initial;
+}
+

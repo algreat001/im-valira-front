@@ -1,14 +1,15 @@
 import * as React from "react";
 import { observer } from "mobx-react";
 
-import { useStores } from "../../../hooks/useStores";
+import { useStores } from "hooks/useStores";
 import { useNavigate } from "react-router-dom";
 
 import { t } from "res/i18n/i18n";
 
 import { CatalogStore } from "stores/CatalogStore";
 
-import { Tooltip, List, ListSubheader, ListItemButton, ListItemText, Collapse } from "@mui/material";
+import { Tooltip, List, ListSubheader, ListItemButton, ListItemText, Collapse, IconButton } from "@mui/material";
+
 import { CatalogEditorToolbar } from "components/Catalog/CatalogEditorToolbar/CatalogEditorToolbar";
 import { Loader } from "components/Loader/Loader";
 
@@ -25,21 +26,31 @@ const MenuItem = observer(({ catalog, level, isEditor }: MenuItemProps) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    catalog.select();
     uiStore.setCurrentCatalogId(catalog.id);
-    navigate("catalog/" + catalog.id);
+    navigate("/catalog/" + catalog.id);
+  };
+  const handleExpandClick = (e: React.MouseEvent<HTMLElement>) => {
+    catalog.select();
+    e.stopPropagation();
   };
 
   return <>
-    <ListItemButton selected={uiStore.isCurrentCatalog(catalog)} onClick={handleClick}>
+    <ListItemButton
+      selected={uiStore.isCurrentCatalog(catalog)}
+      onClick={handleClick}
+      onDoubleClick={handleExpandClick}
+    >
       {isEditor && <CatalogEditorToolbar catalog={catalog} />}
-      <Tooltip title={catalog.description ?? ""} placement="right">
+      <Tooltip title={catalog.description ?? ""} placement="bottom-start">
         <ListItemText primary={catalog.name} sx={{ paddingLeft: `${level * 0.5}em` }} />
       </Tooltip>
       {catalog.hasChildren && (
-        <div className={`menu__item__expand ${catalog.isExpand && "menu__item__expand--expand"}`}>
+        <IconButton
+          className={`menu__item__expand ${catalog.isExpand && "menu__item__expand--expand"}`}
+          onClick={handleExpandClick}
+        >
           <ExpandLess />
-        </div>)}
+        </IconButton>)}
     </ListItemButton>
     {catalog.hasChildren && <Collapse in={catalog.isExpand} timeout="auto" unmountOnExit>
       <Loader show={!catalog.isChildrenLoaded} />

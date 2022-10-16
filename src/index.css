@@ -3,6 +3,7 @@
     --main-color: #8D7694;
     --panel-bg-color: #f9f9f9;
     --white-bg-color: #FFFFFF;
+    --bg-color-tranparent: #FFF0DE70;
     --header-min-height: 64px;
     --footer-min-height: 300px;
     --gap: 12px;
@@ -11,9 +12,19 @@
     --catalog-width: 350px;
     --normal-speed-all: all 0.5s;
     --header-1-font: 14px;
+
+    --bs-normal: 0 7px 14px 0 rgba(0, 0, 0, 0.1), 0 16px 28px 0 rgba(0, 0, 0, 0.1);
+    --bs-small: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    --bs-big: 0px 2px 20px rgba(0, 0, 0, 0.07);
+
+    --bs-select: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+
     --multiline: 5;
 
     --product-card-height: 444px;
+
+    --product-image-carousel-height: 111px;
+    --product-image-big-height: 550px;
 }
 
 body {

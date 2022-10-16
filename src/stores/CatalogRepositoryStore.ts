@@ -9,6 +9,7 @@ export class CatalogRepositoryStore {
 
   constructor() {
     makeAutoObservable(this);
+    this.rootCatalogs.id = "100";
     this.rootCatalogs.loadChildren();
   }
 
@@ -31,11 +32,11 @@ export class CatalogRepositoryStore {
   }
 
   getRecommended(): CatalogStore {
-    return this.getCatalog("10000");
+    return this.getCatalog("1");
   }
 
   getFavorites(): CatalogStore {
-    return this.getCatalog("10001");
+    return this.getCatalog("2");
   }
 
 }

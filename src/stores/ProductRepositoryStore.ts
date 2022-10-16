@@ -23,6 +23,10 @@ export class ProductRepositoryStore {
     return loadProduct;
   }
 
+  newProduct(): ProductStore {
+    return new ProductStore();
+  }
+
   getProductIdsForCatalog(catalogId: null | string): string[] {
     const normalizeCatalogId = this.getNormalizeId(catalogId);
     if (this.productsInCatalog.has(normalizeCatalogId)) {

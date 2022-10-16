@@ -33,7 +33,7 @@ const MyMenuItem = <T, >({ onClick, text, condition, data }: MenuItemProps<T>) =
 };
 
 const EditorMenu = ({ anchorEl, catalog, onClose }: EditorMenuProps) => {
-  const { uiStore } = useStores();
+  const { uiStore, productRepository } = useStores();
   const isMenuOpen = Boolean(anchorEl);
 
   const handleMobileMenuClose = (event: React.MouseEvent<HTMLElement>) => {
@@ -58,6 +58,10 @@ const EditorMenu = ({ anchorEl, catalog, onClose }: EditorMenuProps) => {
     handleMobileMenuClose(event);
   };
 
+  const handleAddNewProduct = (event: React.MouseEvent<HTMLElement>, data: CatalogStore) => {
+    uiStore.showNewProductDlg({ catalog: data, product: productRepository.newProduct(), mode: "new" });
+  };
+
   const items: MenuItemProps<CatalogStore>[] = [ {
     text: t("menu.editor.catalog.edit"),
     onClick: handleEdit,
@@ -76,6 +80,11 @@ const EditorMenu = ({ anchorEl, catalog, onClose }: EditorMenuProps) => {
   }, {
     text: t("menu.editor.catalog.addChildCatalog"),
     onClick: handleAddChildCatalog,
+    condition: () => true,
+    data: catalog
+  }, {
+    text: t("menu.editor.catalog.addNewProduct"),
+    onClick: handleAddNewProduct,
     condition: () => true,
     data: catalog
   } ];

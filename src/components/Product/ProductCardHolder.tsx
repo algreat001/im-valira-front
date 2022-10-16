@@ -7,6 +7,8 @@ import { CatalogEditorToolbar } from "components/Catalog/CatalogEditorToolbar/Ca
 import { CatalogStore } from "stores/CatalogStore";
 import { ProductCard } from "./ProductCard";
 
+import "./product.css";
+
 interface ProductItem {
   product: React.ReactNode;
   id: string;

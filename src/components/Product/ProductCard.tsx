@@ -9,6 +9,9 @@ import { Button, Card, CardActions, CardContent, CardMedia, CircularProgress, Ra
 import { PictureSlider } from "components/PictureSlider/PictureSlider";
 
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import { useNavigate } from "react-router-dom";
+
+import "./product.css";
 
 interface ProductCardBodyProps {
   product: ProductStore;
@@ -63,6 +66,7 @@ export interface ProductCardProps {
 export const ProductCard = observer(({ productId }: ProductCardProps) => {
   const { productRepository } = useStores();
   const [ isHover, setIsHover ] = useState(false);
+  const navigate = useNavigate();
 
   const product = productRepository.getProduct(productId);
   const { isLoading } = product;
@@ -72,6 +76,7 @@ export const ProductCard = observer(({ productId }: ProductCardProps) => {
     className="product__card"
     onMouseEnter={() => setIsHover(true)}
     onMouseLeave={() => setIsHover(false)}
+    onClick={() => navigate(`/product/${productId}`)}
   >
     {isLoading ? <ProductCardLoader /> : <ProductCardBody product={product} />}
   </Card>;

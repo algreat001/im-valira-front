@@ -1,8 +1,9 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import { CatalogStore } from "./CatalogStore";
-import { CatalogEditorProps } from "components/forms/CatalogEditor/CatalogEditor";
+import { EditorProps } from "interfaces/product";
 import { ProductRepositoryStore } from "./ProductRepositoryStore";
 import { CatalogRepositoryStore } from "./CatalogRepositoryStore";
+import { Currency } from "interfaces/ext";
 
 export class UIStore {
 
@@ -16,9 +17,13 @@ export class UIStore {
 
   cancelProductIds: string[] = [];
 
-  catalogEdit: null | CatalogEditorProps = null;
+  catalogEdit: null | EditorProps = null;
+
+  productEdit: null | EditorProps = null;
 
   currentCatalogId: null | string = null;
+
+  currency: Currency = { symbol: "₽", coefficient: 1 };
 
   constructor(private productRepository: ProductRepositoryStore, private catalogRepository: CatalogRepositoryStore) {
     makeAutoObservable(this);
@@ -30,6 +35,7 @@ export class UIStore {
     this.isShowLoginDlg = false;
     this.isShowSignupDlg = false;
     this.catalogEdit = null;
+    this.productEdit = null;
   };
 
   showProfileDlg = () => {
@@ -83,7 +89,7 @@ export class UIStore {
     });
   };
 
-  showCatalogEditDlg = (edit: CatalogEditorProps) => {
+  showCatalogEditDlg = (edit: EditorProps) => {
     runInAction(() => {
       this.catalogEdit = edit;
     });
@@ -97,6 +103,22 @@ export class UIStore {
 
   get isShowCatalogEditDlg() {
     return Boolean(this.catalogEdit);
+  }
+
+  showNewProductDlg = (edit: EditorProps) => {
+    runInAction(() => {
+      this.productEdit = edit;
+    });
+  };
+
+  hideNewProductDlg = () => {
+    runInAction(() => {
+      this.productEdit = null;
+    });
+  };
+
+  get isShowNewProductDlg() {
+    return Boolean(this.productEdit);
   }
 
   setCurrentCatalogId(id: null | string) {

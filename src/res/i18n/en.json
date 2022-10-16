@@ -43,7 +43,8 @@
         "edit": "Edit",
         "delete": "Delete",
         "editProducts": "Edit Products",
-        "addChildCatalog": "Add Child Catalog"
+        "addChildCatalog": "Add Child Catalog",
+        "addNewProduct": "Add new product"
       }
     }
   },
@@ -67,11 +68,42 @@
     }
   },
   "cart": {
-    "add": "Add to cart"
+    "add": "Add to cart",
+    "addButton": "Add to shopping cart"
   },
   "loading": "Loading...",
   "landing": {
     "recommended": "Recommended",
     "favorites": "Favorites"
+  },
+  "option": {
+    "color": {
+      "type": "Color",
+      "white": "White",
+      "green": "Green",
+      "blue": "Blue",
+      "red": "Red"
+    },
+    "size": {
+      "type": "Size"
+    },
+    "material": {
+      "type": "Material",
+      "linen": "Linen",
+      "cotton": "Cotton",
+      "synthetic": "Synthetic",
+      "viscose": "Viscose",
+      "silk": "Silk",
+      "wool": "Wool",
+      "leather": "Leather",
+      "ecoLeather": "Eco-leather"
+    }
+  },
+  "price": {
+    "title": "Price",
+    "from": "from"
+  },
+  "amount": {
+    "title": "Amount"
   }
 }
