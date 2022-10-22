@@ -12,7 +12,7 @@ export interface RolesListProps {
   onAdd?: (role: RoleDto) => void;
 }
 
-export const RolesList = ({ list, onClick, onDelete, onAdd }: RolesListProps) => {
+export const RolesList: React.FC<RolesListProps> = ({ list, onClick, onDelete, onAdd }) => {
   const isShowAddButton = !!onAdd;
 
   const [ addMenuAnchorEl, setAddMenuAnchorEl ] = useState<null | HTMLElement>(null);

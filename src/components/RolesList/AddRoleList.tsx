@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { observer } from "mobx-react";
 import { RoleDto } from "interfaces/ext";
 
@@ -11,7 +11,7 @@ export interface AddRoleListProps {
   onAdd: (role: RoleDto) => void;
 }
 
-export const AddRoleList = observer(({ anchorEl, onAdd, onClose }: AddRoleListProps) => {
+export const AddRoleList: React.FC<AddRoleListProps> = observer(({ anchorEl, onAdd, onClose }) => {
   const { roleStore } = useStores();
   const isShow = Boolean(anchorEl);
 

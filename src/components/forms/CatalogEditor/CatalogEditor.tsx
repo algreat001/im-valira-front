@@ -11,7 +11,7 @@ import { CloseButton } from "components/Bricks/CloseButton";
 
 import SaveIcon from "@mui/icons-material/Save";
 
-export const CatalogEditor = observer(({ catalog, mode }: EditorProps) => {
+export const CatalogEditor: React.FC<EditorProps> = observer(({ catalog, mode }) => {
   const { uiStore } = useStores();
 
   if (!catalog) {

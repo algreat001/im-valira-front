@@ -1,18 +1,13 @@
 import React from "react";
 
-import { OptionMeta, Option } from "interfaces/ext";
+import { Option } from "interfaces/ext";
 import { t } from "res/i18n/i18n";
 
-import { Options } from "./Options";
+import { OptionProps, Options } from "./Options";
 
 import "./options.css";
 
-interface OptionProps {
-  option: OptionMeta;
-  onSelect: (select: Option) => void;
-}
-
-export const ColorOptions = ({ option, onSelect }: OptionProps) => {
+export const ColorOptions: React.FC<OptionProps> = ({ option, onSelect }) => {
 
   const ColorItem = (option: Option) => <div
     className="options__item__color"

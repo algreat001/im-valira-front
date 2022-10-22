@@ -15,7 +15,7 @@ export interface ProductProps {
   product: ProductStore;
 }
 
-export const Product = observer(({ product }: ProductProps) => {
+export const Product: React.FC<ProductProps> = observer(({ product }) => {
 
   if (product.isLoading) {
     return <Skeleton variant="rectangular" width="100%" height="100%" />;

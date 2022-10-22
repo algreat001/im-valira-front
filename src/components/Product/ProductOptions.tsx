@@ -13,7 +13,7 @@ interface ProductOptionsProps {
   product: ProductStore;
 }
 
-export const ProductOptions = observer(({ product }: ProductOptionsProps) => {
+export const ProductOptions: React.FC<ProductOptionsProps> = observer(({ product }) => {
 
   const { meta } = product;
   const options = meta?.options;

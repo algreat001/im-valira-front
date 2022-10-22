@@ -12,7 +12,7 @@ interface SliderProgressProps {
   max: number;
 }
 
-const SliderProgress = ({ className, value, max }: SliderProgressProps) => {
+const SliderProgress: React.FC<SliderProgressProps> = ({ className, value, max }) => {
   const progress: boolean[] = [];
   for (let currenPos = 0; currenPos < max; currenPos++) {
     progress.push(currenPos < value);
@@ -28,7 +28,7 @@ interface PictureSliderProps {
   images: undefined | string[];
 }
 
-export const PictureSlider = ({ images }: PictureSliderProps) => {
+export const PictureSlider: React.FC<PictureSliderProps> = ({ images }) => {
   const [ currenImage, setCurrentImage ] = useState(0);
   const [ isInfluenced, setIsInfluenced ] = useState(false);
   const sliderRef = useRef<HTMLDivElement>(null);

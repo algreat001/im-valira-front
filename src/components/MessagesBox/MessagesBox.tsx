@@ -6,7 +6,7 @@ import Badge from "@mui/material/Badge";
 import { MenuItem } from "@mui/material";
 
 import { t } from "res/i18n/i18n";
-import { useStores } from "../../hooks/useStores";
+import { useStores } from "hooks/useStores";
 
 import MailIcon from "@mui/icons-material/Mail";
 
@@ -15,7 +15,7 @@ export interface MessagesBoxProps {
   onClick?: React.MouseEventHandler<HTMLElement>;
 }
 
-export const MessagesBox = observer(({ showTitle, onClick }: MessagesBoxProps) => {
+export const MessagesBox: React.FC<MessagesBoxProps> = observer(({ showTitle, onClick }) => {
   const { profileManagerStore } = useStores();
   const { viewer } = profileManagerStore;
 

@@ -27,7 +27,7 @@ export interface MainPageProps {
   children: React.ReactNode;
 }
 
-export const MainPage = ({ children }: MainPageProps) => {
+export const MainPage: React.FC<MainPageProps> = ({ children }) => {
   const name = "MainPage";
   return <ThemeProvider theme={theme}>
     <div className="App">

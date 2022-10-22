@@ -12,7 +12,7 @@ export interface CatalogPageProps {
   children?: React.ReactNode;
 }
 
-export const CatalogPage = observer(({ children }: CatalogPageProps) => {
+export const CatalogPage: React.FC<CatalogPageProps> = observer(({ children }) => {
   const { uiStore } = useStores();
 
 

@@ -10,7 +10,7 @@ export interface LoaderProps {
   size?: number;
 }
 
-export const Loader = ({ show, message, size }: LoaderProps) => {
+export const Loader: React.FC<LoaderProps> = ({ show, message, size }) => {
   if (!show) {
     return null;
   }

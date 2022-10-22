@@ -12,7 +12,7 @@ interface ProductAmountProps {
   product: ProductStore;
 }
 
-export const ProductAddCart = observer(({ product }: ProductAmountProps) => {
+export const ProductAddCart: React.FC<ProductAmountProps> = observer(({ product }) => {
 
   const disabled = product.hasUndefinedOptions;
 

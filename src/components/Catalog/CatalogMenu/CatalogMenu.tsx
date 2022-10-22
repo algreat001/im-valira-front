@@ -21,7 +21,7 @@ interface MenuItemProps {
   level: number;
 }
 
-const MenuItem = observer(({ catalog, level, isEditor }: MenuItemProps) => {
+const MenuItem: React.FC<MenuItemProps> = observer(({ catalog, level, isEditor }) => {
   const { catalogRepository, uiStore } = useStores();
   const navigate = useNavigate();
 
@@ -69,7 +69,7 @@ export interface CatalogMenuProps {
   nop?: null;
 }
 
-export const CatalogMenu = observer(({}: CatalogMenuProps) => {
+export const CatalogMenu: React.FC<CatalogMenuProps> = observer(({}) => {
   const { catalogRepository, profileManagerStore } = useStores();
 
   const rootCatalog = catalogRepository.getRoot();

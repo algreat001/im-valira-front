@@ -1,15 +1,10 @@
 import React from "react";
 
-import { OptionMeta, Option } from "interfaces/ext";
+import { Option } from "interfaces/ext";
 
-import { Options } from "./Options";
+import { OptionProps, Options } from "./Options";
 
-interface OptionProps {
-  option: OptionMeta;
-  onSelect: (select: Option) => void;
-}
-
-export const SizeOptions = ({ option, onSelect }: OptionProps) => {
+export const SizeOptions: React.FC<OptionProps> = ({ option, onSelect }) => {
 
   const SizeItem = (option: Option) => <div
     style={{ backgroundColor: option?.value as string ?? "#fff" }}

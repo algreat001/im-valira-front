@@ -20,7 +20,7 @@ export interface ProfileProps {
   profile: ProfileStore;
 }
 
-export const Profile = observer(({ profile }: ProfileProps) => {
+export const Profile: React.FC<ProfileProps> = observer(({ profile }) => {
   const { uiStore, profileManagerStore } = useStores();
   const [ password, setPassword ] = useState("");
   const { isAdmin } = profileManagerStore.viewer;

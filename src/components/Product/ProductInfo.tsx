@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+
 import { ProductStore } from "stores/ProductStore";
+import { t } from "res/i18n/i18n";
 
 import { Box, Tab, Tabs } from "@mui/material";
 
@@ -35,7 +37,7 @@ interface ProductDescriptionProps {
   product: ProductStore;
 }
 
-export const ProductInfo = ({ product }: ProductDescriptionProps) => {
+export const ProductInfo: React.FC<ProductDescriptionProps> = ({ product }) => {
   const [ value, setValue ] = useState(0);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -51,9 +53,9 @@ export const ProductInfo = ({ product }: ProductDescriptionProps) => {
       scrollButtons="auto"
       aria-label="scrollable product tabs"
     >
-      <Tab label="Описание" />
-      <Tab label="Характеристики" />
-      <Tab label="Отзывы" />
+      <Tab label={t("product.info.tabs.description")} />
+      <Tab label={t("product.info.tabs.characteristics")} />
+      <Tab label={t("product.info.tabs.review")} />
     </Tabs>
     <TabPanel value={value} index={0}>
       {meta?.description}

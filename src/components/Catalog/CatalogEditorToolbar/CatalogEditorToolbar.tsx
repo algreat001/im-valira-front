@@ -32,7 +32,7 @@ const MyMenuItem = <T, >({ onClick, text, condition, data }: MenuItemProps<T>) =
   </MenuItem>;
 };
 
-const EditorMenu = ({ anchorEl, catalog, onClose }: EditorMenuProps) => {
+const EditorMenu: React.FC<EditorMenuProps> = ({ anchorEl, catalog, onClose }) => {
   const { uiStore, productRepository } = useStores();
   const isMenuOpen = Boolean(anchorEl);
 
@@ -119,7 +119,7 @@ export interface CatalogEditorToolbarProps {
   catalog: CatalogStore;
 }
 
-export const CatalogEditorToolbar = observer(({ catalog }: CatalogEditorToolbarProps) => {
+export const CatalogEditorToolbar: React.FC<CatalogEditorToolbarProps> = observer(({ catalog }) => {
   const [ editorMenuAnchorEl, setEditorMenuAnchorEl ] = React.useState<null | HTMLElement>(null);
 
   const handleEditorMenuClose = () => {

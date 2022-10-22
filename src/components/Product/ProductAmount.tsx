@@ -10,7 +10,7 @@ interface ProductAmountProps {
   product: ProductStore;
 }
 
-export const ProductAmount = observer(({ product }: ProductAmountProps) => {
+export const ProductAmount: React.FC<ProductAmountProps> = observer(({ product }) => {
 
   const { amount } = product;
 

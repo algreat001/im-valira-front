@@ -8,6 +8,11 @@ import { Card, CardContent, Typography } from "@mui/material";
 
 import "./options.css";
 
+export interface OptionProps {
+  option: OptionMeta;
+  onSelect: (select: Option) => void;
+}
+
 export interface OptionsProps {
   option: OptionMeta;
   type: OptionType;
@@ -15,7 +20,7 @@ export interface OptionsProps {
   onSelect: (option: Option) => void;
 }
 
-export const Options = ({ option, type, item, onSelect }: OptionsProps) => {
+export const Options: React.FC<OptionsProps> = ({ option, type, item, onSelect }) => {
   const [ select, setSelect ] = useState<null | number>(null);
 
   if (option.type !== type) {

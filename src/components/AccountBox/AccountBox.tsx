@@ -1,19 +1,19 @@
 import React, { useState } from "react";
-import IconButton from "@mui/material/IconButton";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
-
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import { t } from "res/i18n/i18n";
-import { useStores } from "../../hooks/useStores";
 import { observer } from "mobx-react";
 
-export interface AcountBoxProps {
+import { t } from "res/i18n/i18n";
+import { useStores } from "hooks/useStores";
+
+import { IconButton, MenuItem, Menu } from "@mui/material";
+
+import AccountCircle from "@mui/icons-material/AccountCircle";
+
+export interface AccountBoxProps {
   showTitle?: boolean;
   onClick?: React.MouseEventHandler<HTMLElement>;
 }
 
-export const AccountBox = observer(({ showTitle, onClick }: AcountBoxProps) => {
+export const AccountBox: React.FC<AccountBoxProps> = observer(({ showTitle, onClick }) => {
   const { loginStore, uiStore } = useStores();
   const [ anchorEl, setAnchorEl ] = useState<null | HTMLElement>(null);
   const isMenuOpen = Boolean(anchorEl);

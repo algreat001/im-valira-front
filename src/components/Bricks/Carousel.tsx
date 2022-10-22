@@ -26,7 +26,7 @@ export interface ArrowProps {
   left?: boolean;
 }
 
-const Arrow = ({ left = false, onClick }: ArrowProps) => (
+const Arrow: React.FC<ArrowProps> = ({ left = false, onClick }) => (
   <IconButton
     onClick={onClick}
     className={cx("carousel__arrow", { "carousel__arrow--left": left })}
@@ -41,7 +41,7 @@ export interface DotProps {
   setActiveIndex: (index: number) => void;
 }
 
-const Dots = ({ length, activeIndex, setActiveIndex }: DotProps) => {
+const Dots: React.FC<DotProps> = ({ length, activeIndex, setActiveIndex }) => {
   return (
     <div className="carousel__dot__wrap">
       {new Array(length).fill("").map((_, i) => (
@@ -64,14 +64,14 @@ export interface CarouselProps {
   loop?: boolean;
 }
 
-export const Carousel = ({
-                           children,
-                           numberPerSlide = 4,
-                           autoPlay = true,
-                           interval = 2000,
-                           loop = true,
-                           setActive
-                         }: CarouselProps) => {
+export const Carousel: React.FC<CarouselProps> = ({
+                                                    children,
+                                                    numberPerSlide = 4,
+                                                    autoPlay = true,
+                                                    interval = 2000,
+                                                    loop = true,
+                                                    setActive
+                                                  }) => {
 
   const x = useMotionValue(0);
   const containerRef = React.useRef<HTMLDivElement>(null);

@@ -9,7 +9,7 @@ interface ProductPriceProps {
   product: ProductStore;
 }
 
-export const ProductPrice = observer(({ product }: ProductPriceProps) => {
+export const ProductPrice: React.FC<ProductPriceProps> = observer(({ product }) => {
   const { uiStore: { currency } } = useStores();
 
   const price = product.calculatePrice(true) * currency.coefficient * product.amount;

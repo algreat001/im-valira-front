@@ -105,5 +105,14 @@
   },
   "amount": {
     "title": "Amount"
+  },
+  "product": {
+    "info": {
+      "tabs": {
+        "description": "Description",
+        "characteristics": "Characteristics",
+        "review": "Review"
+      }
+    }
   }
 }

@@ -10,7 +10,7 @@ export interface ProductImagesProps {
   images: string[];
 }
 
-export const ProductImages = ({ images }: ProductImagesProps) => {
+export const ProductImages: React.FC<ProductImagesProps> = ({ images }) => {
   const [ active, setActive ] = useState<number>(0);
 
   const handleActivateImage = (index: number) => {

@@ -13,7 +13,7 @@ interface PasswordProps {
   disabled?: boolean;
 }
 
-export const Password = ({ id, label, value, onChange, fullWidth, error, disabled }: PasswordProps) => {
+export const Password: React.FC<PasswordProps> = ({ id, label, value, onChange, fullWidth, error, disabled }) => {
   const [ showPassword, setShowPassword ] = useState<boolean>();
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {

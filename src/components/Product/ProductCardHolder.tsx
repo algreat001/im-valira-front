@@ -27,14 +27,14 @@ const ProductLoading = () => {
   </>;
 };
 
-const ProductLineWrapper = ({ items, isLoading }: LineWrapperProps) => (
+const ProductLineWrapper: React.FC<LineWrapperProps> = ({ items, isLoading }) => (
   <Stack overflow="auto" direction="row" spacing={2} className={"landing__item__line"}>
     {isLoading && <ProductLoading />}
     {items.map(item => <React.Fragment key={item.id}>{item.product}</React.Fragment>)}
   </Stack>
 );
 
-const ProductGridWrapper = ({ items, isLoading }: LineWrapperProps) => (
+const ProductGridWrapper: React.FC<LineWrapperProps> = ({ items, isLoading }: LineWrapperProps) => (
   <div className={"landing__item__wrap"}>
     {isLoading && <ProductLoading />}
     {items.map(item => <div key={item.id}>{item.product}</div>)}
@@ -49,7 +49,11 @@ export interface ProductCardHolderProps {
 }
 
 
-export const ProductCardHolder = observer(({ catalog, title, type }: ProductCardHolderProps) => {
+export const ProductCardHolder: React.FC<ProductCardHolderProps> = observer(({
+                                                                               catalog,
+                                                                               title,
+                                                                               type
+                                                                             }: ProductCardHolderProps) => {
   const { productRepository, profileManagerStore } = useStores();
   const isEditor = profileManagerStore.viewer.hasRole("editor");
 

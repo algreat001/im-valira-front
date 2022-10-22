@@ -22,7 +22,7 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 
 const mobileMenuId = "primary-search-account-menu-mobile";
 
-const MobileMenu = ({ anchorEl, onClose }: MobileMenuProps) => {
+const MobileMenu: React.FC<MobileMenuProps> = ({ anchorEl, onClose }) => {
   const { loginStore } = useStores();
   const isMobileMenuOpen = Boolean(anchorEl);
 
@@ -55,7 +55,7 @@ export interface ApplicationBarProps {
   name?: string;
 }
 
-export const ApplicationBar = observer(({}: ApplicationBarProps) => {
+export const ApplicationBar: React.FC<ApplicationBarProps> = observer(() => {
   const { loginStore, profileManagerStore } = useStores();
   const [ mobileMoreAnchorEl, setMobileMoreAnchorEl ] = React.useState<null | HTMLElement>(null);
 

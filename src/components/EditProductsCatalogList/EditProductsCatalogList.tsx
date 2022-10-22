@@ -20,7 +20,7 @@ export interface EditProductsCatalogListProps {
   setProductIds: (ids: string[]) => void;
 }
 
-export const EditProductsCatalogList = observer(({ setProductIds }: EditProductsCatalogListProps) => {
+export const EditProductsCatalogList: React.FC<EditProductsCatalogListProps> = observer(({ setProductIds }) => {
   const { uiStore, productRepository } = useStores();
 
   const [ checked, setChecked ] = useState<string[]>([]);

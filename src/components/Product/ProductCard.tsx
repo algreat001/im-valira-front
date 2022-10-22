@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { observer } from "mobx-react";
 
 import { t } from "res/i18n/i18n";
@@ -17,7 +17,7 @@ interface ProductCardBodyProps {
   product: ProductStore;
 }
 
-const ProductCardBody = observer(({ product }: ProductCardBodyProps) => {
+const ProductCardBody: React.FC<ProductCardBodyProps> = observer(({ product }) => {
 
   return <>
     <CardMedia component="div" className="product__card__image">
@@ -63,7 +63,7 @@ export interface ProductCardProps {
   productId: string;
 }
 
-export const ProductCard = observer(({ productId }: ProductCardProps) => {
+export const ProductCard: React.FC<ProductCardProps> = observer(({ productId }) => {
   const { productRepository } = useStores();
   const [ isHover, setIsHover ] = useState(false);
   const navigate = useNavigate();

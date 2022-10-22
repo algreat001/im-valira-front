@@ -9,7 +9,7 @@ export interface CloseButtonProps {
   onCLose: () => void;
 }
 
-export const CloseButton = ({ onCLose }: CloseButtonProps) => {
+export const CloseButton: React.FC<CloseButtonProps> = ({ onCLose }) => {
   return <IconButton
     aria-label="close"
     onClick={onCLose}

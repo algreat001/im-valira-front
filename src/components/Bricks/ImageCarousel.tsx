@@ -7,13 +7,13 @@ export interface ImageCarouselProps {
   setActive?: (index: number) => void;
 }
 
-export const ImageCarousel = ({ images, className, setActive }: ImageCarouselProps) => {
+export const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, className, setActive }) => {
 
   const handleActivate = (index: number) => {
     if (setActive) {
       setActive(index);
     }
-  }
+  };
 
   return <div className={className}>
     <Carousel autoPlay={false} interval={4000} loop setActive={handleActivate}>

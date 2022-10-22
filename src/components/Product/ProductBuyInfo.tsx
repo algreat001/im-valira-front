@@ -12,7 +12,7 @@ interface ProductBuyInfoProps {
   product: ProductStore;
 }
 
-export const ProductBuyInfo = observer(({ product }: ProductBuyInfoProps) => {
+export const ProductBuyInfo: React.FC<ProductBuyInfoProps> = observer(({ product }) => {
   return <div className="product__info__buy">
     <ProductOptions product={product} />
     <ProductAmount product={product} />

@@ -53,7 +53,7 @@ export interface SearchBarProps {
   onSearch?: (search: string) => void;
 }
 
-export const SearchBar = ({ onSearch }: SearchBarProps) => {
+export const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   const [ search, setSearch ] = useState("");
   const debounceSearch = useDebounce(search, 500);
 
