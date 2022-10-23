@@ -2,6 +2,10 @@ import { makeAutoObservable } from "mobx";
 
 import { CatalogStore } from "./CatalogStore";
 
+export const ROOT_CATALOG = "100";
+export const RECOMMENDED = "1";
+export const FAVORITES = "2";
+
 export class CatalogRepositoryStore {
   private catalogs = new Map<string, CatalogStore>();
 
@@ -9,7 +13,7 @@ export class CatalogRepositoryStore {
 
   constructor() {
     makeAutoObservable(this);
-    this.rootCatalogs.id = "100";
+    this.rootCatalogs.id = ROOT_CATALOG;
     this.rootCatalogs.loadChildren();
   }
 
@@ -32,11 +36,11 @@ export class CatalogRepositoryStore {
   }
 
   getRecommended(): CatalogStore {
-    return this.getCatalog("1");
+    return this.getCatalog(RECOMMENDED);
   }
 
   getFavorites(): CatalogStore {
-    return this.getCatalog("2");
+    return this.getCatalog(FAVORITES);
   }
 
 }

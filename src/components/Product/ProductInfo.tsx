@@ -1,49 +1,22 @@
 import React, { useState } from "react";
 
-import { ProductStore } from "stores/ProductStore";
 import { t } from "res/i18n/i18n";
 
-import { Box, Tab, Tabs } from "@mui/material";
+import { Tab, Tabs } from "@mui/material";
+import { TabPanel } from "components/Bricks/TabPanel";
+import { ProductProps } from "./Product";
 
 import "./product.css";
+import { ProductDescription } from "./ProductDescription";
+import { ProductCharacteristics } from "./ProductCharacteristics";
+import { ProductReview } from "./ProductReview";
 
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
 
-const TabPanel = (props: TabPanelProps) => {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          {children}
-        </Box>
-      )}
-    </div>
-  );
-};
-
-interface ProductDescriptionProps {
-  product: ProductStore;
-}
-
-export const ProductInfo: React.FC<ProductDescriptionProps> = ({ product }) => {
+export const ProductInfo: React.FC<ProductProps> = ({ product }) => {
   const [ value, setValue ] = useState(0);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
-
-  const { meta } = product;
 
   return <>
     <Tabs
@@ -55,16 +28,16 @@ export const ProductInfo: React.FC<ProductDescriptionProps> = ({ product }) => {
     >
       <Tab label={t("product.info.tabs.description")} />
       <Tab label={t("product.info.tabs.characteristics")} />
-      <Tab label={t("product.info.tabs.review")} />
+      <Tab label={t("product.info.tabs.reviews")} />
     </Tabs>
     <TabPanel value={value} index={0}>
-      {meta?.description}
+      <ProductDescription product={product} />
     </TabPanel>
     <TabPanel value={value} index={1}>
-      Характеристики
+      <ProductCharacteristics product={product} />
     </TabPanel>
     <TabPanel value={value} index={2}>
-      Отзывы
+      <ProductReview product={product} />
     </TabPanel>
   </>;
 };

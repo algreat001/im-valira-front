@@ -3,6 +3,7 @@ import { observer } from "mobx-react";
 
 import { EditorProps } from "interfaces/product";
 import { CatalogTextField } from "stores/CatalogStore";
+import { ProductStore } from "stores/ProductStore";
 import { useStores } from "hooks/useStores";
 import { t } from "res/i18n/i18n";
 
@@ -11,28 +12,28 @@ import { CloseButton } from "components/Bricks/CloseButton";
 
 import SaveIcon from "@mui/icons-material/Save";
 
-export const ProductEditor: React.FC<EditorProps> = observer(({ catalog, mode }) => {
+export const ProductEditor: React.FC<EditorProps<ProductStore>> = observer(({ store, mode }) => {
   const { uiStore } = useStores();
 
-  if (!catalog) {
+  if (!store) {
     return null;
   }
 
   useEffect(() => {
-    catalog.saveToCache();
+    //store.saveToCache();
   }, []);
 
   const handleTextChange = (e: any) => {
-    catalog.changeTextField(e.target.id as CatalogTextField, e.target.value);
+    //store.changeTextField(e.target.id as CatalogTextField, e.target.value);
   };
 
   const handleSave = async () => {
-    await catalog.save();
+    //await store.save();
     uiStore.hideCatalogEditDlg();
   };
 
   const handleCancel = () => {
-    catalog.restoreFromCache();
+    //store.restoreFromCache();
     uiStore.hideCatalogEditDlg();
   };
 
@@ -50,7 +51,7 @@ export const ProductEditor: React.FC<EditorProps> = observer(({ catalog, mode })
         fullWidth
         variant="outlined"
         onChange={handleTextChange}
-        value={catalog.name}
+        value={store.name}
       />
       <TextField
         margin="dense"
@@ -60,7 +61,7 @@ export const ProductEditor: React.FC<EditorProps> = observer(({ catalog, mode })
         fullWidth
         variant="outlined"
         onChange={handleTextChange}
-        value={catalog.description}
+        //value={store.description}
         multiline
         rows={4}
       />
@@ -72,7 +73,7 @@ export const ProductEditor: React.FC<EditorProps> = observer(({ catalog, mode })
         fullWidth
         variant="outlined"
         onChange={handleTextChange}
-        value={JSON.stringify(catalog.meta)}
+        value={JSON.stringify(store.meta)}
         multiline
         rows={4}
       />

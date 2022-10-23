@@ -1,15 +1,12 @@
 import React from "react";
 import { observer } from "mobx-react";
 
-import { ProductStore } from "stores/ProductStore";
 import { useStores } from "hooks/useStores";
 import { t } from "res/i18n/i18n";
 
-interface ProductPriceProps {
-  product: ProductStore;
-}
+import { ProductProps } from "./Product";
 
-export const ProductPrice: React.FC<ProductPriceProps> = observer(({ product }) => {
+export const ProductPrice: React.FC<ProductProps> = observer(({ product }) => {
   const { uiStore: { currency } } = useStores();
 
   const price = product.calculatePrice(true) * currency.coefficient * product.amount;

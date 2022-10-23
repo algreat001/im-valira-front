@@ -10,7 +10,7 @@ import { CatalogStore } from "stores/CatalogStore";
 
 import { Tooltip, List, ListSubheader, ListItemButton, ListItemText, Collapse, IconButton } from "@mui/material";
 
-import { CatalogEditorToolbar } from "components/Catalog/CatalogEditorToolbar/CatalogEditorToolbar";
+import { CatalogEditorToolbar } from "./CatalogEditorToolbar";
 import { Loader } from "components/Loader/Loader";
 
 import { ExpandLess } from "@mui/icons-material";

@@ -33,15 +33,17 @@ export const Options: React.FC<OptionsProps> = ({ option, type, item, onSelect }
   };
 
   const selected = select !== null
-    ? t("option." + option.type + "." + option.options[select].name) || option.options[select].name
+    ? option.options[select].name //t("option." + option.type + "." + option.options[select].name) ||
     : undefined;
 
   return <Card className="options" variant="outlined">
     <CardContent>
-      <Typography color="text.secondary" gutterBottom>
-        {t(`option.${option.type}.type`)}
-        {!!selected && <div className="options__value">{`: ${selected}`}</div>}
-      </Typography>
+      <div className="options__params">
+        <Typography color="text.secondary">
+          {t(`option.${option.type}.type`)}
+        </Typography>
+        {!!selected && <Typography color="text.secondary">{`: ${selected}`}</Typography>}
+      </div>
       <div className="options__wrapper">
         {option.options.map((option, index) => <div
             key={index}

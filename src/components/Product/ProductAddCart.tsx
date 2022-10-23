@@ -2,17 +2,13 @@ import React from "react";
 import { observer } from "mobx-react";
 
 import { t } from "res/i18n/i18n";
-import { ProductStore } from "stores/ProductStore";
 
 import { Button } from "@mui/material";
+import { ProductProps } from "./Product";
 
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
-interface ProductAmountProps {
-  product: ProductStore;
-}
-
-export const ProductAddCart: React.FC<ProductAmountProps> = observer(({ product }) => {
+export const ProductAddCart: React.FC<ProductProps> = observer(({ product }) => {
 
   const disabled = product.hasUndefinedOptions;
 

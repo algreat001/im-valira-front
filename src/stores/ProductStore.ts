@@ -1,8 +1,9 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
-import { Option, OptionType, ProductDto, ProductMeta } from "interfaces/ext";
+import { Option, OptionType, ProductDto, ProductMeta, ProductReviewMeta } from "interfaces/ext";
 import { loadProduct } from "services/api";
-import { calculatePrice } from "../helpers/price";
+import { ReviewStore } from "stores/ReviewStore";
+import { calculatePrice } from "helpers/price";
 
 export class ProductStore {
   id: null | string = null;
@@ -10,6 +11,8 @@ export class ProductStore {
   meta: null | ProductMeta = null;
 
   selectedOptions: Map<string, Option> = new Map<string, Option>();
+
+  reviews: null | ReviewStore = null;
 
   isLoading = false;
   isError = false;
@@ -41,6 +44,23 @@ export class ProductStore {
     return calculatePrice(price, operations);
   }
 
+  calculateRating(): number {
+    const initValue = { sumRating: 0, amount: 0 };
+    const { sumRating, amount } = this.meta?.reviews?.reduce(
+      (prev, current) => {
+        if (!current || !current.rating) {
+          return prev;
+        }
+        return {
+          sumRating: prev.sumRating + current.rating,
+          amount: prev.amount + 1
+        };
+      },
+      initValue
+    ) ?? initValue;
+    return amount > 0 ? sumRating / amount : 5;
+  }
+
   get hasUndefinedOptions(): boolean {
     if (!this.meta?.options) {
       return false;
@@ -55,6 +75,15 @@ export class ProductStore {
 
   setOptions(type: OptionType, option: Option) {
     this.selectedOptions.set(type, option);
+  }
+
+  initReviews(reviews: ProductReviewMeta[]) {
+    runInAction(() => {
+      if (!this.meta) {
+        return;
+      }
+      this.meta.reviews = reviews;
+    });
   }
 
   private fromDto(dto: ProductDto) {
@@ -77,6 +106,7 @@ export class ProductStore {
         return;
       }
       this.fromDto(dto);
+      this.reviews = new ReviewStore(this);
     });
     return;
   }

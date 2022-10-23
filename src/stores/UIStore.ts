@@ -1,9 +1,15 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import { CatalogStore } from "./CatalogStore";
-import { EditorProps } from "interfaces/product";
+import { Currency } from "interfaces/ext";
+
 import { ProductRepositoryStore } from "./ProductRepositoryStore";
 import { CatalogRepositoryStore } from "./CatalogRepositoryStore";
-import { Currency } from "interfaces/ext";
+
+import { CatalogStore } from "./CatalogStore";
+import { ProductStore } from "./ProductStore";
+import { ReviewStore } from "./ReviewStore";
+import { EditorProps } from "interfaces/product";
+
+import { ReviewEditParams } from "../components/forms/ReviewEditor/ReviewEditor";
 
 export class UIStore {
 
@@ -17,9 +23,11 @@ export class UIStore {
 
   cancelProductIds: string[] = [];
 
-  catalogEdit: null | EditorProps = null;
+  reviewEdit: null | EditorProps<ReviewStore, ReviewEditParams> = null;
 
-  productEdit: null | EditorProps = null;
+  catalogEdit: null | EditorProps<CatalogStore> = null;
+
+  productEdit: null | EditorProps<ProductStore> = null;
 
   currentCatalogId: null | string = null;
 
@@ -36,6 +44,7 @@ export class UIStore {
     this.isShowSignupDlg = false;
     this.catalogEdit = null;
     this.productEdit = null;
+    this.reviewEdit = null;
   };
 
   showProfileDlg = () => {
@@ -89,7 +98,7 @@ export class UIStore {
     });
   };
 
-  showCatalogEditDlg = (edit: EditorProps) => {
+  showCatalogEditDlg = (edit: EditorProps<CatalogStore>) => {
     runInAction(() => {
       this.catalogEdit = edit;
     });
@@ -105,7 +114,7 @@ export class UIStore {
     return Boolean(this.catalogEdit);
   }
 
-  showNewProductDlg = (edit: EditorProps) => {
+  showNewProductDlg = (edit: EditorProps<ProductStore>) => {
     runInAction(() => {
       this.productEdit = edit;
     });
@@ -119,6 +128,22 @@ export class UIStore {
 
   get isShowNewProductDlg() {
     return Boolean(this.productEdit);
+  }
+
+  showReviewEditDlg = (edit: EditorProps<ReviewStore, ReviewEditParams>) => {
+    runInAction(() => {
+      this.reviewEdit = edit;
+    });
+  };
+
+  hideReviewEditDlg = () => {
+    runInAction(() => {
+      this.reviewEdit = null;
+    });
+  };
+
+  get isShowReviewEditDlg() {
+    return Boolean(this.reviewEdit);
   }
 
   setCurrentCatalogId(id: null | string) {

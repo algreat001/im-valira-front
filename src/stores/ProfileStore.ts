@@ -46,6 +46,10 @@ export class ProfileStore {
     return this.notifications.filter((nt) => !nt.isReadied).length;
   }
 
+  get fullName(): string {
+    return [ this.firstName, this.lastName ].join(" ");
+  }
+
   saveToCache() {
     this.cache = JSON.stringify({ firstName: this.firstName, lastName: this.lastName, roles: this.roles });
   }

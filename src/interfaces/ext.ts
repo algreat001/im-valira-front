@@ -12,7 +12,8 @@ import {
   Currency,
   CurrencyType,
   RurCurrency,
-  CharacteristicMeta
+  CharacteristicMeta,
+  ProductReviewMeta
 } from "../../../backend/src/model/meta";
 
 export type {
@@ -32,6 +33,7 @@ export type {
   Currency,
   CurrencyType,
   RurCurrency,
-  CharacteristicMeta
+  CharacteristicMeta,
+  ProductReviewMeta
 };
 

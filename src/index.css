@@ -162,6 +162,7 @@ code {
 .menu__header {
     display: flex;
     position: relative !important;
+    align-items: center;
 }
 
 .menu__item__expand {
@@ -171,6 +172,11 @@ code {
 
 .menu__item__expand--expand {
     rotate: 180deg;
+}
+
+.menu_icon {
+    max-height: 32px;
+    max-width: 32px;
 }
 
 .footer {

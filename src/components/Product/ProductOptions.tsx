@@ -3,17 +3,14 @@ import { observer } from "mobx-react";
 
 import { Option, OptionType } from "interfaces/ext";
 
-import { ProductStore } from "stores/ProductStore";
 
 import { ColorOptions } from "components/Options/ColorOptions";
 import { SizeOptions } from "components/Options/SizeOptions";
 import { MaterialOptions } from "components/Options/MaterialOptions";
 
-interface ProductOptionsProps {
-  product: ProductStore;
-}
+import { ProductProps } from "./Product";
 
-export const ProductOptions: React.FC<ProductOptionsProps> = observer(({ product }) => {
+export const ProductOptions: React.FC<ProductProps> = observer(({ product }) => {
 
   const { meta } = product;
   const options = meta?.options;

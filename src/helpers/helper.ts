@@ -37,3 +37,22 @@ export function wait(time: number, cb ?: AnyFunction) {
 export function toRange(n: number, min: number, max: number): number {
   return n < min ? min : n > max ? max : n;
 }
+
+export function toDigits(value: number, digits: number) {
+  let res = `${value}`;
+  while (res.length < digits) {
+    res = "0" + res;
+  }
+  return res;
+}
+
+export function dateToString(date: string | Date, withTime = true): string {
+  const _date = typeof date === "string" ? new Date(date) : date;
+
+  const strDate = `${toDigits(_date.getDate(), 2)}.${toDigits(_date.getMonth(), 2)}.${toDigits(
+    _date.getFullYear(), 4)}`;
+  if (!withTime) {
+    return strDate;
+  }
+  return `${strDate} - ${toDigits(_date.getHours(), 2)}:${toDigits(_date.getMinutes(), 2)}`;
+}

@@ -5,7 +5,7 @@ import { useStores } from "hooks/useStores";
 
 import { Stack } from "@mui/material";
 
-import { CatalogMenu } from "components/Catalog/CatalogMenu/CatalogMenu";
+import { CatalogMenu } from "../Catalog/CatalogMenu";
 import { CatalogEditor } from "components/forms/CatalogEditor/CatalogEditor";
 
 export interface CatalogPageProps {

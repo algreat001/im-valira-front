@@ -1,4 +1,6 @@
-import { CatalogStore } from "../stores/CatalogStore";
+import * as React from "react";
+import { CatalogStore } from "stores/CatalogStore";
+import { ReviewStore } from "stores/ReviewStore";
 
 export interface BaseMenuProps {
   anchorEl: null | HTMLElement;
@@ -7,6 +9,24 @@ export interface BaseMenuProps {
 
 export type MobileMenuProps = BaseMenuProps;
 
-export interface EditorMenuProps extends BaseMenuProps {
+
+export interface CatalogEditorMenuProps extends BaseMenuProps {
   catalog: CatalogStore;
+}
+
+export interface ReviewEditorMenuProps extends BaseMenuProps {
+  reviews: ReviewStore;
+  index: number;
+}
+
+export interface MenuItemProps {
+  onClick: (event: React.MouseEvent<HTMLElement>) => void;
+  text: null | string;
+  condition: () => boolean;
+  icon?: React.ReactNode;
+}
+
+export interface MenuProps extends BaseMenuProps {
+  menuId: string;
+  items: MenuItemProps[];
 }

@@ -18,7 +18,9 @@ export const config = {
     searchProducts: `${api}product/search/`,
 
     catalog: `${api}catalog/`,
-    catalogList: `${api}catalog/list/`
+    catalogList: `${api}catalog/list/`,
+
+    review: `${api}product/:productId/review`
   },
   route: {
     catalog: { path: "catalog", param: ":catalogId" },

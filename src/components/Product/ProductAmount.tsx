@@ -2,15 +2,11 @@ import React from "react";
 import { observer } from "mobx-react";
 
 import { t } from "res/i18n/i18n";
-import { ProductStore } from "stores/ProductStore";
 
 import { TextField, Typography } from "@mui/material";
+import { ProductProps } from "./Product";
 
-interface ProductAmountProps {
-  product: ProductStore;
-}
-
-export const ProductAmount: React.FC<ProductAmountProps> = observer(({ product }) => {
+export const ProductAmount: React.FC<ProductProps> = observer(({ product }) => {
 
   const { amount } = product;
 

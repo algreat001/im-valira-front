@@ -12,6 +12,14 @@
     gap: var(--mini-gap);
 }
 
+.options__params {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+}
+
 .options__value {
     display: inline;
     text-transform: lowercase;

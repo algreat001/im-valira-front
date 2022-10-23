@@ -3,7 +3,7 @@ import { observer } from "mobx-react";
 import { useStores } from "../../hooks/useStores";
 
 import { Skeleton, Stack, Typography } from "@mui/material";
-import { CatalogEditorToolbar } from "components/Catalog/CatalogEditorToolbar/CatalogEditorToolbar";
+import { CatalogEditorToolbar } from "../Catalog/CatalogEditorToolbar";
 import { CatalogStore } from "stores/CatalogStore";
 import { ProductCard } from "./ProductCard";
 

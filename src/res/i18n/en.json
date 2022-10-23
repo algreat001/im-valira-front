@@ -111,8 +111,58 @@
       "tabs": {
         "description": "Description",
         "characteristics": "Characteristics",
-        "review": "Review"
+        "reviews": "Reviews"
+      },
+      "missing": {
+        "description": "There is no product description, it will appear soon",
+        "characteristics": "There is no product characteristics, they will appear soon",
+        "reviews": "Nobody has left a review about this product yet, be the first"
       }
+    },
+    "overall": "Overall rating"
+  },
+  "review": {
+    "add": "Add a review",
+    "login": "Log in to be able to leave a review",
+    "title": {
+      "edit": "Editing review",
+      "new": "Add new review"
+    },
+    "save": "Save",
+    "rating": "Rate the product"
+  },
+  "char": {
+    "name": {
+      "header": "Characteristic",
+      "material": "Material",
+      "size": "Size",
+      "weight": "Weight",
+      "height": "Height",
+      "width": "Width",
+      "length": "Length",
+      "packingSize": "Packing size",
+      "colors": "Available colors"
+    },
+    "unit": {
+      "header": "Unit",
+      "kg": "Kg",
+      "grams": "Grams",
+      "mm": "mm"
+    },
+    "value": {
+      "header": "Value",
+      "linen": "Linen",
+      "cotton": "Cotton",
+      "synthetic": "Synthetic",
+      "viscose": "Viscose",
+      "silk": "Silk",
+      "wool": "Wool",
+      "leather": "Leather",
+      "ecoLeather": "Eco-leather",
+      "white": "White",
+      "green": "Green",
+      "blue": "Blue",
+      "red": "Red"
     }
   }
 }

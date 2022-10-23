@@ -1,8 +1,5 @@
-import { CatalogStore } from "stores/CatalogStore";
-import { ProductStore } from "stores/ProductStore";
-
-export interface EditorProps {
-  catalog?: CatalogStore;
-  product?: ProductStore;
+export interface EditorProps<T, P = unknown> {
+  store: T;
   mode: "new" | "edit";
+  params?: P;
 }
