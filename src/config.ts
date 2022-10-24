@@ -16,6 +16,7 @@ export const config = {
     product: `${api}product/`,
     products: `${api}product/list/`,
     searchProducts: `${api}product/search/`,
+    addProductToCatalog: `${api}product/add/:productId/to/:catalogId`,
 
     catalog: `${api}catalog/`,
     catalogList: `${api}catalog/list/`,

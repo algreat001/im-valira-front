@@ -8,6 +8,7 @@ import { Alert, Skeleton } from "@mui/material";
 import { ProductImages } from "./ProductImages";
 import { ProductInfo } from "./ProductInfo";
 import { ProductBuyInfo } from "./ProductBuyInfo";
+import { ProductEditorToolbar } from "./ProductEditorToolbar";
 
 import "./product.css";
 
@@ -32,7 +33,10 @@ export const Product: React.FC<ProductProps> = observer(({ product }) => {
 
 
   return <>
-    <h2>{product.name}</h2>
+    <h2>
+      <ProductEditorToolbar product={product} />
+      {product.name}
+    </h2>
     <div className="product__info__stack">
       {isContainsPhoto && <ProductImages images={photos} />}
       <ProductBuyInfo product={product} />

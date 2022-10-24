@@ -9,6 +9,7 @@ interface ProductCharacteristicItemProps {
 }
 
 const ProductCharacteristicItem: React.FC<ProductCharacteristicItemProps> = ({ characteristic }) => {
+  // name и unit - в один массив, value убрать от сюда!!!
   return <>
     <div>{t(`char.name.${characteristic.name}`)}</div>
     <div>{t(`char.value.${characteristic.value}`)}</div>

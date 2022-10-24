@@ -7,7 +7,6 @@ import { useStores } from "hooks/useStores";
 
 import { Button, Rating } from "@mui/material";
 import { ReviewItem } from "components/Review/ReviewItem";
-import { ReviewEditorDlg } from "../forms/ReviewEditor/ReviewEditor";
 
 import "./product.css";
 
@@ -52,7 +51,6 @@ export const ProductReview: React.FC<ProductProps> = observer(({ product }) => {
       : <Button variant="contained" size="large" onClick={handleLogin}>
         {t("review.login")}
       </Button>}
-    {!!uiStore.reviewEdit && <ReviewEditorDlg {...uiStore.reviewEdit} />}
   </>;
 
 });

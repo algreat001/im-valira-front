@@ -3,7 +3,7 @@ import { observer } from "mobx-react";
 
 import { useStores } from "hooks/useStores";
 import { ProductReviewMeta } from "interfaces/ext";
-import { ProductStore } from "stores/ProductStore";
+import { EditorProps } from "interfaces/product";
 import { ReviewStore } from "stores/ReviewStore";
 import { t } from "res/i18n/i18n";
 
@@ -12,7 +12,6 @@ import { Rating, Button, Dialog, DialogActions, DialogContent, DialogTitle, Text
 
 import { CloseButton } from "components/Bricks/CloseButton";
 import SaveIcon from "@mui/icons-material/Save";
-import { EditorProps } from "../../../interfaces/product";
 
 export interface ReviewEditParams {
   index?: number;

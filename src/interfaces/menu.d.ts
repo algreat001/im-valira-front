@@ -1,5 +1,6 @@
 import * as React from "react";
 import { CatalogStore } from "stores/CatalogStore";
+import { ProductStore } from "stores/ProductStore";
 import { ReviewStore } from "stores/ReviewStore";
 
 export interface BaseMenuProps {
@@ -12,6 +13,10 @@ export type MobileMenuProps = BaseMenuProps;
 
 export interface CatalogEditorMenuProps extends BaseMenuProps {
   catalog: CatalogStore;
+}
+
+export interface ProductEditorMenuProps extends BaseMenuProps {
+  product: ProductStore;
 }
 
 export interface ReviewEditorMenuProps extends BaseMenuProps {

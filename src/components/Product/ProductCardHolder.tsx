@@ -1,9 +1,10 @@
 import React from "react";
 import { observer } from "mobx-react";
-import { useStores } from "../../hooks/useStores";
+import { useStores } from "hooks/useStores";
+import { ROOT_CATALOG } from "stores/CatalogRepositoryStore";
 
 import { Skeleton, Stack, Typography } from "@mui/material";
-import { CatalogEditorToolbar } from "../Catalog/CatalogEditorToolbar";
+import { CatalogEditorToolbar } from "components/Catalog/CatalogEditorToolbar";
 import { CatalogStore } from "stores/CatalogStore";
 import { ProductCard } from "./ProductCard";
 
@@ -49,15 +50,12 @@ export interface ProductCardHolderProps {
 }
 
 
-export const ProductCardHolder: React.FC<ProductCardHolderProps> = observer(({
-                                                                               catalog,
-                                                                               title,
-                                                                               type
-                                                                             }: ProductCardHolderProps) => {
+export const ProductCardHolder: React.FC<ProductCardHolderProps>
+  = observer(({ catalog, title, type }: ProductCardHolderProps) => {
   const { productRepository, profileManagerStore } = useStores();
   const isEditor = profileManagerStore.viewer.hasRole("editor");
 
-  const productIds = productRepository.getProductIdsForCatalog(catalog.id ?? "0");
+  const productIds = productRepository.getProductIdsForCatalog(catalog.id ?? ROOT_CATALOG);
 
   const isLoading = productIds.length === 0;
 

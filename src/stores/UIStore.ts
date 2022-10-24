@@ -10,6 +10,7 @@ import { ReviewStore } from "./ReviewStore";
 import { EditorProps } from "interfaces/product";
 
 import { ReviewEditParams } from "../components/forms/ReviewEditor/ReviewEditor";
+import { ProductEditParams } from "../components/forms/ProductEditor/ProductEditor";
 
 export class UIStore {
 
@@ -27,7 +28,7 @@ export class UIStore {
 
   catalogEdit: null | EditorProps<CatalogStore> = null;
 
-  productEdit: null | EditorProps<ProductStore> = null;
+  productEdit: null | EditorProps<ProductStore, ProductEditParams> = null;
 
   currentCatalogId: null | string = null;
 
@@ -114,19 +115,19 @@ export class UIStore {
     return Boolean(this.catalogEdit);
   }
 
-  showNewProductDlg = (edit: EditorProps<ProductStore>) => {
+  showProductEditDlg = (edit: EditorProps<ProductStore, ProductEditParams>) => {
     runInAction(() => {
       this.productEdit = edit;
     });
   };
 
-  hideNewProductDlg = () => {
+  hideProductEditDlg = () => {
     runInAction(() => {
       this.productEdit = null;
     });
   };
 
-  get isShowNewProductDlg() {
+  get isShowProductEditDlg() {
     return Boolean(this.productEdit);
   }
 

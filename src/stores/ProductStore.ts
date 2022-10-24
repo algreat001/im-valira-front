@@ -1,9 +1,13 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
+import { t } from "res/i18n/i18n";
 import { Option, OptionType, ProductDto, ProductMeta, ProductReviewMeta } from "interfaces/ext";
-import { loadProduct } from "services/api";
+import { addProductToCatalog, loadProduct, saveProduct } from "services/api";
 import { ReviewStore } from "stores/ReviewStore";
 import { calculatePrice } from "helpers/price";
+
+
+export type ProductTextField = "name" | "meta.description" | "meta";
 
 export class ProductStore {
   id: null | string = null;
@@ -20,9 +24,13 @@ export class ProductStore {
 
   amount = 1;
 
+  private cache: null | string = null;
+
   constructor() {
     makeAutoObservable(this);
     this.isLoading = true;
+    this.name = t("product.default.name");
+    this.createMeta();
   }
 
   setAmount(value: string) {
@@ -89,9 +97,20 @@ export class ProductStore {
   private fromDto(dto: ProductDto) {
     this.name = dto.name;
     this.meta = dto.meta;
+    this.id = dto.id;
     if (this.meta?.photos.length > 0) {
       this.isPhoto = true;
     }
+    this.reviews = new ReviewStore(this);
+
+  }
+
+  private toDto(): ProductDto {
+    return {
+      name: this.name,
+      meta: this.meta,
+      id: this.id
+    } as ProductDto;
   }
 
   async load(id: string): Promise<void> {
@@ -106,13 +125,81 @@ export class ProductStore {
         return;
       }
       this.fromDto(dto);
-      this.reviews = new ReviewStore(this);
     });
     return;
   }
 
   async save(): Promise<void> {
+    const dto = this.toDto();
+    const result = await saveProduct(dto);
+    if (!result) {
+      console.log("error save product");
+      return;
+    }
+    this.fromDto(result);
     return;
+  }
+
+  async addToCatalog(catalogId: string): Promise<boolean> {
+    if (this.id === null) {
+      return false;
+    }
+    const result = await addProductToCatalog(this.id, catalogId);
+    if (!result) {
+      console.log("error add product to catalog");
+      return false;
+    }
+    this.fromDto(result);
+    return true;
+  }
+
+  saveToCache() {
+    this.cache = JSON.stringify(this.toDto());
+  }
+
+  restoreFromCache() {
+    if (!this.cache) {
+      return;
+    }
+    const obj = JSON.parse(this.cache);
+    if (!obj) {
+      return;
+    }
+    this.fromDto(obj);
+  }
+
+  changeTextField(field: ProductTextField, text: string) {
+    switch (field) {
+      case "name": {
+        this[field] = text;
+        return;
+      }
+      case "meta": {
+        this.meta = (text === "null" || text === "") ? null : JSON.parse(text) as ProductMeta;
+        return;
+      }
+      case "meta.description": {
+        if (!this.meta) {
+          this.createMeta();
+        }
+        if (!this.meta) {
+          return;
+        }
+        this.meta.description = text;
+        return;
+      }
+    }
+  }
+
+  private createMeta() {
+    this.meta = {
+      description: "",
+      price: 10000,
+      rating: 5,
+      photos: [],
+      options: [],
+      actions: []
+    };
   }
 
   mock() {

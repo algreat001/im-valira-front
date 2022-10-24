@@ -1,20 +1,29 @@
-import * as React from "react";
-
+import React from "react";
 import { observer } from "mobx-react";
-
-import { CatalogStore } from "stores/CatalogStore";
 
 import { IconButton } from "@mui/material";
 import MoreIcon from "@mui/icons-material/MoreVert";
+import { useStores } from "hooks/useStores";
 
-import { CatalogEditorContextMenu } from "./CatalogEditorContextMenu";
+import { ProductProps } from "./Product";
+import { ProductEditorContextMenu } from "./ProductEditorContextMenu";
 
-export interface CatalogEditorToolbarProps {
-  catalog: CatalogStore;
-}
 
-export const CatalogEditorToolbar: React.FC<CatalogEditorToolbarProps> = observer(({ catalog }) => {
+export const ProductEditorToolbar: React.FC<ProductProps> = observer(({ product }) => {
+  const { profileManagerStore: { viewer } } = useStores();
   const [ editorMenuAnchorEl, setEditorMenuAnchorEl ] = React.useState<null | HTMLElement>(null);
+
+  const { meta } = product;
+
+  if (!meta) {
+    return null;
+  }
+
+  const isEditable = (viewer.isAdmin || viewer.hasRole("Editor"));
+
+  if (!isEditable) {
+    return null;
+  }
 
   const handleEditorMenuClose = () => {
     setEditorMenuAnchorEl(null);
@@ -35,6 +44,10 @@ export const CatalogEditorToolbar: React.FC<CatalogEditorToolbarProps> = observe
     >
       <MoreIcon />
     </IconButton>
-    <CatalogEditorContextMenu catalog={catalog} anchorEl={editorMenuAnchorEl} onClose={handleEditorMenuClose} />
+    <ProductEditorContextMenu
+      product={product}
+      anchorEl={editorMenuAnchorEl}
+      onClose={handleEditorMenuClose}
+    />
   </>;
 });

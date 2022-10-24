@@ -119,7 +119,23 @@
         "reviews": "Nobody has left a review about this product yet, be the first"
       }
     },
-    "overall": "Overall rating"
+    "overall": "Overall rating",
+    "edit": {
+      "title": {
+        "new": "New product",
+        "edit": "Edit product"
+      },
+      "name": "Name",
+      "description": "Description",
+      "meta": "Meta info",
+      "parent": "Parent",
+      "save": "Save",
+      "saveChanges": "Save changes"
+    },
+    "default": {
+      "name": "Name of the product",
+      "meta": "{}"
+    }
   },
   "review": {
     "add": "Add a review",

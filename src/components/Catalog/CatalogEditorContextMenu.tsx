@@ -21,14 +21,21 @@ export const CatalogEditorContextMenu: React.FC<CatalogEditorMenuProps> = observ
     uiStore.showCatalogEditDlg({ store: catalog.getNewChildCatalog(), mode: "new" });
   };
   const handleAddProducts = () => {
+    uiStore.setCurrentCatalogId(catalog.id);
     uiStore.showSelectProductDlg();
   };
   const handleDeleteCatalog = () => {
-    catalog.delete();
+    const deletedId = catalog.id
+    catalog.delete().then(() => {
+      if (deletedId === uiStore.currentCatalogId) {
+        uiStore.setCurrentCatalogId(ROOT_CATALOG);
+      }
+    });
+
   };
 
   const handleAddNewProduct = () => {
-    uiStore.showNewProductDlg({ params: { catalog }, store: productRepository.newProduct(), mode: "new" });
+    uiStore.showProductEditDlg({ params: { catalog }, store: productRepository.newProduct(), mode: "new" });
   };
 
   const items: MenuItemProps[] = [ {

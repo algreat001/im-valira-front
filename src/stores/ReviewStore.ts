@@ -19,11 +19,10 @@ export class ReviewStore {
       this.meta = [];
       product.initReviews(this.meta);
     }
-
   }
 
   get(index: null | number): null | ProductReviewMeta {
-    if (!index || !this.meta || this.meta.length < index) {
+    if (index === null || !this.meta || this.meta.length < index) {
       return null;
     }
     return this.meta[index];
@@ -82,13 +81,5 @@ export class ReviewStore {
     }
 
   }
-
-  // static init(product: ProductStore): null | ReviewStore {
-  //   if (!product?.meta) {
-  //     return null;
-  //   }
-  //   return new ReviewStore(product);
-  // }
-
 
 }

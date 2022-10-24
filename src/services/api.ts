@@ -25,6 +25,20 @@ export const loadRoles = async (): Promise<null | RoleDto[]> =>
 export const loadProduct = async (productId: string): Promise<null | ProductDto> =>
   (await request<ProductDto>({ api: config.api.product, query: productId }));
 
+export const saveProduct = async (product: ProductDto): Promise<null | ProductDto> =>
+  (await request<ProductDto>({ api: config.api.product, method: "PUT", data: product }));
+
+export const addProductToCatalog = async (productId: string, catalogId: string): Promise<null | ProductDto> =>
+  (await request<ProductDto>({
+    api: config.api.addProductToCatalog
+      .replace(':productId', productId)
+      .replace(':catalogId', catalogId),
+    method: "PUT"
+  }));
+
+export const deleteProduct = async (productId: string): Promise<null | boolean> =>
+  (await request<boolean>({ api: config.api.product, method: "DELETE", query: productId }));
+
 export const loadListProduct = async (catalogId: string): Promise<null | string[]> =>
   (await request<string[]>({ api: config.api.products, query: catalogId }));
 

@@ -2,6 +2,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 
 import { ProductStore } from "./ProductStore";
 import { loadListProduct, saveListProduct } from "services/api";
+import { ROOT_CATALOG } from "./CatalogRepositoryStore";
 
 export class ProductRepositoryStore {
   private products = new Map<string, ProductStore>();
@@ -23,8 +24,20 @@ export class ProductRepositoryStore {
     return loadProduct;
   }
 
+  addProduct(id: string, product: ProductStore) {
+    this.products.set(id, product);
+  }
+
   newProduct(): ProductStore {
     return new ProductStore();
+  }
+
+  addProductToCatalog(productId: string, catalogId: string): void {
+    if (!this.productsInCatalog.has(catalogId)) {
+      return;
+    }
+    this.productsInCatalog.get(catalogId)?.push(productId);
+    return;
   }
 
   getProductIdsForCatalog(catalogId: null | string): string[] {
@@ -72,7 +85,7 @@ export class ProductRepositoryStore {
   }
 
   private getNormalizeId(id: null | string): string {
-    return id ?? "0";
+    return id ?? ROOT_CATALOG;
   }
 
 }

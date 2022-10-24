@@ -3,6 +3,7 @@ import React from "react";
 import { ApplicationBar } from "components/AppBar/AppBar";
 import { Footer } from "components/Footer/Footer";
 import { createTheme, ThemeProvider } from "@mui/material";
+import { EditDialogs } from "./EditDialogs";
 
 const theme = createTheme({
   palette: {
@@ -28,6 +29,7 @@ export interface MainPageProps {
 }
 
 export const MainPage: React.FC<MainPageProps> = ({ children }) => {
+
   const name = "MainPage";
   return <ThemeProvider theme={theme}>
     <div className="App">
@@ -35,5 +37,8 @@ export const MainPage: React.FC<MainPageProps> = ({ children }) => {
       {children}
       <Footer />
     </div>
+
+    <EditDialogs />
+
   </ThemeProvider>;
 };

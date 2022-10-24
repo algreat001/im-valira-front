@@ -121,3 +121,7 @@
     flex-direction: row;
     gap: var(--gap);
 }
+
+.product__description {
+    white-space: pre-wrap;
+}

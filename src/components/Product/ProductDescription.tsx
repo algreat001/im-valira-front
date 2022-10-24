@@ -7,5 +7,5 @@ export const ProductDescription: React.FC<ProductProps> = ({ product }) => {
   if (!meta?.description) {
     return <div>{t("product.info.missing.description")}</div>;
   }
-  return <div>{meta.description}</div>;
+  return <div className="product__description">{meta.description}</div>;
 };
