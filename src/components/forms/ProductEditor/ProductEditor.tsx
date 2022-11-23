@@ -61,7 +61,7 @@ export const ProductEditorDlg: React.FC<EditorProps<ProductStore, ProductEditPar
   return <Dialog open={uiStore.isShowProductEditDlg} onClose={handleCancel}>
     <DialogTitle>
       {t(`product.edit.title.${mode}`)}
-      <CloseButton onCLose={handleCancel} />
+      <CloseButton onClose={handleCancel} />
     </DialogTitle>
     <DialogContent>
       <TextField

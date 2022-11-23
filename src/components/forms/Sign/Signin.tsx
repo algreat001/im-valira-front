@@ -69,7 +69,7 @@ export const Signin = observer(() => {
       <form onSubmit={formik.handleSubmit}>
         <DialogTitle>
           {t("appbar.profile.signin")}
-          <CloseButton onCLose={uiStore.hideLoginDlg} />
+          <CloseButton onClose={uiStore.hideLoginDlg} />
         </DialogTitle>
         <DialogContent>
           <TextField

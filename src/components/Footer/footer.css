@@ -1,0 +1,26 @@
+.footer {
+    display: grid;
+    grid-template-columns: 300px auto auto;
+    align-items: center;
+    justify-items: center;
+
+    min-height: var(--footer-min-height);
+    background-color: var(--main-color);
+    color: var(--main-bg-color);
+    gap: var(--gap);
+    padding: var(--gap);
+}
+
+.footer__logo {
+    width: 300px;
+    object-fit: cover;
+}
+
+.footer__links {
+    color: var(--main-bg-color) !important;
+}
+
+.footer__link {
+    cursor: pointer;
+    color: var(--main-bg-color) !important;
+}

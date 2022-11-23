@@ -2,6 +2,7 @@ import * as React from "react";
 import { CatalogStore } from "stores/CatalogStore";
 import { ProductStore } from "stores/ProductStore";
 import { ReviewStore } from "stores/ReviewStore";
+import { CharacteristicStore } from "../stores/CharactersticStore";
 
 export interface BaseMenuProps {
   anchorEl: null | HTMLElement;
@@ -17,6 +18,11 @@ export interface CatalogEditorMenuProps extends BaseMenuProps {
 
 export interface ProductEditorMenuProps extends BaseMenuProps {
   product: ProductStore;
+}
+
+export interface CharacteristicEditorMenuProps extends BaseMenuProps {
+  characteristic: CharacteristicStore;
+  name: null | string;
 }
 
 export interface ReviewEditorMenuProps extends BaseMenuProps {

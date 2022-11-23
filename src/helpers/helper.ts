@@ -56,3 +56,21 @@ export function dateToString(date: string | Date, withTime = true): string {
   }
   return `${strDate} - ${toDigits(_date.getHours(), 2)}:${toDigits(_date.getMinutes(), 2)}`;
 }
+
+
+export function mapToString<T>(map: Map<string, T>): string {
+  const jsonObject: { [key: string]: T } = {};
+  map.forEach((value, key) => {
+    jsonObject[key] = value;
+  });
+  return JSON.stringify(jsonObject);
+}
+
+export function stringToMap<T>(jsonString: string): Map<string, T> {
+  const jsonObject = JSON.parse(jsonString);
+  const map = new Map<string, T>();
+  for (const value in jsonObject) {
+    map.set(value, jsonObject[value] as T);
+  }
+  return map;
+}

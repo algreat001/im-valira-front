@@ -1,4 +1,4 @@
-import { CatalogDto, ProductDto, RoleDto, UserDto } from "../../../backend/src/dto";
+import { OrderRequestDto, OrderResponseDto, CatalogDto, ProductDto, RoleDto, UserDto } from "../../../backend/src/dto";
 import {
   CatalogMeta,
   ProductMeta,
@@ -17,6 +17,8 @@ import {
 } from "../../../backend/src/model/meta";
 
 export type {
+  OrderRequestDto,
+  OrderResponseDto,
   UserDto,
   CatalogDto,
   ProductDto,

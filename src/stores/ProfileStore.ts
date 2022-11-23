@@ -12,6 +12,10 @@ export class ProfileStore {
 
   email = "";
 
+  phone = "";
+
+  address = "";
+
   photo: null | string = null;
 
   roles: RoleDto[] = [];
@@ -30,6 +34,8 @@ export class ProfileStore {
     this.firstName = "";
     this.lastName = "";
     this.email = "";
+    this.phone = "";
+    this.address = "";
     this.photo = "";
     this.cache = "";
     this.messages = [];
@@ -51,7 +57,14 @@ export class ProfileStore {
   }
 
   saveToCache() {
-    this.cache = JSON.stringify({ firstName: this.firstName, lastName: this.lastName, roles: this.roles });
+    this.cache = JSON.stringify({
+      firstName: this.firstName,
+      lastName: this.lastName,
+      email: this.email,
+      phone: this.phone,
+      address: this.address,
+      roles: this.roles
+    });
   }
 
   restoreFromCache() {
@@ -64,6 +77,9 @@ export class ProfileStore {
     }
     this.firstName = obj.firstName;
     this.lastName = obj.lastName;
+    this.email = obj.email;
+    this.phone = obj.phone;
+    this.address = obj.address;
     this.roles = obj.roles;
   }
 
@@ -82,6 +98,8 @@ export class ProfileStore {
   initFromDto(userDto: UserDto) {
     runInAction(() => {
       this.email = userDto.email ?? "";
+      this.phone = userDto.phone ?? "";
+      this.address = userDto.address ?? "";
       this.firstName = userDto.firstName ?? "";
       this.lastName = userDto.lastName ?? "";
       this.photo = userDto.photo ?? null;
@@ -93,6 +111,8 @@ export class ProfileStore {
   get dto(): UserDto {
     return {
       email: this.email,
+      phone: this.phone,
+      address: this.address,
       lastName: this.lastName,
       firstName: this.firstName,
       roles: this.roles

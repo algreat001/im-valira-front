@@ -21,11 +21,19 @@ export const config = {
     catalog: `${api}catalog/`,
     catalogList: `${api}catalog/list/`,
 
-    review: `${api}product/:productId/review`
+    review: `${api}product/:productId/review`,
+    characteristic: `${api}product/:productId/characteristic`,
+
+    send: {
+      order: `${api}send/order`
+    }
   },
   route: {
     catalog: { path: "catalog", param: ":catalogId" },
-    product: { path: "product", param: ":productId" }
+    product: { path: "product", param: ":productId" },
+    cart: { path: "cart" },
+    checkout: { path: "checkout" },
+    search: { path: "search" }
   },
   limits: {
     minSearchLength: 3

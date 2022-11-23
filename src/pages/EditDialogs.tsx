@@ -7,6 +7,7 @@ import { SelectProducts } from "components/Admins/SelectProducts";
 import { ProductEditorDlg } from "components/forms/ProductEditor/ProductEditor";
 import { ReviewEditorDlg } from "components/forms/ReviewEditor/ReviewEditor";
 import { CatalogEditor } from "components/forms/CatalogEditor/CatalogEditor";
+import { CharacteristicEditorDlg } from "components/forms/CharacteristicEditor/CharacteristicEditor";
 
 export const EditDialogs = observer(() => {
   const { uiStore } = useStores();
@@ -16,5 +17,6 @@ export const EditDialogs = observer(() => {
     {!!uiStore.productEdit && <ProductEditorDlg {...uiStore.productEdit} />}
     {!!uiStore.reviewEdit && <ReviewEditorDlg {...uiStore.reviewEdit} />}
     {!!uiStore.catalogEdit && <CatalogEditor {...uiStore.catalogEdit} />}
+    {!!uiStore.characteristicEdit && <CharacteristicEditorDlg {...uiStore.characteristicEdit} />}
   </>;
 });

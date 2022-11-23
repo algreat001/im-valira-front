@@ -2,14 +2,16 @@ import React, { useState } from "react";
 import { observer } from "mobx-react";
 
 import { t } from "res/i18n/i18n";
-import { useStores } from "../../hooks/useStores";
+import { useStores } from "hooks/useStores";
+import { useNavigate } from "react-router-dom";
 import { ProductStore } from "stores/ProductStore";
 
 import { Button, Card, CardActions, CardContent, CardMedia, CircularProgress, Rating, Typography } from "@mui/material";
 import { PictureSlider } from "components/PictureSlider/PictureSlider";
 
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import { useNavigate } from "react-router-dom";
+
+import { ProductPrice } from "./ProductPrice";
 
 import "./product.css";
 
@@ -37,7 +39,7 @@ const ProductCardBody: React.FC<ProductCardBodyProps> = observer(({ product }) =
         variant="h4"
         color="text.primary"
       >
-        {product.meta?.price} ₽
+        <ProductPrice product={product} />
       </Typography>
       <Typography
         className="product__card__description ellipsis-multiline hyphens"
@@ -46,7 +48,7 @@ const ProductCardBody: React.FC<ProductCardBodyProps> = observer(({ product }) =
       >
         {product.meta?.description}
       </Typography>
-      <Rating className="product__card__rating" defaultValue={product.meta?.rating} size="small" readOnly />
+      <Rating className="product__card__rating" value={product.calculateRating()} size="small" readOnly />
     </CardContent>
     <CardActions className="product__card__action">
       <Button variant="contained" size="medium" startIcon={<AddShoppingCartIcon />}>{t("cart.add")}</Button>
@@ -55,7 +57,7 @@ const ProductCardBody: React.FC<ProductCardBodyProps> = observer(({ product }) =
 });
 
 const ProductCardLoader = () => {
-  return <CardContent><CircularProgress disableShrink /></CardContent>;
+  return <CardContent className="product__card__loader"><CircularProgress disableShrink /></CardContent>;
 };
 
 

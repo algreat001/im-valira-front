@@ -7,10 +7,10 @@ import { CatalogRepositoryStore } from "./CatalogRepositoryStore";
 import { CatalogStore } from "./CatalogStore";
 import { ProductStore } from "./ProductStore";
 import { ReviewStore } from "./ReviewStore";
-import { EditorProps } from "interfaces/product";
+import { ReviewEditParams, CharacteristicEditParams, EditorProps } from "interfaces/product";
 
-import { ReviewEditParams } from "../components/forms/ReviewEditor/ReviewEditor";
-import { ProductEditParams } from "../components/forms/ProductEditor/ProductEditor";
+import { ProductEditParams } from "components/forms/ProductEditor/ProductEditor";
+import { CharacteristicStore } from "./CharactersticStore";
 
 export class UIStore {
 
@@ -25,6 +25,8 @@ export class UIStore {
   cancelProductIds: string[] = [];
 
   reviewEdit: null | EditorProps<ReviewStore, ReviewEditParams> = null;
+
+  characteristicEdit: null | EditorProps<CharacteristicStore, CharacteristicEditParams> = null;
 
   catalogEdit: null | EditorProps<CatalogStore> = null;
 
@@ -145,6 +147,22 @@ export class UIStore {
 
   get isShowReviewEditDlg() {
     return Boolean(this.reviewEdit);
+  }
+
+  showCharacteristicEditDlg = (edit: EditorProps<CharacteristicStore, CharacteristicEditParams>) => {
+    runInAction(() => {
+      this.characteristicEdit = edit;
+    });
+  };
+
+  hideCharacteristicEditDlg = () => {
+    runInAction(() => {
+      this.characteristicEdit = null;
+    });
+  };
+
+  get isShowCharacteristicEditDlg() {
+    return Boolean(this.characteristicEdit);
   }
 
   setCurrentCatalogId(id: null | string) {

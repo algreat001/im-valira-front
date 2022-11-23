@@ -3,7 +3,7 @@ import { observer } from "mobx-react";
 
 import { useStores } from "hooks/useStores";
 import { ProductReviewMeta } from "interfaces/ext";
-import { EditorProps } from "interfaces/product";
+import { EditorProps, ReviewEditParams } from "interfaces/product";
 import { ReviewStore } from "stores/ReviewStore";
 import { t } from "res/i18n/i18n";
 
@@ -12,10 +12,6 @@ import { Rating, Button, Dialog, DialogActions, DialogContent, DialogTitle, Text
 
 import { CloseButton } from "components/Bricks/CloseButton";
 import SaveIcon from "@mui/icons-material/Save";
-
-export interface ReviewEditParams {
-  index?: number;
-}
 
 export const ReviewEditorDlg: React.FC<EditorProps<ReviewStore, ReviewEditParams>>
   = observer(({ store, mode, params }) => {
@@ -73,7 +69,7 @@ export const ReviewEditorDlg: React.FC<EditorProps<ReviewStore, ReviewEditParams
         {mode === "edit"
           ? t("review.title.edit")
           : t("review.title.new")}
-        <CloseButton onCLose={handleCancel} />
+        <CloseButton onClose={handleCancel} />
       </DialogTitle>
       <DialogContent>
         <TextField

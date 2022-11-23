@@ -6,7 +6,11 @@ import { t } from "res/i18n/i18n";
 
 import { ProductProps } from "./Product";
 
-export const ProductPrice: React.FC<ProductProps> = observer(({ product }) => {
+export interface ProductPriceProps extends ProductProps {
+  className?: string;
+}
+
+export const ProductPrice: React.FC<ProductPriceProps> = observer(({ product, className }) => {
   const { uiStore: { currency } } = useStores();
 
   const price = product.calculatePrice(true) * currency.coefficient * product.amount;
@@ -14,7 +18,7 @@ export const ProductPrice: React.FC<ProductProps> = observer(({ product }) => {
   const isActions = price !== priceWithoutActions;
   const { hasUndefinedOptions } = product;
 
-  return <div className="product__price">
+  return <div className={className ? className : "product__price"}>
     {isActions && <div>{`${priceWithoutActions} ${currency.symbol}`}</div>}
     {t("price.title")}
     {": "}

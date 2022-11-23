@@ -14,6 +14,8 @@
       "save": "Save",
       "firstname": "First name",
       "lastname": "Surname",
+      "phone": "Phone number",
+      "address": "Delivery address",
       "error": {
         "signup": "There was a registration error, please try again later",
         "signin": "There was a login error, please try again later",
@@ -25,6 +27,7 @@
     "cancel": "Cancel",
     "messages": "Messages",
     "notifications": "Notifications",
+    "cart": "Shopping cart",
     "search": "Search..."
   },
   "admin": {
@@ -45,8 +48,17 @@
         "editProducts": "Edit Products",
         "addChildCatalog": "Add Child Catalog",
         "addNewProduct": "Add new product"
+      },
+      "characteristic": {
+        "edit": "Edit characteristic",
+        "delete": "Delete characteristic",
+        "add": "Add new characteristic"
       }
     }
+  },
+  "search": {
+    "notFound": "No search of key words",
+    "found": "Search of key words"
   },
   "catalog": {
     "edit": {
@@ -69,7 +81,20 @@
   },
   "cart": {
     "add": "Add to cart",
-    "addButton": "Add to shopping cart"
+    "addButton": "Add to shopping cart",
+    "empty": "Shopping cart is empty",
+    "header": {
+      "number": "№",
+      "name": "Name of product",
+      "amount": "Amount",
+      "price": "Price"
+    },
+    "footer": {
+      "total": "Total"
+    },
+    "continue": "Continue Shopping",
+    "checkout": "Checkout",
+    "clear": "Empty shopping cart"
   },
   "loading": "Loading...",
   "landing": {
@@ -148,37 +173,126 @@
     "rating": "Rate the product"
   },
   "char": {
-    "name": {
-      "header": "Characteristic",
-      "material": "Material",
-      "size": "Size",
-      "weight": "Weight",
-      "height": "Height",
-      "width": "Width",
-      "length": "Length",
-      "packingSize": "Packing size",
-      "colors": "Available colors"
+    "header": {
+      "name": "Characteristic",
+      "value": "Value",
+      "unit": "Unit"
     },
-    "unit": {
-      "header": "Unit",
-      "kg": "Kg",
-      "grams": "Grams",
-      "mm": "mm"
+    "material": {
+      "name": "Material",
+      "unit": "-"
     },
-    "value": {
-      "header": "Value",
-      "linen": "Linen",
-      "cotton": "Cotton",
-      "synthetic": "Synthetic",
-      "viscose": "Viscose",
-      "silk": "Silk",
-      "wool": "Wool",
-      "leather": "Leather",
-      "ecoLeather": "Eco-leather",
-      "white": "White",
-      "green": "Green",
-      "blue": "Blue",
-      "red": "Red"
+    "size": {
+      "name": "Size",
+      "unit": "mm х mm x mm"
+    },
+    "weight": {
+      "name": "Weight",
+      "unit": "grams"
+    },
+    "height": {
+      "name": "Height",
+      "unit": "mm"
+    },
+    "width": {
+      "name": "Width",
+      "unit": "mm"
+    },
+    "length": {
+      "name": "Length",
+      "unit": "mm"
+    },
+    "packingSize": {
+      "name": "Packing size",
+      "unit": "mm x mm x mm"
+    },
+    "colors": {
+      "name": "Available colors",
+      "unit": "-"
     }
+  },
+  "checkout": {
+    "steps": {
+      "1": {
+        "label": "Customer data",
+        "description": ""
+      },
+      "2": {
+        "label": "Delivery address",
+        "description": ""
+      },
+      "3": {
+        "label": "Payment method",
+        "description": ""
+      },
+      "4": {
+        "label": "Order list",
+        "description": ""
+      }
+    },
+    "next": "Continue",
+    "back": "Back",
+    "finish": "Finish",
+    "lastStep": "Last step",
+    "completed": "Order placed, please wait. The operator will contact you shortly.",
+    "shopping": "Continue Shopping",
+    "customer": {
+      "name": "Full name",
+      "phone": "Phone number",
+      "email": "Email"
+    },
+    "delivery": {
+      "address": "Delivery address"
+    },
+    "payment": {
+      "type": "Choose the appropriate payment method",
+      "20/80": "Advance payment 20%, payment upon receipt 80%. Operator will provide details."
+    },
+    "order": {
+      "approve": "I agree with the terms of the order"
+    }
+  },
+  "footer": {
+    "close": "Close",
+    "links": "Links"
+  },
+  "feedback": {
+    "header": "Оставьте заявку",
+    "subheader": "Наши специалисты свяжутся с вами, ответят на вопросы и подготовят коммерческое предложение.",
+    "radio": [
+      "Разработка сайта",
+      "Продвижение и реклама",
+      "Техническая поддержка",
+      "Тарифный план",
+      "Трудоустройство",
+      "Другое"
+    ],
+    "field": [
+      {
+        "type": "text",
+        "name": "name",
+        "place": "ФИО"
+      },
+      {
+        "type": "text",
+        "name": "phone",
+        "place": "Телефон"
+      },
+      {
+        "type": "text",
+        "name": "email",
+        "place": "e-mail"
+      },
+      {
+        "type": "multiline",
+        "rows": 5,
+        "name": "desc",
+        "place": "Комментарий"
+      }
+    ],
+    "error": "При отправке заявки возникла ошибка, попробуйте позже.",
+    "ok_status": "Заявка успешно отправлена, наши специалисты в ближайшее время свяжутся с Вами.",
+    "send": "Отправить сообщение",
+    "cancel": "Отмена"
   }
 }

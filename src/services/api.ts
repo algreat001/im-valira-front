@@ -1,5 +1,5 @@
 import { config } from "config";
-import { CatalogDto, ProductDto, ProductReviewMeta, RoleDto, UserDto } from "interfaces/ext";
+import { CatalogDto, CharacteristicMeta, ProductDto, ProductReviewMeta, RoleDto, UserDto } from "interfaces/ext";
 import { Token } from "interfaces/profile";
 import { request } from "services/request";
 
@@ -31,8 +31,8 @@ export const saveProduct = async (product: ProductDto): Promise<null | ProductDt
 export const addProductToCatalog = async (productId: string, catalogId: string): Promise<null | ProductDto> =>
   (await request<ProductDto>({
     api: config.api.addProductToCatalog
-      .replace(':productId', productId)
-      .replace(':catalogId', catalogId),
+      .replace(":productId", productId)
+      .replace(":catalogId", catalogId),
     method: "PUT"
   }));
 
@@ -86,3 +86,38 @@ export const deleteReview = async (productId: string, review: ProductReviewMeta)
     method: "DELETE",
     data: review
   }));
+
+//characteristic
+export const addCharacteristic = async (
+  productId: string,
+  characteristic: CharacteristicMeta
+): Promise<null | CharacteristicMeta> =>
+  (await request<CharacteristicMeta>({
+    api: config.api.characteristic.replace(":productId", productId),
+    method: "POST",
+    data: characteristic
+  }));
+
+export const updateCharacteristic = async (
+  productId: string,
+  characteristic: CharacteristicMeta
+): Promise<null | CharacteristicMeta> =>
+  (await request<CharacteristicMeta>({
+    api: config.api.characteristic.replace(":productId", productId),
+    method: "PUT",
+    data: characteristic
+  }));
+
+export const deleteCharacteristic = async (
+  productId: string,
+  characteristic: CharacteristicMeta
+): Promise<null | boolean> =>
+  (await request<boolean>({
+    api: config.api.characteristic.replace(":productId", productId),
+    method: "DELETE",
+    data: characteristic
+  }));
+
+export const sendOrderHtml = async (data: { email: string; orderHtml: string }): Promise<boolean> =>
+  ((await request<boolean>({ api: config.api.send.order, method: "POST", data })) ?? false);
+

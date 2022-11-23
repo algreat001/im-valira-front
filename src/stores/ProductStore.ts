@@ -1,13 +1,21 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
 import { t } from "res/i18n/i18n";
-import { Option, OptionType, ProductDto, ProductMeta, ProductReviewMeta } from "interfaces/ext";
+import { CharacteristicMeta, Option, OptionType, ProductDto, ProductMeta, ProductReviewMeta } from "interfaces/ext";
 import { addProductToCatalog, loadProduct, saveProduct } from "services/api";
 import { ReviewStore } from "stores/ReviewStore";
+import { CharacteristicStore } from "stores/CharactersticStore";
 import { calculatePrice } from "helpers/price";
+import { mapToString, stringToMap } from "helpers/helper";
 
 
-export type ProductTextField = "name" | "meta.description" | "meta";
+interface ProductJson {
+  dto: ProductDto;
+  selectedOptions: string;
+  amount: number;
+}
+
+export type ProductTextField = "name" | "meta.description" | "meta"
 
 export class ProductStore {
   id: null | string = null;
@@ -18,6 +26,8 @@ export class ProductStore {
 
   reviews: null | ReviewStore = null;
 
+  characteristics: null | CharacteristicStore = null;
+
   isLoading = false;
   isError = false;
   isPhoto = false;
@@ -26,11 +36,14 @@ export class ProductStore {
 
   private cache: null | string = null;
 
-  constructor() {
+  constructor(stringProduct?: string) {
     makeAutoObservable(this);
     this.isLoading = true;
     this.name = t("product.default.name");
     this.createMeta();
+    if (stringProduct) {
+      this.fromString(stringProduct);
+    }
   }
 
   setAmount(value: string) {
@@ -39,17 +52,31 @@ export class ProductStore {
   }
 
   calculatePrice(withActions: boolean): number {
+
     const price = this.meta?.price;
     if (!price) {
       return 0;
     }
+
+    const calcOptions: Option[] = [ ...this.selectedOptions.values() ];
+
     const operations = [
-      ...[ ...this.selectedOptions.values() ].map(option => option?.operation),
+      ...calcOptions.map(option => option?.operation),
       ...(withActions
         ? this.meta?.actions?.map(action => action.operation) ?? []
         : [])
     ];
     return calculatePrice(price, operations);
+  }
+
+  selectedOptionsToString(): undefined | string {
+    const stringOptions: string[] = [];
+    this.selectedOptions.forEach((option, type) => {
+      const localizeType = t(`option.${type}.type`);
+      const localizeValue = t(`option.${type}.${option.name}`);
+      stringOptions.push(`${localizeType}: ${localizeValue || option.name}`);
+    });
+    return stringOptions.length > 0 ? " (" + stringOptions.join(", ") + ")" : undefined;
   }
 
   calculateRating(): number {
@@ -94,6 +121,19 @@ export class ProductStore {
     });
   }
 
+  initCharacteristic(characteristics: CharacteristicMeta[]) {
+    runInAction(() => {
+      if (!this.meta) {
+        return;
+      }
+      this.meta.characteristics = characteristics;
+    });
+  }
+
+  resetAmount() {
+    this.amount = 1;
+  }
+
   private fromDto(dto: ProductDto) {
     this.name = dto.name;
     this.meta = dto.meta;
@@ -102,7 +142,7 @@ export class ProductStore {
       this.isPhoto = true;
     }
     this.reviews = new ReviewStore(this);
-
+    this.characteristics = new CharacteristicStore(this);
   }
 
   private toDto(): ProductDto {
@@ -138,6 +178,24 @@ export class ProductStore {
     }
     this.fromDto(result);
     return;
+  }
+
+  toString(): string {
+    return JSON.stringify({
+      dto: this.toDto(),
+      selectedOptions: mapToString(this.selectedOptions),
+      amount: this.amount
+    });
+  }
+
+  private fromString(productString: string) {
+    const dtoWithSelectedOptions = JSON.parse(productString) as ProductJson;
+    if (!dtoWithSelectedOptions) {
+      return;
+    }
+    this.fromDto(dtoWithSelectedOptions.dto);
+    this.selectedOptions = stringToMap(dtoWithSelectedOptions.selectedOptions);
+    this.amount = dtoWithSelectedOptions.amount;
   }
 
   async addToCatalog(catalogId: string): Promise<boolean> {
@@ -191,6 +249,15 @@ export class ProductStore {
     }
   }
 
+  clone(): ProductStore {
+    const cloneProduct = new ProductStore();
+    const dto = this.toDto();
+    cloneProduct.fromDto(dto);
+    cloneProduct.selectedOptions = new Map(this.selectedOptions);
+    cloneProduct.amount = this.amount;
+    return cloneProduct;
+  }
+
   private createMeta() {
     this.meta = {
       description: "",
@@ -198,7 +265,9 @@ export class ProductStore {
       rating: 5,
       photos: [],
       options: [],
-      actions: []
+      actions: [],
+      characteristics: [],
+      reviews: []
     };
   }
 
@@ -210,7 +279,9 @@ export class ProductStore {
       rating: Math.floor(Math.random() * 5),
       photos: [],
       options: [],
-      actions: []
+      actions: [],
+      characteristics: [],
+      reviews: []
     };
   }
 

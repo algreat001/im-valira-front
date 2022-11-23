@@ -55,17 +55,29 @@ export interface SearchBarProps {
 
 export const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   const [ search, setSearch ] = useState("");
-  const debounceSearch = useDebounce(search, 500);
+  // const debounceSearch = useDebounce(search, 500);
+
+  const handleSearch = () => {
+    if (onSearch && search.length >= config.limits.minSearchLength) {
+      onSearch(search);
+    }
+  };
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     setSearch(event.currentTarget.value);
   };
 
-  useEffect(() => {
-    if (onSearch && search.length >= config.limits.minSearchLength) {
-      onSearch(search);
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      handleSearch();
     }
-  }, [ debounceSearch ]);
+  };
+
+  // useEffect(() => {
+  //   if (onSearch && search.length >= config.limits.minSearchLength) {
+  //     onSearch(search);
+  //   }
+  // }, [ debounceSearch ]);
 
   return (
     <Search>
@@ -74,6 +86,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
       </SearchIconWrapper>
       <StyledInputBase
         onChange={handleChange}
+        onKeyDown={handleKeyDown}
         placeholder={t("appbar.search") as string}
         inputProps={{ "aria-label": "search" }}
       />

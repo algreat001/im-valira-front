@@ -6,9 +6,20 @@ import { t } from "res/i18n/i18n";
 import { TextField, Typography } from "@mui/material";
 import { ProductProps } from "./Product";
 
-export const ProductAmount: React.FC<ProductProps> = observer(({ product }) => {
+interface ProductAmountProps extends ProductProps {
+  onChange?: () => void;
+}
+
+export const ProductAmount: React.FC<ProductAmountProps> = observer(({ product, onChange }) => {
 
   const { amount } = product;
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    product.setAmount(e.currentTarget.value);
+    if (onChange) {
+      onChange();
+    }
+  };
 
   return <div className="product__amount">
     <Typography color="text.secondary">
@@ -17,7 +28,7 @@ export const ProductAmount: React.FC<ProductProps> = observer(({ product }) => {
     <TextField type="number"
                inputProps={{ min: 1, max: 10 }}
                value={amount}
-               onChange={(e) => product.setAmount(e.currentTarget.value)}
+               onChange={handleChange}
     />
   </div>;
 });

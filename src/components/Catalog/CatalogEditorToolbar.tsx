@@ -3,9 +3,7 @@ import * as React from "react";
 import { observer } from "mobx-react";
 
 import { CatalogStore } from "stores/CatalogStore";
-
-import { IconButton } from "@mui/material";
-import MoreIcon from "@mui/icons-material/MoreVert";
+import { MoreButton } from "components/Bricks/MoreButton";
 
 import { CatalogEditorContextMenu } from "./CatalogEditorContextMenu";
 
@@ -26,15 +24,7 @@ export const CatalogEditorToolbar: React.FC<CatalogEditorToolbarProps> = observe
   };
 
   return <>
-    <IconButton
-      size="small"
-      aria-haspopup="true"
-      onClick={handleEditorMenuOpen}
-      color="inherit"
-      className="menu_icon"
-    >
-      <MoreIcon />
-    </IconButton>
+    <MoreButton onClick={handleEditorMenuOpen} />
     <CatalogEditorContextMenu catalog={catalog} anchorEl={editorMenuAnchorEl} onClose={handleEditorMenuClose} />
   </>;
 });

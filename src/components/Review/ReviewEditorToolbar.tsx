@@ -1,10 +1,9 @@
 import React from "react";
 import { observer } from "mobx-react";
 
-import { IconButton } from "@mui/material";
-import MoreIcon from "@mui/icons-material/MoreVert";
 import { useStores } from "hooks/useStores";
 
+import { MoreButton } from "components/Bricks/MoreButton";
 import { ReviewItemProps } from "./ReviewItem";
 import { ReviewEditorContextMenu } from "./ReviewEditorContextMenu";
 
@@ -35,15 +34,7 @@ export const ReviewEditorToolbar: React.FC<ReviewItemProps> = observer(({ review
   };
 
   return <>
-    <IconButton
-      size="small"
-      aria-haspopup="true"
-      onClick={handleEditorMenuOpen}
-      color="inherit"
-      className="menu_icon"
-    >
-      <MoreIcon />
-    </IconButton>
+    <MoreButton onClick={handleEditorMenuOpen} />
     <ReviewEditorContextMenu
       reviews={reviews}
       index={index}

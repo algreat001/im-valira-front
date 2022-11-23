@@ -179,23 +179,6 @@ code {
     max-width: 32px;
 }
 
-.footer {
-    min-height: var(--footer-min-height);
-    background-color: var(--main-color);
-    color: var(--main-bg-color);
-    gap: var(--gap);
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    padding: var(--gap);
-}
-
-.footer__logo {
-    width: 128px;
-    height: 128px;
-    border-radius: var(--radius);
-}
-
 .header {
     min-height: var(--header-min-height);
     background-color: var(--main-color);
@@ -210,79 +193,10 @@ code {
     gap: var(--gap);
 }
 
-.product__card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    max-width: 280px;
-    width: 280px;
-    height: var(--product-card-height) !important;
-    flex-shrink: 0;
-    cursor: pointer;
-    transition: var(--normal-speed-all);
-}
-
-
-.product__card__image, .product__card__image > svg, .product__card__image > div > img {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 165px;
-    fill: var(--main-color) !important;
-    object-fit: cover;
-}
-
-.product__card__content {
-    position: absolute;
-    top: 160px;
-    gap: var(--mini-gap);
-    left: 0;
-    display: flex;
-    flex-direction: column;
-    width: calc(100% - 32px);
-}
-
-.product__card__header {
-    justify-content: flex-end !important;
-}
-
-.product__card__description {
-    justify-content: flex-start !important;
-}
-
-
-.product__card__action {
-    position: absolute;
-    bottom: 0;
-    justify-content: flex-end !important;
-    gap: var(--gap);
-    width: calc(100% - 32px);
-    height: 54px;
-}
-
-.product__card__price {
-    display: inline-flex;
-    justify-content: flex-end;
-}
-
-.product__card__rating {
-    justify-content: center;
-}
-
-.product__custom-list {
-    width: var(--catalog-width);
-    height: 230px;
-    overflow: auto;
-}
-
-.product__custom-list__item-name {
-
-}
-
 .picture-slider {
     position: relative;
+    width: 100%;
+    height: 100%;
 }
 
 .picture-slider__progress {
@@ -304,6 +218,7 @@ code {
 .picture-slider__progress > svg {
     max-height: 8px;
     height: 8px;
+    width: 8px;
 }
 
 .picture-slider__progress--hide {
@@ -315,5 +230,25 @@ code {
     top: 0;
     left: 0;
     right: 0;
+    width: 100%;
+    height: 100%;
     transition: var(--normal-speed-all);
+    object-fit: cover;
+}
+
+.checkout {
+    margin: var(--gap) auto;
+    min-height: calc(100vh - var(--header-min-height));
+}
+
+@media only screen and (max-width: 1000px) {
+    .checkout {
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+    .checkout {
+        width: 80%;
+    }
 }

@@ -39,7 +39,7 @@ export const CatalogEditor: React.FC<EditorProps<CatalogStore>> = observer(({ st
   return <Dialog open={uiStore.isShowCatalogEditDlg} onClose={handleCancel}>
     <DialogTitle>
       {t(`catalog.edit.title.${mode}`)}
-      <CloseButton onCLose={handleCancel} />
+      <CloseButton onClose={handleCancel} />
     </DialogTitle>
     <DialogContent>
       <TextField

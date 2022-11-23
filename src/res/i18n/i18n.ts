@@ -63,11 +63,11 @@ const nameToValue = (name: string): string => {
       curr = curr[name];
     });
   } catch (err) {
-    console.log("i18 - error parse name", name);
+    notFoundName(name);
     return "";
   }
   if (!curr) {
-    console.log("i18 - not found name", name);
+    notFoundName(name);
   }
   return curr as string ?? "";
 };
@@ -148,7 +148,7 @@ export const t: Ii18nSimple = (name: string, ...args: (number | string | boolean
   const value = nameToValue(name);
   if (value == null) {
     notFound.add(name);
-    console.log("i18 - not found name", name);
+    notFoundName(name);
     return "";
   }
   const text = format(value.toString(), ...args);
@@ -190,7 +190,7 @@ export const tn = (name: string, ...args: ITnArgs): string | string[] | ReactNod
   const curr = nameToValue(name);
   if (curr == null) {
     notFound.add(name);
-    console.log("i18 - not found name", name);
+    notFoundName(name);
     return "";
   }
   // step 4: transform value: prepare to format, format, process nl2br
@@ -201,7 +201,7 @@ export const tn = (name: string, ...args: ITnArgs): string | string[] | ReactNod
   const lines: INL2BR = nl2br(formatted);
   if (lines === null) {
     notFound.add(name);
-    console.log("i18 - not found name", name);
+    notFoundName(name);
     return "";
   }
   // step 5: if value includes %n
@@ -222,6 +222,12 @@ export const tn = (name: string, ...args: ITnArgs): string | string[] | ReactNod
   return body;
 };
 
+const notFoundName = (name: string) => {
+  if (process.env.NODE_ENV === "development") {
+    console.log("i18 - not found name", name);
+  }
+};
+
 export const setLocale = (localeShort: Local) => {
   locale = localeShort;
 };
@@ -229,6 +235,8 @@ export const setLocale = (localeShort: Local) => {
 export const getLocale = (): Local => locale;
 
 export const listLocales = (): Local[] => [ "en", "de", "fr", "ru" ];
+
+export const getDictionary = () => dict[getLocale()] as any;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 (window as any).getNotFoundLocalizeName = () => {
