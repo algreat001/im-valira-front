@@ -65,7 +65,12 @@ export const OrderForm: React.FC<CheckoutFormProps> = observer(({ checkout, onBa
         label={t("checkout.order.approve")}
         color={checkout.orderForm.errors.approve ? "error" : "default"}
       />
-      <CheckoutFormButtons isBusy={checkout.isSendOrder} onNext={handleSubmit} onBack={handleBack} />
+      <CheckoutFormButtons
+        isBusy={checkout.isSendOrder}
+        disableNext={!checkout.orderForm.values.approve}
+        onNext={handleSubmit}
+        onBack={handleBack}
+      />
     </form>
 
   </div>;

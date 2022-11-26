@@ -47,10 +47,12 @@ export class ProductRepositoryStore {
     } else {
       loadListProduct(normalizeCatalogId).then(products => {
         runInAction(() => {
-          if (!products || products.length === 0) {
-            products = this.mockProductIdsForCatalog();
+          // if (!products || products.length === 0) {
+          //   products = this.mockProductIdsForCatalog();
+          // }
+          if (products) {
+            this.productsInCatalog.set(normalizeCatalogId, products);
           }
-          this.productsInCatalog.set(normalizeCatalogId, products);
         });
       });
       return [];

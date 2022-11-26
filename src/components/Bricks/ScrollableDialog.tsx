@@ -17,7 +17,7 @@ export const ScrollableDialog: React.FC<ScrollableDialogProps> = ({
   articleText,
   open
 }) => {
-  const descriptionElementRef = React.useRef<HTMLSpanElement>(null);
+  const descriptionElementRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
     const { current } = descriptionElementRef;
@@ -38,7 +38,7 @@ export const ScrollableDialog: React.FC<ScrollableDialogProps> = ({
     >
       <DialogTitle id="scroll-dialog-title">{articleTitle}</DialogTitle>
       <DialogContent dividers={true}>
-        <DialogContentText id="scroll-dialog-description" ref={descriptionElementRef} tabIndex={-1}>
+        <DialogContentText component="div" id="scroll-dialog-description" ref={descriptionElementRef} tabIndex={-1}>
           <div dangerouslySetInnerHTML={{ __html: articleText }} />
         </DialogContentText>
       </DialogContent>
