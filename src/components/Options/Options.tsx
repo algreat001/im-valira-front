@@ -20,6 +20,21 @@ export interface OptionsProps {
   onSelect: (option: Option) => void;
 }
 
+function getSelectedName(type: string, select: null | number, options: Option[]): undefined | string {
+  if (select === null) {
+    return undefined;
+  }
+  const name = options[select]?.name;
+  if (!name) {
+    return undefined;
+  }
+  const localizeName = t(`option.${type}.${name}`);
+  if (localizeName) {
+    return localizeName;
+  }
+  return name;
+}
+
 export const Options: React.FC<OptionsProps> = ({ option, type, item, onSelect }) => {
   const [ select, setSelect ] = useState<null | number>(null);
 
@@ -32,9 +47,7 @@ export const Options: React.FC<OptionsProps> = ({ option, type, item, onSelect }
     setSelect(index);
   };
 
-  const selected = select !== null
-    ? (t("option." + option.type + "." + option.options[select].name) || option.options[select].name)
-    : undefined;
+  const selected = getSelectedName(option.type, select, option.options);
 
   return <Card className="options" variant="outlined">
     <CardContent>
@@ -53,7 +66,6 @@ export const Options: React.FC<OptionsProps> = ({ option, type, item, onSelect }
         )}
       </div>
     </CardContent>
-  </Card>
-    ;
+  </Card>;
 };
 
