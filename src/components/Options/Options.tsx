@@ -33,7 +33,7 @@ export const Options: React.FC<OptionsProps> = ({ option, type, item, onSelect }
   };
 
   const selected = select !== null
-    ? option.options[select].name //t("option." + option.type + "." + option.options[select].name) ||
+    ? (t("option." + option.type + "." + option.options[select].name) || option.options[select].name)
     : undefined;
 
   return <Card className="options" variant="outlined">
