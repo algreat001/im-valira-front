@@ -52,7 +52,7 @@
     overflow: hidden;
     border-radius: var(--radius);
     padding: 0 var(--gap);
-    height: var(--product-image-big-height);
+    min-height: var(--product-image-big-height);
     background-color: var(--panel-bg-color);
 }
 
