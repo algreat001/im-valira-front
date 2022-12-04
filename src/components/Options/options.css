@@ -4,10 +4,10 @@
 
 .options__wrapper {
     display: flex;
-    flex-wrap: wrap;
     flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
     align-content: flex-start;
     gap: var(--mini-gap);
 }

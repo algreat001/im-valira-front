@@ -107,7 +107,17 @@
       "white": "White",
       "green": "Green",
       "blue": "Blue",
-      "red": "Red"
+      "red": "Red",
+      "pink": "Pink",
+      "yellow": "Yellow",
+      "mustard": "Mustard",
+      "cornflowerBlue": "Cornflower blue",
+      "lightBlue": "Light blue",
+      "lightTurquoise": "Light turquoise",
+      "lilac": "Lilac",
+      "khaki": "Khaki",
+      "naturalLinen": "Natural linen",
+      "melangeGray": "Melange gray"
     },
     "size": {
       "type": "Size"

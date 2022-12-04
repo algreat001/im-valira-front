@@ -107,7 +107,17 @@
       "white": "Белый",
       "green": "Зеленый",
       "blue": "Синий",
-      "red": "Красный"
+      "red": "Красный",
+      "pink": "Розовый",
+      "yellow": "Жёлтый",
+      "mustard": "Горчица",
+      "cornflowerBlue": "Васильковый",
+      "lightBlue": "Светло-голубой",
+      "lightTurquoise": "Светло-бирюзовый",
+      "lilac": "Лиловый",
+      "khaki": "Хаки",
+      "naturalLinen": "Натуральный лён",
+      "melangeGray": "Серый меланж"
     },
     "size": {
       "type": "Размер"
