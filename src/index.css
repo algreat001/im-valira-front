@@ -1,4 +1,5 @@
 :root {
+    --main-max-width: 1250px;
     --main-bg-color: #FFF0DE;
     --main-color: #8D7694;
     --panel-bg-color: #f9f9f9;
@@ -21,7 +22,7 @@
 
     --multiline: 5;
 
-    --product-card-height: 444px;
+    --product-card-height: 526px;
 
     --product-image-carousel-height: 111px;
     --product-image-big-height: 550px;
@@ -121,13 +122,16 @@ code {
     .landing {
         grid-template-columns: auto;
         grid-template-rows: auto auto;
+        max-width: calc(100% - 24px);
+        margin: auto;
     }
-
 }
 
 @media only screen and (min-width: 1000px) {
     .landing {
         grid-template-columns: var(--catalog-width) auto;
+        max-width: var(--main-max-width);
+        margin: auto;
     }
 
     .menu {
@@ -243,7 +247,7 @@ code {
 
 @media only screen and (max-width: 1000px) {
     .checkout {
-        width: 100%;
+        margin: var(--gap);
     }
 }
 

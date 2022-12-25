@@ -21,8 +21,12 @@ export const CartPage = observer(() => {
   return <div className="cart__page">
     <Cart />
     <Toolbar className="cart__toolbar">
-      <Button variant="contained" onClick={() => navigate(cartStore.exitLink)}>
-        {t("cart.continue")}
+      <Button
+        variant="contained"
+        disabled={!cartStore.isContainedProducts}
+        onClick={() => navigate("/checkout")}
+      >
+        {t("cart.checkout")}
       </Button>
       <Button
         variant="contained"
@@ -31,12 +35,8 @@ export const CartPage = observer(() => {
       >
         {t("cart.clear")}
       </Button>
-      <Button
-        variant="contained"
-        disabled={!cartStore.isContainedProducts}
-        onClick={() => navigate("/checkout")}
-      >
-        {t("cart.checkout")}
+      <Button variant="contained" onClick={() => navigate(cartStore.exitLink)}>
+        {t("cart.continue")}
       </Button>
     </Toolbar>
   </div>;

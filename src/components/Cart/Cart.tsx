@@ -21,18 +21,16 @@ export const Cart: React.FC<CartProps> = observer(({ readonly }) => {
     </div>;
   }
 
-  return <TableContainer component={Paper} className="cart">
-    <Table sx={{ minWidth: 700 }} aria-label="customized table">
-      <CartHeader />
-      <TableBody>
-        {cartStore.products.map((item, index) => <CartItem
-          key={index}
-          product={item}
-          number={index}
-          readonly={readonly}
-        />)}
-      </TableBody>
-      <CartFooter totalPrice={cartStore.totalPrice} />
-    </Table>
-  </TableContainer>;
+  return <Paper className="cart">
+    <CartHeader />
+    <div className='cart__content'>
+      {cartStore.products.map((item, index) => <CartItem
+        key={index}
+        product={item}
+        number={index}
+        readonly={readonly}
+      />)}
+    </div>
+    <CartFooter totalPrice={cartStore.totalPrice} />
+  </Paper>;
 });

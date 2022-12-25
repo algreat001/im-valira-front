@@ -6,6 +6,7 @@ import { useStores } from "hooks/useStores";
 
 import { CatalogPage } from "components/CatalogPage/CatalogPage";
 import { Product } from "components/Product/Product";
+import ScrollToTop from 'components/Bricks/ScrollOnTop';
 
 export const ProductPage = observer(() => {
   const { productRepository } = useStores();
@@ -23,7 +24,10 @@ export const ProductPage = observer(() => {
     return null;
   }
 
-  return <CatalogPage>
-    <Product product={product} />
-  </CatalogPage>;
+  return <>
+    <ScrollToTop />
+    <CatalogPage>
+      <Product product={product} />
+    </CatalogPage>
+  </>;
 });

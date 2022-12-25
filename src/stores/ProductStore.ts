@@ -46,9 +46,23 @@ export class ProductStore {
     }
   }
 
+  private getValidAmount(amount: number, min: number, max: number): number {
+    if (Number.isNaN(amount)) {
+      return min;
+    }
+    if (amount < min) {
+      return min;
+    }
+    if (amount > max) {
+      return max;
+    }
+    return amount;
+  }
+
+
   setAmount(value: string) {
-    const numValue = Number.parseInt(value);
-    this.amount = numValue < 1 ? 1 : numValue > 10 ? 10 : numValue;
+    const numValue = this.getValidAmount(parseInt(value), 1, 10);
+    this.amount = numValue;
   }
 
   calculatePrice(withActions: boolean): number {
@@ -58,7 +72,7 @@ export class ProductStore {
       return 0;
     }
 
-    const calcOptions: Option[] = [ ...this.selectedOptions.values() ];
+    const calcOptions: Option[] = [...this.selectedOptions.values()];
 
     const operations = [
       ...calcOptions.map(option => option?.operation),
@@ -143,6 +157,7 @@ export class ProductStore {
     }
     this.reviews = new ReviewStore(this);
     this.characteristics = new CharacteristicStore(this);
+    this.initOptions();
   }
 
   private toDto(): ProductDto {
@@ -161,7 +176,6 @@ export class ProductStore {
       this.isLoading = false;
       this.isError = !dto;
       if (!dto) {
-        this.mock();
         return;
       }
       this.fromDto(dto);
@@ -246,6 +260,19 @@ export class ProductStore {
         this.meta.description = text;
         return;
       }
+    }
+  }
+
+  initOptions() {
+    if (!this.meta?.options) {
+      return;
+    }
+    for (const option of this.meta.options) {
+      const defaultOption = option.options[0];
+      if (!defaultOption) {
+        continue;
+      }
+      this.selectedOptions.set(option.type, defaultOption);
     }
   }
 

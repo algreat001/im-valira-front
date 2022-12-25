@@ -47,7 +47,7 @@
 
 .options__item--active {
     box-shadow: var(--bs-small);
-    border: 1px dotted var(--main-color);
+    outline: 2px dotted var(--main-color);
 }
 
 .options__item__color {

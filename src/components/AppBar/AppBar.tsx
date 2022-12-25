@@ -47,7 +47,6 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ anchorEl, onClose }) => {
   >
     {/*{loginStore.isLogined && <MessagesBox onClick={handleMobileMenuClose} showTitle />}*/}
     {/*{loginStore.isLogined && <NotificationsBox onClick={handleMobileMenuClose} showTitle />}*/}
-    <CartBox showTitle />
     <AccountBox showTitle />
   </Menu>;
 };
@@ -90,7 +89,9 @@ export const ApplicationBar: React.FC<ApplicationBarProps> = observer(() => {
             </IconButton>
             <LogoBar />
             <SearchBar onSearch={handleSearch} />
+
             <Box sx={{ flexGrow: 1 }} />
+            <CartBox />
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
               {/*{loginStore.isLogined && (*/}
               {/*  <>*/}
@@ -98,7 +99,6 @@ export const ApplicationBar: React.FC<ApplicationBarProps> = observer(() => {
               {/*    <NotificationsBox onClick={handleMobileMenuClose} />*/}
               {/*  </>*/}
               {/*)}*/}
-              <CartBox />
               <AccountBox />
             </Box>
             <Box sx={{ display: { xs: "flex", md: "none" } }}>

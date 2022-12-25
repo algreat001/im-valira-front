@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import cx from "classnames";
 
 import { OptionMeta, Option, OptionType } from "interfaces/ext";
@@ -36,7 +36,7 @@ function getSelectedName(type: string, select: null | number, options: Option[])
 }
 
 export const Options: React.FC<OptionsProps> = ({ option, type, item, onSelect }) => {
-  const [ select, setSelect ] = useState<null | number>(null);
+  const [select, setSelect] = useState<null | number>(null);
 
   if (option.type !== type) {
     return null;
@@ -46,6 +46,10 @@ export const Options: React.FC<OptionsProps> = ({ option, type, item, onSelect }
     onSelect(option.options[index]);
     setSelect(index);
   };
+
+  useEffect(() => {
+    setSelect(0);
+  }, []);
 
   const selected = getSelectedName(option.type, select, option.options);
 
@@ -59,10 +63,10 @@ export const Options: React.FC<OptionsProps> = ({ option, type, item, onSelect }
       </div>
       <div className="options__wrapper">
         {option.options.map((option, index) => <div
-            key={index}
-            className={cx("options__item", { "options__item--active": select === index })}
-            onClick={() => handleSelect(index)}
-          >{item(option)}</div>
+          key={index}
+          className={cx("options__item", { "options__item--active": select === index })}
+          onClick={() => handleSelect(index)}
+        >{item(option)}</div>
         )}
       </div>
     </CardContent>

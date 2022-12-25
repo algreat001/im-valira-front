@@ -15,7 +15,8 @@ export const ProductAmount: React.FC<ProductAmountProps> = observer(({ product, 
   const { amount } = product;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    product.setAmount(e.currentTarget.value);
+    product.setAmount(e.target.value);
+    console.log(product.amount);
     if (onChange) {
       onChange();
     }
@@ -26,9 +27,9 @@ export const ProductAmount: React.FC<ProductAmountProps> = observer(({ product, 
       {t("amount.title")}
     </Typography>
     <TextField type="number"
-               inputProps={{ min: 1, max: 10 }}
-               value={amount}
-               onChange={handleChange}
+      inputProps={{ min: 1, max: 10 }}
+      value={amount}
+      onChange={handleChange}
     />
   </div>;
 });

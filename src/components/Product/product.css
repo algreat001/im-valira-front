@@ -56,6 +56,13 @@
     background-color: var(--panel-bg-color);
 }
 
+@media only screen and (max-width: 1000px) {
+    .product__info__buy {
+        min-height: 20px;
+    }
+}
+
+
 .product__price {
     font-weight: bold;
     font-size: 18px;
@@ -142,7 +149,7 @@
 .product__card__image, .product__card__image > svg, .product__card__image > div > img {
     position: relative;
     width: 100%;
-    height: 165px;
+    height: 250px;
     fill: var(--main-color) !important;
     object-fit: cover;
 }

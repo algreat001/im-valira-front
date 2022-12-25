@@ -22,6 +22,9 @@ export const CartBox: React.FC<CartBoxProps> = observer(({ showTitle, onClick })
   const location = useLocation();
 
   const handleClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    if (location.pathname === '/cart') {
+      return;
+    }
     cartStore.setExitLink(location.pathname);
     navigate("/cart");
     if (onClick) {

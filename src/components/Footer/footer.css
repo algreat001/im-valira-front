@@ -1,9 +1,4 @@
 .footer {
-    display: grid;
-    grid-template-columns: 300px auto auto;
-    align-items: center;
-    justify-items: center;
-
     min-height: var(--footer-min-height);
     background-color: var(--main-color);
     color: var(--main-bg-color);
@@ -24,4 +19,21 @@
 .footer__link {
     cursor: pointer;
     color: var(--main-bg-color) !important;
+}
+
+@media only screen and (max-width: 1000px) {
+    .footer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+    .footer {
+        display: grid;
+        grid-template-columns: 300px auto auto;
+        align-items: center;
+        justify-items: center;
+    }
 }
