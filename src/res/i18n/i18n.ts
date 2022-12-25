@@ -8,7 +8,7 @@ import de from "./de.json";
 import fr from "./fr.json";
 import ru from "./ru.json";
 
-export type Ii18nSimple = (name: string, ...args: (number | string | boolean)[]) => string | null;
+export type Ii18nSimple = (name: string, ...args: (number | string | boolean)[]) => string;
 
 export type Local = "en" | "ru" | "fr" | "de";
 export type ITnArgs = (number | string | boolean | ReactNode)[];
@@ -55,7 +55,7 @@ const cache = {
  * Extract value by name from dict
  * @param name
  */
-const nameToValue = (name: string): null | string => {
+const nameToValue = (name: string): string => {
   const path = name.split(".");
   let curr: any = dict[locale];
   try {
@@ -63,9 +63,13 @@ const nameToValue = (name: string): null | string => {
       curr = curr[name];
     });
   } catch (err) {
-    return null;
+    notFoundName(name);
+    return "";
   }
-  return curr as string ?? null;
+  if (!curr) {
+    notFoundName(name);
+  }
+  return curr as string ?? "";
 };
 
 /**
@@ -136,7 +140,7 @@ const linesToBody = (lines: INL2BR, nodeArgs: ReactNode[]): (string | ReactNode)
  *   more info at https://nodejs.org/docs/latest-v10.x/api/util.html#util_util_format_format_args
  * @return string|null
  */
-export const t: Ii18nSimple = (name: string, ...args: (number | string | boolean)[]): string | null => {
+export const t: Ii18nSimple = (name: string, ...args: (number | string | boolean)[]): string => {
   const key = name + (args.length ? `:${args.join(":")}` : "");
   if (cache.t.has(key)) {
     return cache.t.get(key) ?? "";
@@ -144,7 +148,8 @@ export const t: Ii18nSimple = (name: string, ...args: (number | string | boolean
   const value = nameToValue(name);
   if (value == null) {
     notFound.add(name);
-    return null;
+    notFoundName(name);
+    return "";
   }
   const text = format(value.toString(), ...args);
   cache.t.set(key, text);
@@ -159,7 +164,7 @@ export const t: Ii18nSimple = (name: string, ...args: (number | string | boolean
  * @param args replace %s %d for string and decimal, %n replaced by ReactNode object
  * @return ReactNode[]|null
  */
-export const tn = (name: string, ...args: ITnArgs): string | string[] | ReactNode[] | null => {
+export const tn = (name: string, ...args: ITnArgs): string | string[] | ReactNode[] => {
   let useCache = true;
   // step 1: separate arguments for ReactNode and other
   // (now we have suppose only ReactNode have type is `object`)
@@ -185,7 +190,8 @@ export const tn = (name: string, ...args: ITnArgs): string | string[] | ReactNod
   const curr = nameToValue(name);
   if (curr == null) {
     notFound.add(name);
-    return null;
+    notFoundName(name);
+    return "";
   }
   // step 4: transform value: prepare to format, format, process nl2br
   const formatted = format(
@@ -195,7 +201,8 @@ export const tn = (name: string, ...args: ITnArgs): string | string[] | ReactNod
   const lines: INL2BR = nl2br(formatted);
   if (lines === null) {
     notFound.add(name);
-    return null;
+    notFoundName(name);
+    return "";
   }
   // step 5: if value includes %n
   //   then process insert nodes
@@ -215,6 +222,12 @@ export const tn = (name: string, ...args: ITnArgs): string | string[] | ReactNod
   return body;
 };
 
+const notFoundName = (name: string) => {
+  if (process.env.NODE_ENV === "development") {
+    console.log("i18 - not found name", name);
+  }
+};
+
 export const setLocale = (localeShort: Local) => {
   locale = localeShort;
 };
@@ -222,6 +235,8 @@ export const setLocale = (localeShort: Local) => {
 export const getLocale = (): Local => locale;
 
 export const listLocales = (): Local[] => [ "en", "de", "fr", "ru" ];
+
+export const getDictionary = () => dict[getLocale()] as any;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 (window as any).getNotFoundLocalizeName = () => {

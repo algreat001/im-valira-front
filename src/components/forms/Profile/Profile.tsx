@@ -5,7 +5,7 @@ import { Button, Dialog, DialogActions, DialogTitle, DialogContent, TextField } 
 
 import { ProfileStore, ProfileTextField } from "stores/ProfileStore";
 
-import { useStores } from "stores/useStores";
+import { useStores } from "../../../hooks/useStores";
 import { t } from "res/i18n/i18n";
 import { RoleDto } from "interfaces/ext";
 
@@ -20,7 +20,7 @@ export interface ProfileProps {
   profile: ProfileStore;
 }
 
-export const Profile = observer(({ profile }: ProfileProps) => {
+export const Profile: React.FC<ProfileProps> = observer(({ profile }) => {
   const { uiStore, profileManagerStore } = useStores();
   const [ password, setPassword ] = useState("");
   const { isAdmin } = profileManagerStore.viewer;
@@ -65,7 +65,7 @@ export const Profile = observer(({ profile }: ProfileProps) => {
       {isMyProfile
         ? t("appbar.profile.profile")
         : t("admin.profiles.title")}
-      <CloseButton onCLose={handleCancel} />
+      <CloseButton onClose={handleCancel} />
     </DialogTitle>
     <DialogContent>
       {isAdmin
@@ -98,6 +98,28 @@ export const Profile = observer(({ profile }: ProfileProps) => {
         variant="outlined"
         onChange={handleTextChange}
         value={profile.lastName}
+      />
+      <TextField
+        margin="dense"
+        id="phone"
+        label={t("appbar.profile.phone")}
+        type="text"
+        fullWidth
+        variant="outlined"
+        onChange={handleTextChange}
+        value={profile.phone}
+      />
+      <TextField
+        margin="dense"
+        id="address"
+        label={t("appbar.profile.address")}
+        type="text"
+        fullWidth
+        variant="outlined"
+        onChange={handleTextChange}
+        value={profile.address}
+        multiline
+        rows={5}
       />
       {isAdmin
         ? <RolesList onAdd={handleAddRole} onDelete={handleDeleteRole} list={profile.roles} />

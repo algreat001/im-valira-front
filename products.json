@@ -1,0 +1,360 @@
+{
+    "price": 1990,
+    "photos": [
+        "/images/product/baby/2/10.jpg",
+        "/images/product/baby/2/11.jpg",
+        "/images/product/baby/2/12.jpg",
+        "/images/product/baby/2/13.jpg",
+        "/images/product/baby/2/14.jpg",
+        "/images/product/baby/2/15.jpg",
+        "/images/product/baby/2/16.jpg",
+        "/images/product/baby/2/17.jpg",
+        "/images/product/baby/2/18.jpg",
+        "/images/product/baby/2/19.jpg",
+        "/images/product/baby/2/20.jpg",
+        "/images/product/baby/2/1.jpg",
+        "/images/product/baby/2/2.jpg",
+        "/images/product/baby/2/3.jpg",
+        "/images/product/baby/2/4.jpg",
+        "/images/product/baby/2/5.jpg",
+        "/images/product/baby/2/6.jpg",
+        "/images/product/baby/2/7.jpg",
+        "/images/product/baby/2/8.jpg"
+    ],
+    "rating": 5,
+    "actions": [],
+    "options": [
+        {
+            "type": "size",
+            "options": [
+                {
+                    "name": "86",
+                    "value": "86"
+                },
+                {
+                    "name": "92",
+                    "value": "92"
+                },
+                {
+                    "name": "98",
+                    "value": "98"
+                },
+                {
+                    "name": "104",
+                    "value": "104"
+                },
+                {
+                    "name": "110",
+                    "value": "110"
+                },
+                {
+                    "name": "116",
+                    "value": "116"
+                },
+                {
+                    "name": "122",
+                    "value": "122"
+                },
+                {
+                    "name": "128",
+                    "value": "128"
+                },
+                {
+                    "name": "134",
+                    "value": "134"
+                },
+                {
+                    "name": "140",
+                    "value": "140"
+                }
+            ]
+        },
+        {
+            "type": "color",
+            "options": [
+                {
+                    "name": "red",
+                    "value": "#c01114"
+                },
+                {
+                    "name": "pink",
+                    "value": "#b57b7f"
+                },
+                {
+                    "name": "yellow",
+                    "value": "#dbae32"
+                },
+                {
+                    "name": "mustard",
+                    "value": "#a85a29"
+                },
+                {
+                    "name": "cornflowerBlue",
+                    "value": "#537fad"
+                },
+                {
+                    "name": "lightBlue",
+                    "value": "#d4e6e8"
+                },
+                {
+                    "name": "lightTurquoise",
+                    "value": "#6a8c91"
+                },
+                {
+                    "name": "lilac",
+                    "value": "#af8fb0"
+                },
+                {
+                    "name": "khaki",
+                    "value": "#78866b"
+                },
+                {
+                    "name": "naturalLinen",
+                    "value": "#b39f84"
+                },
+                {
+                    "name": "melangeGray",
+                    "value": "#808080"
+                }
+            ]
+        }
+    ],
+    "reviews": [],
+    "description": "Кюлоты Ника\nОписание модели: Брюки прямые, широкие, укороченные. В боковых швах наклоные карманы.\nБрюки на притачном поясе с эластичной лентой внутри.\nРазмер. Рост 98-128\nТкань. Лен 100%\n",
+    "characteristics": [
+        {
+            "name": "material",
+            "value": "Лён",
+            "unitOfMeasurement": "-"
+        }
+    ]
+}
+
+{
+    "price": 1990,
+    "photos": [
+        "/images/product/baby/10/1.jpg",
+        "/images/product/baby/10/2.jpg",
+        "/images/product/baby/10/3.jpg",
+        "/images/product/baby/10/4.jpg",
+        "/images/product/baby/10/5.jpg",
+        "/images/product/baby/10/6.jpg",
+        "/images/product/baby/10/7.jpg",
+        "/images/product/baby/10/10.jpg",
+        "/images/product/baby/10/11.jpg",
+        "/images/product/baby/10/12.jpg",
+        "/images/product/baby/10/13.jpg",
+        "/images/product/baby/10/14.jpg",
+        "/images/product/baby/10/15.jpg",
+        "/images/product/baby/10/16.jpg",
+        "/images/product/baby/10/17.jpg"
+    ],
+    "rating": 5,
+    "actions": [],
+    "options": [
+        {
+            "type": "size",
+            "options": [
+                {
+                    "name": "80",
+                    "value": "80"
+                },
+                {
+                    "name": "86",
+                    "value": "86"
+                },
+                {
+                    "name": "92",
+                    "value": "92"
+                },
+                {
+                    "name": "98",
+                    "value": "98"
+                },
+                {
+                    "name": "104",
+                    "value": "104"
+                },
+                {
+                    "name": "110",
+                    "value": "110"
+                },
+                {
+                    "name": "116",
+                    "value": "116"
+                },
+                {
+                    "name": "122",
+                    "value": "122"
+                },
+                {
+                    "name": "128",
+                    "value": "128"
+                }
+            ]
+        },
+        {
+            "type": "color",
+            "options": [
+                {
+                    "name": "red",
+                    "value": "#c01114"
+                },
+                {
+                    "name": "pink",
+                    "value": "#b57b7f"
+                },
+                {
+                    "name": "yellow",
+                    "value": "#dbae32"
+                },
+                {
+                    "name": "mustard",
+                    "value": "#a85a29"
+                },
+                {
+                    "name": "cornflowerBlue",
+                    "value": "#537fad"
+                },
+                {
+                    "name": "lightBlue",
+                    "value": "#d4e6e8"
+                },
+                {
+                    "name": "lightTurquoise",
+                    "value": "#6a8c91"
+                },
+                {
+                    "name": "lilac",
+                    "value": "#af8fb0"
+                },
+                {
+                    "name": "khaki",
+                    "value": "#78866b"
+                },
+                {
+                    "name": "naturalLinen",
+                    "value": "#b39f84"
+                },
+                {
+                    "name": "melangeGray",
+                    "value": "#808080"
+                }
+            ]
+        }
+    ],
+    "reviews": [],
+    "description": "Кюлоты Ника\nОписание модели: Брюки прямые, широкие, укороченные. В боковых швах наклоные карманы.\nБрюки на притачном поясе с эластичной лентой внутри.\nРазмер. Рост 98-128\nТкань. Лен 100%\n",
+    "characteristics": [
+        {
+            "name": "material",
+            "value": "Лён",
+            "unitOfMeasurement": "-"
+        }
+    ]
+}
+
+{
+    "price": 10000,
+    "photos": [
+        "https://taplink.st/p/f/6/e/d/32320040.jpg",
+        "https://taplink.st/p/b/8/9/4/13840940.jpg",
+        "https://taplink.st/p/2/e/1/b/32320022.jpg",
+        "https://taplink.st/p/6/7/c/c/13840904.jpg",
+        "https://taplink.st/p/4/a/f/8/13841021.jpg",
+        "https://taplink.st/p/6/a/c/4/13841114.jpg",
+        "https://taplink.st/p/a/6/4/e/13841174.jpg",
+        "https://taplink.st/p/e/1/1/d/13841060.jpg",
+        "https://taplink.st/p/1/8/5/5/32320058.jpg"
+    ],
+    "rating": "5",
+    "options": [
+        {
+            "type": "color",
+            "options": [
+                {
+                    "name": "red",
+                    "value": "#c01114"
+                },
+                {
+                    "name": "pink",
+                    "value": "#b57b7f"
+                },
+                {
+                    "name": "yellow",
+                    "value": "#dbae32"
+                },
+                {
+                    "name": "mustard",
+                    "value": "#a85a29"
+                },
+                {
+                    "name": "cornflowerBlue",
+                    "value": "#537fad"
+                },
+                {
+                    "name": "lightBlue",
+                    "value": "#d4e6e8"
+                },
+                {
+                    "name": "lightTurquoise",
+                    "value": "#6a8c91"
+                },
+                {
+                    "name": "lilac",
+                    "value": "#af8fb0"
+                },
+                {
+                    "name": "khaki",
+                    "value": "#9f9d87"
+                },
+                {
+                    "name": "naturalLinen",
+                    "value": "#b39f84"
+                },
+                {
+                    "name": "melangeGray",
+                    "value": "#808080"
+                }
+            ]
+        },
+        {
+            "type": "size",
+            "options": [
+                {
+                    "name": "40",
+                    "value": "40"
+                },
+                {
+                    "name": "50",
+                    "value": "#50"
+                },
+                {
+                    "name": "60",
+                    "value": "60"
+                },
+                {
+                    "name": "70",
+                    "value": "70"
+                }
+            ]
+        }
+    ],
+    "reviews": [
+        {
+            "text": "Супер товар! всем рекомендую!!!",
+            "email": "alexey.shkolnik@gmail.com",
+            "author": "Школьник Алекcей",
+            "rating": 5,
+            "dataUpdate": "2022-10-23T19:25:37.572Z"
+        }
+    ],
+    "description": "1,5 спальный\nПростыня 170×220\nПододеяльник 150×210\nНаволочки 2 шт 50×70 или 70×70",
+    "characteristics": [
+        {
+            "name": "length",
+            "value": "1200",
+            "unitOfMeasurement": "mm"
+        }
+    ]
+}

@@ -6,7 +6,7 @@ import Badge from "@mui/material/Badge";
 import { MenuItem } from "@mui/material";
 
 import { t } from "res/i18n/i18n";
-import { useStores } from "stores/useStores";
+import { useStores } from "hooks/useStores";
 
 import NotificationsIcon from "@mui/icons-material/Notifications";
 
@@ -15,7 +15,7 @@ export interface NotificationsBoxProps {
   onClick?: React.MouseEventHandler<HTMLElement>;
 }
 
-export const NotificationsBox = observer(({ showTitle, onClick }: NotificationsBoxProps) => {
+export const NotificationsBox: React.FC<NotificationsBoxProps> = observer(({ showTitle, onClick }) => {
   const { profileManagerStore } = useStores();
   const { viewer } = profileManagerStore;
 

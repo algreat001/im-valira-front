@@ -6,13 +6,13 @@ import CloseIcon from "@mui/icons-material/Close";
 
 
 export interface CloseButtonProps {
-  onCLose: () => void;
+  onClose: () => void;
 }
 
-export const CloseButton = ({ onCLose }: CloseButtonProps) => {
+export const CloseButton: React.FC<CloseButtonProps> = ({ onClose }) => {
   return <IconButton
     aria-label="close"
-    onClick={onCLose}
+    onClick={onClose}
     sx={{
       position: "absolute",
       right: 8,

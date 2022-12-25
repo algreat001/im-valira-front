@@ -1,21 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { observer } from "mobx-react";
 
-import { useStores } from "stores/useStores";
+import { ProductStore } from "stores/ProductStore";
 
 import { Alert, Skeleton } from "@mui/material";
 
+import { ProductImages } from "./ProductImages";
+import { ProductInfo } from "./ProductInfo";
+import { ProductBuyInfo } from "./ProductBuyInfo";
+import { ProductEditorToolbar } from "./ProductEditorToolbar";
+
+import "./product.css";
+
 export interface ProductProps {
-  id: string;
+  product: ProductStore;
 }
 
-export const Product = observer(({ id }: ProductProps) => {
-  const { productManagerStore } = useStores();
+export const Product: React.FC<ProductProps> = observer(({ product }) => {
 
-  const product = productManagerStore.getProduct(id);
-  if (!product) {
-    return null;
-  }
   if (product.isLoading) {
     return <Skeleton variant="rectangular" width="100%" height="100%" />;
   }
@@ -23,11 +25,22 @@ export const Product = observer(({ id }: ProductProps) => {
     return <Alert severity="error">Error loading product</Alert>;
   }
 
+
   const meta = product.meta;
 
-  return <div>
-    <h2>{product.name}</h2>
-    <div>{meta?.description}</div>
-    {!!product.meta?.price && <div>productStore.meta.price</div>}
-  </div>;
+  const photos = meta?.photos;
+  const isContainsPhoto = !!photos && photos.length > 0;
+
+
+  return <>
+    <h2>
+      <ProductEditorToolbar product={product} />
+      {product.name}
+    </h2>
+    <div className="product__info__stack">
+      {isContainsPhoto && <ProductImages images={photos} />}
+      <ProductBuyInfo product={product} />
+    </div>
+    <ProductInfo product={product} />
+  </>;
 });

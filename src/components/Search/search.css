@@ -1,0 +1,47 @@
+.search__page {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: var(--gap);
+    min-height: calc(100vh - 64px);
+    margin: 24px;
+}
+
+.search__card {
+    min-height: 150px;
+    display: grid;
+    grid-template-columns: 200px auto;
+    padding: var(--gap);
+    gap: var(--gap);
+}
+
+.search__card__slider {
+    overflow: hidden;
+    width: 200px;
+    height: 150px;
+    fill: var(--main-color) !important;
+    border-radius: var(--radius);
+}
+
+.search__card__name {
+    font-size: 1.2em;
+}
+
+.search__card__description {
+    color: var(--main-color);
+    white-space: pre-wrap;
+}
+
+.search__card__info {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: var(--mini-gap);
+}
+
+.search__card__price {
+
+}
+
+.search__card__price__text {
+}

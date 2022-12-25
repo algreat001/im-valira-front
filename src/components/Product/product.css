@@ -1,0 +1,212 @@
+.product__carousel {
+    height: var(--product-image-carousel-height);
+    width: 100%;
+    margin: var(--gap) 0;
+}
+
+.product__images {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    padding: 4px;
+    overflow: hidden;
+}
+
+.product__images__img {
+    border-radius: var(--radius);
+    height: var(--product-image-big-height);
+    width: 100% !important;
+    box-shadow: var(--bs-select);
+}
+
+.product__images__img--none {
+    display: none !important;
+}
+
+.product__images__img img {
+    height: 100%;
+    object-fit: cover;
+}
+
+.product__info__stack {
+    display: grid;
+    grid-template-columns: auto 300px;
+    align-items: start;
+    justify-items: stretch;
+    align-content: center;
+    width: 100%;
+    gap: var(--gap);
+}
+
+@media only screen and (max-width: 1000px) {
+    .product__info__stack {
+        grid-template-columns: auto;
+        grid-template-rows: auto auto;
+    }
+
+}
+
+.product__info__buy {
+    overflow: hidden;
+    border-radius: var(--radius);
+    padding: 0 var(--gap);
+    min-height: var(--product-image-big-height);
+    background-color: var(--panel-bg-color);
+}
+
+@media only screen and (max-width: 1000px) {
+    .product__info__buy {
+        min-height: 20px;
+    }
+}
+
+
+.product__price {
+    font-weight: bold;
+    font-size: 18px;
+    padding: 4px;
+}
+
+.product__amount {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    gap: var(--gap);
+    margin: var(--gap) 0;
+}
+
+.product__add-cart-button {
+    width: 100%;
+    margin: var(--gap) 0 !important;
+}
+
+.product__characteristics {
+    margin: var(--gap);
+}
+
+.product__no-review {
+    margin-bottom: var(--gap);
+}
+
+.product__review {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: var(--gap);
+    margin: var(--gap) 0;
+}
+
+.product__review__item {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    gap: var(--gap);
+    padding: var(--gap);
+}
+
+.product__review__item__footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: var(--gap);
+}
+
+.product__rating {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: var(--gap);
+}
+
+.product__description {
+    white-space: pre-wrap;
+}
+
+
+.product__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    max-width: 280px;
+    width: 280px;
+    height: var(--product-card-height) !important;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: var(--normal-speed-all);
+}
+
+
+.product__card__image, .product__card__image > svg, .product__card__image > div > img {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    fill: var(--main-color) !important;
+    object-fit: cover;
+}
+
+.product__card__content {
+    gap: var(--mini-gap);
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 32px);
+    padding: 8px 16px !important;
+}
+
+.product__card__header {
+    justify-content: flex-end !important;
+}
+
+.product__card__description {
+    justify-content: flex-start !important;
+}
+
+
+.product__card__action {
+    position: absolute;
+    bottom: -8px;
+    justify-content: flex-end !important;
+    gap: var(--gap);
+    width: calc(100% - 32px);
+    height: 54px;
+}
+
+.product__card__price {
+    display: inline-flex;
+    justify-content: flex-end;
+}
+
+.product__card__rating {
+    justify-content: center;
+}
+
+.product__card__loader {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 !important;
+}
+
+.product__custom-list {
+    width: var(--catalog-width);
+    height: 230px;
+    overflow: auto;
+}
+
+.product__custom-list__item-name {
+
+}

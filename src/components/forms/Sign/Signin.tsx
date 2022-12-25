@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react";
-import { useStores } from "stores/useStores";
+import { useStores } from "../../../hooks/useStores";
 import {
   Button,
   Dialog,
@@ -69,7 +69,7 @@ export const Signin = observer(() => {
       <form onSubmit={formik.handleSubmit}>
         <DialogTitle>
           {t("appbar.profile.signin")}
-          <CloseButton onCLose={uiStore.hideLoginDlg} />
+          <CloseButton onClose={uiStore.hideLoginDlg} />
         </DialogTitle>
         <DialogContent>
           <TextField

@@ -1,15 +1,15 @@
 import * as React from "react";
 import { observer } from "mobx-react";
 
-import { useStores } from "stores/useStores";
+import { useStores } from "hooks/useStores";
+import { useNavigate } from "react-router-dom";
 
 import { AppBar, Box, Toolbar, IconButton, Menu } from "@mui/material";
 
 import { AccountBox } from "components/AccountBox/AccountBox";
-import { NotificationsBox } from "components/NotificationsBox/NotificationsBox";
 import { SearchBar } from "components/SearchBar/SearchBar";
 import { LogoBar } from "components/LogoBar/LogoBar";
-import { MessagesBox } from "components/MessagesBox/MessagesBox";
+import { CartBox } from "components/CartBox/CartBox";
 import { Signin } from "components/forms/Sign/Signin";
 import { Signup } from "components/forms/Sign/Signup";
 import { Profile } from "components/forms/Profile/Profile";
@@ -22,8 +22,8 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 
 const mobileMenuId = "primary-search-account-menu-mobile";
 
-const MobileMenu = ({ anchorEl, onClose }: MobileMenuProps) => {
-  const { loginStore } = useStores();
+const MobileMenu: React.FC<MobileMenuProps> = ({ anchorEl, onClose }) => {
+  // const { loginStore } = useStores();
   const isMobileMenuOpen = Boolean(anchorEl);
 
   const handleMobileMenuClose = () => {
@@ -45,8 +45,8 @@ const MobileMenu = ({ anchorEl, onClose }: MobileMenuProps) => {
     open={isMobileMenuOpen}
     onClose={handleMobileMenuClose}
   >
-    {loginStore.isLogined && <MessagesBox onClick={handleMobileMenuClose} showTitle />}
-    {loginStore.isLogined && <NotificationsBox onClick={handleMobileMenuClose} showTitle />}
+    {/*{loginStore.isLogined && <MessagesBox onClick={handleMobileMenuClose} showTitle />}*/}
+    {/*{loginStore.isLogined && <NotificationsBox onClick={handleMobileMenuClose} showTitle />}*/}
     <AccountBox showTitle />
   </Menu>;
 };
@@ -55,8 +55,9 @@ export interface ApplicationBarProps {
   name?: string;
 }
 
-export const ApplicationBar = observer(({}: ApplicationBarProps) => {
-  const { loginStore, profileManagerStore } = useStores();
+export const ApplicationBar: React.FC<ApplicationBarProps> = observer(() => {
+  const { loginStore, searchStore, profileManagerStore } = useStores();
+  const navigate = useNavigate();
   const [ mobileMoreAnchorEl, setMobileMoreAnchorEl ] = React.useState<null | HTMLElement>(null);
 
   const handleMobileMenuClose = () => {
@@ -67,24 +68,37 @@ export const ApplicationBar = observer(({}: ApplicationBarProps) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const handleSearch = (searchLine: string) => {
+    searchStore.search(searchLine);
+    navigate("/search");
+  };
+
   return (
     <>
       <HideOnScroll>
         <AppBar>
           <Toolbar>
-            <IconButton size="large" edge="start" color="inherit" aria-label="open drawer" sx={{ mr: 2 }}>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="open drawer" sx={{ mr: 2 }}
+              onClick={() => navigate("/")}
+            >
               <MenuIcon />
             </IconButton>
             <LogoBar />
-            <SearchBar />
+            <SearchBar onSearch={handleSearch} />
+
             <Box sx={{ flexGrow: 1 }} />
+            <CartBox />
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              {loginStore.isLogined && (
-                <>
-                  <MessagesBox onClick={handleMobileMenuClose} />
-                  <NotificationsBox onClick={handleMobileMenuClose} />
-                </>
-              )}
+              {/*{loginStore.isLogined && (*/}
+              {/*  <>*/}
+              {/*    <MessagesBox onClick={handleMobileMenuClose} />*/}
+              {/*    <NotificationsBox onClick={handleMobileMenuClose} />*/}
+              {/*  </>*/}
+              {/*)}*/}
               <AccountBox />
             </Box>
             <Box sx={{ display: { xs: "flex", md: "none" } }}>

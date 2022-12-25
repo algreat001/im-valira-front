@@ -1,0 +1,23 @@
+.checkout__customer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: var(--gap);
+    width: 100%;
+}
+
+.checkout__customer__info {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: var(--gap);
+    width: 100%;
+}
+
+.checkout__customer__form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: var(--gap);
+    width: 100%;
+}

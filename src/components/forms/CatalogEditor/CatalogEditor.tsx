@@ -1,48 +1,45 @@
 import React, { useEffect } from "react";
 import { observer } from "mobx-react";
 
-import { Button, Dialog, DialogActions, DialogTitle, DialogContent, TextField } from "@mui/material";
-
+import { EditorProps } from "interfaces/product";
 import { CatalogStore, CatalogTextField } from "stores/CatalogStore";
-
-import { useStores } from "stores/useStores";
+import { useStores } from "hooks/useStores";
 import { t } from "res/i18n/i18n";
 
+import { Button, Dialog, DialogActions, DialogTitle, DialogContent, TextField } from "@mui/material";
 import { CloseButton } from "components/Bricks/CloseButton";
 
 import SaveIcon from "@mui/icons-material/Save";
 
-
-export interface CatalogEditorProps {
-  catalog: CatalogStore;
-  mode: "new" | "edit";
-}
-
-export const CatalogEditor = observer(({ catalog, mode }: CatalogEditorProps) => {
+export const CatalogEditor: React.FC<EditorProps<CatalogStore>> = observer(({ store, mode }) => {
   const { uiStore } = useStores();
 
+  if (!store) {
+    return null;
+  }
+
   useEffect(() => {
-    catalog.saveToCache();
+    store.saveToCache();
   }, []);
 
   const handleTextChange = (e: any) => {
-    catalog.changeTextField(e.target.id as CatalogTextField, e.target.value);
+    store.changeTextField(e.target.id as CatalogTextField, e.target.value);
   };
 
   const handleSave = async () => {
-    await catalog.save();
+    await store.save();
     uiStore.hideCatalogEditDlg();
   };
 
   const handleCancel = () => {
-    catalog.restoreFromCache();
+    store.restoreFromCache();
     uiStore.hideCatalogEditDlg();
   };
 
   return <Dialog open={uiStore.isShowCatalogEditDlg} onClose={handleCancel}>
     <DialogTitle>
       {t(`catalog.edit.title.${mode}`)}
-      <CloseButton onCLose={handleCancel} />
+      <CloseButton onClose={handleCancel} />
     </DialogTitle>
     <DialogContent>
       <TextField
@@ -53,7 +50,7 @@ export const CatalogEditor = observer(({ catalog, mode }: CatalogEditorProps) =>
         fullWidth
         variant="outlined"
         onChange={handleTextChange}
-        value={catalog.name}
+        value={store.name}
       />
       <TextField
         margin="dense"
@@ -63,7 +60,7 @@ export const CatalogEditor = observer(({ catalog, mode }: CatalogEditorProps) =>
         fullWidth
         variant="outlined"
         onChange={handleTextChange}
-        value={catalog.description}
+        value={store.description}
         multiline
         rows={4}
       />
@@ -75,7 +72,7 @@ export const CatalogEditor = observer(({ catalog, mode }: CatalogEditorProps) =>
         fullWidth
         variant="outlined"
         onChange={handleTextChange}
-        value={JSON.stringify(catalog.meta)}
+        value={JSON.stringify(store.meta)}
         multiline
         rows={4}
       />

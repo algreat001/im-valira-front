@@ -1,20 +1,37 @@
 :root {
+    --main-max-width: 1250px;
     --main-bg-color: #FFF0DE;
     --main-color: #8D7694;
     --panel-bg-color: #f9f9f9;
     --white-bg-color: #FFFFFF;
+    --bg-color-tranparent: #FFF0DE70;
     --header-min-height: 64px;
     --footer-min-height: 300px;
     --gap: 12px;
+    --mini-gap: 8px;
     --radius: 5px;
     --catalog-width: 350px;
     --normal-speed-all: all 0.5s;
     --header-1-font: 14px;
+
+    --bs-normal: 0 7px 14px 0 rgba(0, 0, 0, 0.1), 0 16px 28px 0 rgba(0, 0, 0, 0.1);
+    --bs-small: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    --bs-big: 0px 2px 20px rgba(0, 0, 0, 0.07);
+
+    --bs-select: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+
+    --multiline: 5;
+
+    --product-card-height: 526px;
+
+    --product-image-carousel-height: 111px;
+    --product-image-big-height: 550px;
 }
 
 body {
     margin: 0;
     font-family: 'Overpass', sans-serif;
+    font-size: 14px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -24,6 +41,28 @@ code {
     monospace;
 }
 
+.ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.ellipsis-multiline {
+    display: -webkit-box;
+    width: 100%;
+    overflow: hidden;
+    white-space: pre-wrap;
+    word-break: break-word;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: var(--multiline);
+    -webkit-box-orient: vertical;
+}
+
+.hyphens {
+    white-space: pre-wrap;
+    word-break: break-word;
+    hyphens: auto;
+}
 
 .login__panel__social {
     width: 100%;
@@ -72,7 +111,6 @@ code {
 
 .landing {
     display: grid;
-    grid-template-columns: var(--catalog-width) auto;
     margin: var(--gap);
     gap: var(--gap);
     background-color: var(--white-bg-color);
@@ -80,8 +118,47 @@ code {
     min-height: calc(100vh - var(--header-min-height));
 }
 
+@media only screen and (max-width: 1000px) {
+    .landing {
+        grid-template-columns: auto;
+        grid-template-rows: auto auto;
+        max-width: calc(100% - 24px);
+        margin: auto;
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+    .landing {
+        grid-template-columns: var(--catalog-width) auto;
+        max-width: var(--main-max-width);
+        margin: auto;
+    }
+
+    .menu {
+        max-width: var(--catalog-width);
+    }
+}
+
+
+.landing__item {
+    overflow-x: hidden;
+}
+
+.landing__item__line {
+    margin: 0 0 8px 0 !important;
+    padding: 8px 4px;
+}
+
+.landing__item__wrap {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin: 8px 0 16px 0 !important;
+}
+
 .menu {
-    max-width: var(--catalog-width);
     width: 100%;
     background-color: var(--white-bg-color);
 }
@@ -89,6 +166,7 @@ code {
 .menu__header {
     display: flex;
     position: relative !important;
+    align-items: center;
 }
 
 .menu__item__expand {
@@ -100,21 +178,9 @@ code {
     rotate: 180deg;
 }
 
-.footer {
-    min-height: var(--footer-min-height);
-    background-color: var(--main-color);
-    color: var(--main-bg-color);
-    gap: var(--gap);
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    padding: var(--gap);
-}
-
-.footer__logo {
-    width: 128px;
-    height: 128px;
-    border-radius: var(--radius);
+.menu_icon {
+    max-height: 32px;
+    max-width: 32px;
 }
 
 .header {
@@ -129,4 +195,64 @@ code {
     align-items: center;
     padding: var(--gap);
     gap: var(--gap);
+}
+
+.picture-slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.picture-slider__progress {
+    position: absolute !important;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    height: 8px;
+    transition: var(--normal-speed-all);
+    color: var(--main-bg-color);
+    opacity: 1;
+}
+
+.picture-slider__progress > svg {
+    max-height: 8px;
+    height: 8px;
+    width: 8px;
+}
+
+.picture-slider__progress--hide {
+    opacity: 0;
+}
+
+.picture-slider__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    transition: var(--normal-speed-all);
+    object-fit: cover;
+}
+
+.checkout {
+    margin: var(--gap) auto;
+    min-height: calc(100vh - var(--header-min-height));
+}
+
+@media only screen and (max-width: 1000px) {
+    .checkout {
+        margin: var(--gap);
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+    .checkout {
+        width: 80%;
+    }
 }
